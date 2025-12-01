@@ -1,36 +1,195 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ NeonCV - Futuristic CV & Portfolio Builder
 
-## Getting Started
+A modern, stylish, and colorful CV & Portfolio builder web application featuring neon gradients, glassmorphism, and a futuristic design aesthetic.
 
-First, run the development server:
+![NeonCV](./public/screenshot.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 16 (App Router) + React 19 + TypeScript (strict mode)
+- **Styling**: Tailwind CSS 4.1 + shadcn/ui components
+- **Icons**: Lucide React
+- **Package Manager**: pnpm
+- **Deployment**: Vercel-ready (no Docker)
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── globals.css        # Global styles + theme
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Landing page
+├── components/            # Reusable UI components
+│   ├── ui/               # shadcn/ui base components
+│   ├── builder/          # CV/Portfolio builder components
+│   ├── common/           # Shared components
+│   └── layout/           # Layout components
+├── features/             # Feature-specific modules
+│   ├── auth/            # Authentication
+│   ├── cv/              # CV builder
+│   ├── portfolio/       # Portfolio builder
+│   ├── templates/       # Template management
+│   ├── themes/          # Theme customization
+│   └── export/          # PDF, DOCX, JSON export
+├── lib/                  # Utilities and helpers
+│   ├── supabase/        # Supabase client (coming soon)
+│   └── utils.ts         # Utility functions
+├── server/              # Server-side code
+│   ├── repositories/    # Data access layer
+│   └── actions/         # Server actions
+├── types/               # TypeScript type definitions
+└── styles/              # Additional style configurations
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Design System
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+NeonCV features a vibrant, futuristic design with:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Neon Colors**: Electric purple, hot pink, cyber cyan, neon green, and more
+- **Glassmorphism**: Frosted glass effects with backdrop blur
+- **Gradients**: Vibrant gradient text, borders, and backgrounds
+- **Animations**: Floating orbs, pulse glow, gradient shifts
+- **Dark Mode**: Default cyberpunk aesthetic with light mode support
 
-## Learn More
+### Available Utility Classes
 
-To learn more about Next.js, take a look at the following resources:
+```css
+/* Glassmorphism */
+.glass          /* Standard glass effect */
+.glass-strong   /* Stronger blur effect */
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/* Neon Glow */
+.glow-sm        /* Subtle glow */
+.glow-md        /* Medium glow */
+.glow-lg        /* Large glow */
+.glow-cyan      /* Cyan-colored glow */
+.glow-pink      /* Pink-colored glow */
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+/* Gradient Text */
+.text-gradient       /* Purple → Pink → Cyan */
+.text-gradient-cyan  /* Cyan → Blue */
 
-## Deploy on Vercel
+/* Backgrounds */
+.bg-mesh       /* Colorful mesh gradient */
+.bg-grid       /* Subtle grid pattern */
+.border-gradient  /* Animated gradient border */
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+/* Animations */
+.animate-float       /* Floating animation */
+.animate-pulse-glow  /* Pulsing glow effect */
+.animate-gradient    /* Moving gradient */
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm (package manager)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd neoncv
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+### Available Scripts
+
+```bash
+pnpm dev          # Start dev server with Turbopack
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run ESLint
+pnpm lint:fix     # Fix ESLint errors
+pnpm format       # Format code with Prettier
+pnpm format:check # Check code formatting
+pnpm typecheck    # Run TypeScript type checking
+pnpm check        # Run all quality checks
+```
+
+## 🌐 Environment Variables
+
+Create a `.env.local` file with:
+
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # For server-side operations
+
+# App Configuration
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+## 🗄️ Database Setup
+
+NeonCV uses Supabase for backend (auth, database, storage).
+
+### Option 1: Supabase Cloud (Recommended)
+
+1. Create a project at [supabase.com](https://supabase.com)
+2. Go to SQL Editor
+3. Run the migration script: `supabase/migrations/00001_initial_schema.sql`
+4. Copy your project URL and anon key to `.env.local`
+
+### Option 2: Supabase Local (Development)
+
+```bash
+# Install Supabase CLI
+npm install -g supabase
+
+# Start local Supabase
+supabase start
+
+# Apply migrations
+supabase db push
+```
+
+### Database Schema
+
+The schema includes:
+
+| Table | Description |
+|-------|-------------|
+| `profiles` | User profile info (linked to auth.users) |
+| `cvs` | CV metadata (title, slug, template, theme) |
+| `cv_sections` | Sections within CVs (experience, education, etc.) |
+| `cv_items` | Items within sections (JSONB for flexibility) |
+| `portfolios` | Portfolio metadata |
+| `portfolio_blocks` | Customizable portfolio sections |
+| `featured_projects` | Projects showcased in portfolios |
+| `themes` | User and system themes |
+| `cv_templates` | Pre-designed CV templates |
+| `portfolio_templates` | Pre-designed portfolio templates |
+
+**Multi-CV/Portfolio Support**: Each user can have multiple CVs and portfolios. Portfolios can optionally link to a CV to inherit data.
+
+## 📦 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import the repository in Vercel
+3. Set environment variables
+4. Deploy!
+
+No Docker configuration is needed - the app is designed to run with plain Node.js commands.
+
+## 📝 License
+
+MIT License - feel free to use this for personal and commercial projects.
+
+---
+
+Built with 💜 using Next.js, React, and Tailwind CSS
