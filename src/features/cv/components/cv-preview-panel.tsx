@@ -38,6 +38,17 @@ import { AuroraBorealisTemplate } from "../templates/aurora-borealis";
 import { CarbonFiberTemplate } from "../templates/carbon-fiber";
 import { PrismaticCrystalTemplate } from "../templates/prismatic-crystal";
 import { MidnightCosmosTemplate } from "../templates/midnight-cosmos";
+import { TitaniumEliteTemplate } from "../templates/titanium-elite";
+import { NebulaDriftTemplate } from "../templates/nebula-drift";
+import { VogueStarlightTemplate } from "../templates/vogue-starlight";
+import { CrimsonNexusTemplate } from "../templates/crimson-nexus";
+import { HoloFlowTemplate } from "../templates/holo-flow";
+import { NoirEleganceTemplate } from "../templates/noir-elegance";
+import { ZenGardenTemplate } from "../templates/zen-garden";
+import { ElectricPulseTemplate } from "../templates/electric-pulse";
+import { ArtDecoLuxeTemplate } from "../templates/art-deco-luxe";
+import { CyberGridTemplate } from "../templates/cyber-grid";
+import { VelvetRoseTemplate } from "../templates/velvet-rose";
 import type { PersonalInfo, CVSection } from "@/types/cv";
 
 // Template props interface that all templates should implement
@@ -89,6 +100,17 @@ const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
   "carbon-fiber": CarbonFiberTemplate,
   "prismatic-crystal": PrismaticCrystalTemplate,
   "midnight-cosmos": MidnightCosmosTemplate,
+  "titanium-elite": TitaniumEliteTemplate,
+  "nebula-drift": NebulaDriftTemplate,
+  "vogue-starlight": VogueStarlightTemplate,
+  "crimson-nexus": CrimsonNexusTemplate,
+  "holo-flow": HoloFlowTemplate,
+  "noir-elegance": NoirEleganceTemplate,
+  "zen-garden": ZenGardenTemplate,
+  "electric-pulse": ElectricPulseTemplate,
+  "art-deco-luxe": ArtDecoLuxeTemplate,
+  "cyber-grid": CyberGridTemplate,
+  "velvet-rose": VelvetRoseTemplate,
 };
 
 export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(
