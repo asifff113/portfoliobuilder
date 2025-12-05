@@ -49,6 +49,11 @@ import { ElectricPulseTemplate } from "../templates/electric-pulse";
 import { ArtDecoLuxeTemplate } from "../templates/art-deco-luxe";
 import { CyberGridTemplate } from "../templates/cyber-grid";
 import { VelvetRoseTemplate } from "../templates/velvet-rose";
+import { ObsidianEdgeTemplate } from "../templates/obsidian-edge";
+import { NeuralNetworkTemplate } from "../templates/neural-network";
+import { LiquidMercuryTemplate } from "../templates/liquid-mercury";
+import { NeonHorizonTemplate } from "../templates/neon-horizon";
+import { FrostMinimalTemplate } from "../templates/frost-minimal";
 import type { PersonalInfo, CVSection } from "@/types/cv";
 
 // Template props interface that all templates should implement
@@ -111,6 +116,11 @@ const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
   "art-deco-luxe": ArtDecoLuxeTemplate,
   "cyber-grid": CyberGridTemplate,
   "velvet-rose": VelvetRoseTemplate,
+  "obsidian-edge": ObsidianEdgeTemplate,
+  "neural-network": NeuralNetworkTemplate,
+  "liquid-mercury": LiquidMercuryTemplate,
+  "neon-horizon": NeonHorizonTemplate,
+  "frost-minimal": FrostMinimalTemplate,
 };
 
 export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(

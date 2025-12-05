@@ -980,5 +980,41 @@ export const cvTemplates: CVTemplate[] = [
     previewImageUrl: null,
     category: "creative",
   },
+  // New Advanced Templates
+  {
+    id: "obsidian-edge",
+    name: "Obsidian Edge",
+    description: "Sleek dark obsidian design with sharp geometric edges and gold accents",
+    previewImageUrl: null,
+    category: "professional",
+  },
+  {
+    id: "neural-network",
+    name: "Neural Network",
+    description: "Futuristic AI-themed design with node connections and glowing tech aesthetics",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "liquid-mercury",
+    name: "Liquid Mercury",
+    description: "Fluid metallic chrome design with reflective effects and premium feel",
+    previewImageUrl: null,
+    category: "modern",
+  },
+  {
+    id: "neon-horizon",
+    name: "Neon Horizon",
+    description: "Synthwave retrowave aesthetic with sunset gradients and perspective grid",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "frost-minimal",
+    name: "Frost Minimal",
+    description: "Ultra-clean frosted glass design with icy blue tones and elegant simplicity",
+    previewImageUrl: null,
+    category: "minimal",
+  },
 ];
 

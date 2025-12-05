@@ -12,7 +12,7 @@
  * - Monospace typography
  */
 
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, Cpu, Circuit, Binary, Scan, Database, Terminal, Wifi, Server } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Linkedin, Github, Cpu, CircuitBoard, Binary, Scan, Database, Terminal, Wifi, Server } from "lucide-react";
 import type {
   PersonalInfo,
   CVSection,
@@ -315,7 +315,7 @@ export function CyberGridTemplate({ personalInfo, sections, settings }: Template
             .map((section) => (
               <section key={section.id} className={cn("p-4", gridCard)}>
                 <header className="flex items-center gap-2 mb-4">
-                  <Circuit className="w-3.5 h-3.5" style={{ color: neonGreen }} />
+                  <CircuitBoard className="w-3.5 h-3.5" style={{ color: neonGreen }} />
                   <h3 className="text-xs uppercase tracking-[0.15em]" style={{ color: neonCyan }}>// {section.title}</h3>
                 </header>
 
