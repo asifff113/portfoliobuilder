@@ -297,7 +297,7 @@ export function ArtDecoLuxeTemplate({ personalInfo, sections, settings }: Templa
                         <div key={proj.id} className="text-center">
                           <h4 className="font-semibold text-lg tracking-wider flex items-center justify-center gap-2" style={{ color: decoGold }}>
                             <Sparkles className="w-4 h-4" />
-                            {proj.name || "Project"}
+                            {proj.title || "Project"}
                           </h4>
                           {proj.description && (
                             <p className="mt-2 text-sm font-light" style={{ color: decoGoldLight }}>{proj.description}</p>
@@ -311,8 +311,8 @@ export function ArtDecoLuxeTemplate({ personalInfo, sections, settings }: Templa
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-xs tracking-wider uppercase hover:opacity-70" style={{ color: decoGold }}>
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-xs tracking-wider uppercase hover:opacity-70" style={{ color: decoGold }}>
                               <Globe className="w-3 h-3" /> View Project
                             </a>
                           )}

@@ -62,7 +62,7 @@ function AcademicDateRange({ start, end, isCurrent, color }: { start?: string; e
   );
 }
 
-export function AcademicResearchTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function AcademicResearchTemplate({ personalInfo, sections }: TemplateProps) {
   // Use CSS variables if available
   const primaryColor = "var(--cv-primary, #8B2500)";
   const textColor = "var(--cv-text, #1a1a1a)";
@@ -167,7 +167,7 @@ export function AcademicResearchTemplate({ personalInfo, sections, settings }: T
                         {item.location && `, ${item.location}`}
                       </p>
                     </div>
-                    <AcademicDateRange start={item.startDate} end={item.endDate} isCurrent={item.isCurrent} color={primaryColor} />
+                    <AcademicDateRange start={item.startDate || undefined} end={item.endDate || undefined} isCurrent={item.isCurrent} color={primaryColor} />
                   </div>
                   
                   {/* Education Details as bullet points */}
@@ -209,7 +209,7 @@ export function AcademicResearchTemplate({ personalInfo, sections, settings }: T
                         )}
                       </p>
                     </div>
-                    <AcademicDateRange start={item.startDate} end={item.endDate} isCurrent={item.isCurrent} color={primaryColor} />
+                    <AcademicDateRange start={item.startDate || undefined} end={item.endDate || undefined} isCurrent={item.isCurrent} color={primaryColor} />
                   </div>
                   
                   {item.description && (
@@ -279,7 +279,7 @@ export function AcademicResearchTemplate({ personalInfo, sections, settings }: T
                       {item.description?.split('\n')[0]}
                     </p>
                     {(item.startDate || item.endDate) && (
-                      <AcademicDateRange start={item.startDate} end={item.endDate} color={primaryColor} />
+                      <AcademicDateRange start={item.startDate || undefined} end={item.endDate || undefined} color={primaryColor} />
                     )}
                   </div>
                   
@@ -408,7 +408,7 @@ export function AcademicResearchTemplate({ personalInfo, sections, settings }: T
                       {item.organization && `, ${item.organization}`}
                       {item.location && ` – ${item.location}`}
                     </div>
-                    <AcademicDateRange start={item.startDate} end={item.endDate} isCurrent={item.isCurrent} color={primaryColor} />
+                    <AcademicDateRange start={item.startDate || undefined} end={item.endDate || undefined} isCurrent={item.isCurrent} color={primaryColor} />
                   </div>
                   {item.description && (
                     <p className="text-sm mt-1">{item.description}</p>

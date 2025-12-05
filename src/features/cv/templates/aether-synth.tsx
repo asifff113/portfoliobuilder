@@ -31,7 +31,6 @@ export function AetherSynthTemplate({ personalInfo, sections }: TemplateProps) {
   const primary = "var(--cv-primary, " + fallbackPrimary + ")";
   const accent = "var(--cv-accent, " + fallbackAccent + ")";
   const text = "var(--cv-text, " + fallbackText + ")";
-  const textMuted = "var(--cv-text-muted, #9ca3af)";
 
   const contactItems = [
     personalInfo.email && { icon: <Mail className="h-4 w-4" />, label: personalInfo.email },
@@ -147,7 +146,6 @@ export function AetherSynthTemplate({ personalInfo, sections }: TemplateProps) {
                           <p className="text-base font-semibold" style={{ color: primary }}>{item.title || "Project"}</p>
                           <p className="text-sm text-white/70">{item.role || "Owner"}</p>
                         </div>
-                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.2em] text-white/70">{item.status || "Built"}</span>
                       </div>
                       {item.description && <p className="mt-2 text-sm text-white/80">{item.description}</p>}
                       {item.techStack && item.techStack.length > 0 && (

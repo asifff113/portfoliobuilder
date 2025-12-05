@@ -12,7 +12,7 @@
  * - Clean, authoritative, corporate feel
  */
 
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, ExternalLink, Briefcase, GraduationCap, Award, Code } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Github, Briefcase, GraduationCap, Code } from "lucide-react";
 import type { 
   PersonalInfo, 
   CVSection, 
@@ -31,7 +31,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function BoldExecutiveTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function BoldExecutiveTemplate({ personalInfo, sections }: TemplateProps) {
   const primaryColor = "var(--cv-primary, #0f172a)";
   const accentColor = "var(--cv-accent, #3b82f6)";
   const textColor = "var(--cv-text, #1e293b)";

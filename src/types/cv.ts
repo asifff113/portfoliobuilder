@@ -728,6 +728,13 @@ export const cvTemplates: CVTemplate[] = [
     category: "professional",
   },
   {
+    id: "developer",
+    name: "Developer IDE",
+    description: "Dark IDE-like theme with syntax highlighting colors and terminal header",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
     id: "ats-safe",
     name: "ATS Optimized",
     description: "Clean, ATS-friendly format for maximum compatibility",
@@ -741,13 +748,6 @@ export const cvTemplates: CVTemplate[] = [
     description: "Clean, vertical layout with colorful neon accents",
     previewImageUrl: null,
     category: "modern",
-  },
-  {
-    id: "developer",
-    name: "Developer",
-    description: "Code-themed template perfect for software engineers",
-    previewImageUrl: null,
-    category: "creative",
   },
   // Creative Templates
   {

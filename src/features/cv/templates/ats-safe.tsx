@@ -36,7 +36,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function ATSSafeTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function ATSSafeTemplate({ personalInfo, sections }: TemplateProps) {
   return (
     <div 
       className="min-h-[1000px] bg-white p-8 text-black"

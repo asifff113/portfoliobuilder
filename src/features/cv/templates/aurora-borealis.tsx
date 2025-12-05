@@ -271,7 +271,7 @@ export function AuroraBorealisTemplate({ personalInfo, sections, settings }: Tem
                         const proj = item as ProjectItem;
                         return (
                           <div key={proj.id} className="p-4 rounded-xl bg-white/40 border border-white/60">
-                            <h4 className="font-semibold text-slate-900">{proj.name || "Project"}</h4>
+                            <h4 className="font-semibold text-slate-900">{proj.title || "Project"}</h4>
                             {proj.description && <p className="mt-1 text-sm text-slate-600">{proj.description}</p>}
                             {proj.techStack?.length > 0 && (
                               <div className="mt-2 flex flex-wrap gap-1">
@@ -280,8 +280,8 @@ export function AuroraBorealisTemplate({ personalInfo, sections, settings }: Tem
                                 ))}
                               </div>
                             )}
-                            {proj.url && (
-                              <a href={proj.url} className={cn("mt-2 inline-flex items-center gap-1 text-xs hover:underline", accentColors[colorIdx])}>
+                            {proj.liveUrl && (
+                              <a href={proj.liveUrl} className={cn("mt-2 inline-flex items-center gap-1 text-xs hover:underline", accentColors[colorIdx])}>
                                 <Globe className="w-3 h-3" /> View Project
                               </a>
                             )}

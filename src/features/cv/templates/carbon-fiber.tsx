@@ -266,7 +266,7 @@ export function CarbonFiberTemplate({ personalInfo, sections, settings }: Templa
                         <div key={proj.id} className="p-4 rounded bg-zinc-800/50 border border-zinc-700/50">
                           <h4 className="font-bold text-white flex items-center gap-2">
                             <Code className="w-4 h-4 text-amber-500" />
-                            {proj.name || "Project"}
+                            {proj.title || "Project"}
                           </h4>
                           {proj.description && <p className="mt-1 text-sm text-zinc-400">{proj.description}</p>}
                           {proj.techStack?.length > 0 && (

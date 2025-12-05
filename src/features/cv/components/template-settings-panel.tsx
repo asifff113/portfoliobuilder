@@ -9,8 +9,6 @@ import {
   Image as ImageIcon, 
   Printer,
   RotateCcw,
-  ChevronDown,
-  ChevronUp,
   Check,
   FileText,
   Sparkles,
