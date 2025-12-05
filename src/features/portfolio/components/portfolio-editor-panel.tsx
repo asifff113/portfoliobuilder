@@ -136,21 +136,21 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
         <TabsList className="grid w-full grid-cols-3 bg-white/5">
           <TabsTrigger
             value="hero"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <Layout className="mr-2 h-4 w-4" />
             Hero
           </TabsTrigger>
           <TabsTrigger
             value="projects"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <Layers className="mr-2 h-4 w-4" />
             Projects ({projects.length})
           </TabsTrigger>
           <TabsTrigger
             value="blocks"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <FileText className="mr-2 h-4 w-4" />
             Blocks

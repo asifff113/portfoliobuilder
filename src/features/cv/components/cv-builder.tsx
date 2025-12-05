@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Save, Download, Eye, Settings, Loader2, Check, FileImage, FileText, ChevronDown } from "lucide-react";
+import { Save, Download, Loader2, Check, FileImage, FileText, ChevronDown, FileType, FileJson, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,9 +14,14 @@ import { useCVStore } from "../store";
 import { CVEditorPanel } from "./cv-editor-panel";
 import { CVPreviewPanel } from "./cv-preview-panel";
 import { TemplateSelector } from "./template-selector";
+import { AIAssistant } from "./ai-assistant";
+import { KeyboardShortcuts } from "./keyboard-shortcuts";
+import { ShareCVDialog } from "./share-cv-dialog";
+import { ImportCVDialog } from "./import-cv-dialog";
+import { TemplateSettingsPanel } from "./template-settings-panel";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import { toast } from "sonner";
-import { downloadPDF, exportToPNG } from "@/lib/export";
+import { downloadPDF, exportToPNG, exportToDOCX, downloadCVAsJSON, readCVFromFile } from "@/lib/export";
 
 interface CVBuilderProps {
   isNew?: boolean;
@@ -35,10 +40,12 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
     setIsSaving,
     markAsSaved,
     updateMeta,
+    loadCV,
   } = useCVStore();
 
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isExporting, setIsExporting] = useState(false);
 
   // Export handlers
@@ -50,11 +57,11 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
 
     setIsExporting(true);
     try {
+      toast.info("Select 'Save as PDF' in the print dialog", { duration: 5000 });
       await downloadPDF(previewRef.current, {
         filename: meta.title || "cv",
         format: "a4",
       });
-      toast.success("PDF exported successfully!");
     } catch (error) {
       console.error("Export error:", error);
       toast.error("Failed to export PDF");
@@ -78,9 +85,67 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
       toast.success("PNG exported successfully!");
     } catch (error) {
       console.error("Export error:", error);
-      toast.error("Failed to export PNG");
+      toast.error("PNG export failed. Try using PDF export instead.");
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  const handleExportDOCX = async () => {
+    setIsExporting(true);
+    try {
+      await exportToDOCX(personalInfo, sections, {
+        filename: meta.title || "cv",
+      });
+      toast.success("DOCX exported successfully!");
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error("Failed to export DOCX");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleExportJSON = () => {
+    try {
+      downloadCVAsJSON(meta, personalInfo, sections, meta.title || "cv");
+      toast.success("JSON exported successfully!");
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error("Failed to export JSON");
+    }
+  };
+
+  const handleImportJSON = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const result = await readCVFromFile(file);
+      if (result.success && result.data) {
+        // Load the imported data into the store
+        loadCV({
+          meta: {
+            ...meta,
+            title: result.data.meta.title || meta.title,
+            language: result.data.meta.language || meta.language,
+            templateId: result.data.meta.templateId || meta.templateId,
+          },
+          personalInfo: result.data.personalInfo,
+          sections: result.data.sections,
+        });
+        toast.success("CV imported successfully!");
+      } else {
+        toast.error(result.error || "Failed to import CV");
+      }
+    } catch (error) {
+      console.error("Import error:", error);
+      toast.error("Failed to import CV");
+    }
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -103,10 +168,41 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
 
       if (isNew && !cvId) {
         // Create new CV
-        const slug = meta.title
+        // Generate base slug from title
+        const baseSlug = meta.title
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, "");
+          .replace(/(^-|-$)/g, "") || `cv-${Date.now()}`;
+
+        // Ensure slug is unique by checking existing CVs
+        let slug = baseSlug;
+        let counter = 1;
+        let isUnique = false;
+        const maxAttempts = 100; // Safety limit to prevent infinite loops
+
+        while (!isUnique && counter <= maxAttempts) {
+          // Check if a CV with this slug already exists for this user
+          const { data: existingCV } = await supabase
+            .from("cvs")
+            .select("id")
+            .eq("user_id", user.id)
+            .eq("slug", slug)
+            .single();
+
+          if (!existingCV) {
+            // Slug is unique, we can use it
+            isUnique = true;
+          } else {
+            // Slug exists, append a number
+            counter++;
+            slug = `${baseSlug}-${counter}`;
+          }
+        }
+
+        // Fallback to timestamp-based slug if we couldn't find a unique one
+        if (!isUnique) {
+          slug = `cv-${Date.now()}`;
+        }
 
         // Template ID is stored as a client-side string (e.g., "neon-minimal")
         // The database expects a UUID or null, so we don't send it
@@ -115,7 +211,7 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
           .insert({
             user_id: user.id,
             title: meta.title || "Untitled CV",
-            slug: slug || `cv-${Date.now()}`,
+            slug: slug,
             language: meta.language,
             template_id: null, // Client-side templates are stored in local state
             theme_id: meta.themeId || null,
@@ -155,7 +251,8 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
 
           // Create items for each section
           for (const item of section.items) {
-            const { id: _itemId, ...itemData } = item;
+            const itemData = { ...item };
+            delete (itemData as { id?: string }).id;
             await supabase.from("cv_items").insert({
               section_id: typedNewSection.id,
               order: section.items.indexOf(item),
@@ -169,20 +266,71 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
         toast.success("CV created successfully!");
         router.replace(`/app/cv/${typedNewCV.id}`);
       } else if (cvId) {
-        // Update existing CV
-        await supabase
+        // Update existing CV metadata
+        const { error: cvUpdateError } = await supabase
           .from("cvs")
           .update({
             title: meta.title,
             language: meta.language,
-            // template_id is stored client-side, not in DB
             theme_id: meta.themeId || null,
             is_public: meta.isPublic,
             last_edited_at: new Date().toISOString(),
           } as never)
           .eq("id", cvId);
 
+        if (cvUpdateError) {
+          console.error("Error updating CV:", cvUpdateError);
+          toast.error("Failed to update CV");
+          return;
+        }
+
+        // Delete existing sections and items, then recreate them
+        // This ensures we handle additions, deletions, and reordering correctly
+        const { error: deleteError } = await supabase
+          .from("cv_sections")
+          .delete()
+          .eq("cv_id", cvId);
+
+        if (deleteError) {
+          console.error("Error deleting sections:", deleteError);
+        }
+
+        // Recreate all sections and items
+        for (const section of sections) {
+          const { data: newSection, error: sectionError } = await supabase
+            .from("cv_sections")
+            .insert({
+              cv_id: cvId,
+              type: section.type,
+              title: section.title,
+              order: section.order,
+              is_visible: section.isVisible,
+            } as never)
+            .select()
+            .single();
+
+          if (sectionError) {
+            console.error("Error creating section:", sectionError);
+            continue;
+          }
+
+          const typedNewSection = newSection as { id: string };
+
+          // Create items for each section
+          for (let i = 0; i < section.items.length; i++) {
+            const item = section.items[i];
+            const itemData = { ...item } as { id?: string };
+            delete itemData.id;
+            await supabase.from("cv_items").insert({
+              section_id: typedNewSection.id,
+              order: i,
+              data: itemData,
+            } as never);
+          }
+        }
+
         markAsSaved();
+        toast.success("CV saved successfully!");
       }
     } catch (error) {
       console.error("Save error:", error);
@@ -265,7 +413,13 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
         </div>
 
         <div className="flex items-center gap-2">
+          <AIAssistant />
+          
+          <ImportCVDialog />
+          
           <TemplateSelector />
+
+          <ShareCVDialog cvId={cvId} />
 
           <Button variant="outline" size="sm" onClick={saveCV} disabled={isSaving || !isDirty}>
             <Save className="mr-2 h-4 w-4" />
@@ -293,18 +447,48 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
                 Export as PDF
               </DropdownMenuItem>
               <DropdownMenuItem
+                onClick={handleExportDOCX}
+                className="text-white/80 hover:bg-white/10 hover:text-white"
+              >
+                <FileType className="mr-2 h-4 w-4" />
+                Export as DOCX
+              </DropdownMenuItem>
+              <DropdownMenuItem
                 onClick={handleExportPNG}
                 className="text-white/80 hover:bg-white/10 hover:text-white"
               >
                 <FileImage className="mr-2 h-4 w-4" />
                 Export as PNG
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={handleExportJSON}
+                className="text-white/80 hover:bg-white/10 hover:text-white"
+              >
+                <FileJson className="mr-2 h-4 w-4" />
+                Export as JSON (Backup)
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => fileInputRef.current?.click()}
+                className="text-white/80 hover:bg-white/10 hover:text-white"
+              >
+                <Upload className="mr-2 h-4 w-4" />
+                Import from JSON
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button variant="ghost" size="icon">
-            <Settings className="h-4 w-4" />
-          </Button>
+          {/* Hidden file input for JSON import */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json"
+            onChange={handleImportJSON}
+            className="hidden"
+          />
+
+          <KeyboardShortcuts />
+
+          <TemplateSettingsPanel />
         </div>
       </div>
 

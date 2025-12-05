@@ -32,7 +32,7 @@ export function PortfolioTemplateSelector({
             onClick={() => onSelect(template.id)}
             className={`group relative rounded-xl border p-4 text-left transition-all ${
               selected === template.layoutType
-                ? "border-cyan-400 bg-gradient-to-br from-cyan-500/10 to-purple-500/10"
+                ? "border-cyan-400 bg-linear-to-br from-cyan-500/10 to-purple-500/10"
                 : "border-white/10 bg-white/5 hover:border-white/20"
             }`}
           >
@@ -40,7 +40,7 @@ export function PortfolioTemplateSelector({
             <div
               className={`mb-2 inline-flex rounded-lg p-2 ${
                 selected === template.layoutType
-                  ? "bg-gradient-to-br from-cyan-500/20 to-purple-500/20 text-cyan-400"
+                  ? "bg-linear-to-br from-cyan-500/20 to-purple-500/20 text-cyan-400"
                   : "bg-white/5 text-white/50 group-hover:text-white/70"
               }`}
             >

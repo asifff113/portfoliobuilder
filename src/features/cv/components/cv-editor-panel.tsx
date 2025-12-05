@@ -26,16 +26,33 @@ import {
 import { useCVStore } from "../store";
 import { PersonalInfoForm } from "./personal-info-form";
 import { SectionCard } from "./section-card";
+import { CVScoreMeter } from "./cv-score-meter";
 import type { CVSectionType } from "@/types/cv";
 
 const sectionTypes: { type: CVSectionType; label: string; icon: string }[] = [
+  // Core Sections
+  { type: "about", label: "About Me", icon: "👤" },
   { type: "experience", label: "Work Experience", icon: "💼" },
   { type: "education", label: "Education", icon: "🎓" },
   { type: "skills", label: "Skills", icon: "⚡" },
   { type: "projects", label: "Projects", icon: "🚀" },
+  // Professional Sections
   { type: "certifications", label: "Certifications", icon: "📜" },
+  { type: "courses", label: "Courses & Training", icon: "📖" },
+  { type: "memberships", label: "Professional Memberships", icon: "🏛️" },
+  { type: "speaking", label: "Speaking & Presentations", icon: "🎤" },
+  // Academic Sections
+  { type: "patents", label: "Patents", icon: "⚖️" },
+  { type: "publications", label: "Publications", icon: "📚" },
+  { type: "teaching", label: "Teaching Experience", icon: "👨‍🏫" },
+  // Technical Sections
+  { type: "opensource", label: "Open Source", icon: "💻" },
+  // Other Sections
   { type: "languages", label: "Languages", icon: "🌍" },
-  { type: "awards", label: "Awards", icon: "🏆" },
+  { type: "awards", label: "Awards & Honors", icon: "🏆" },
+  { type: "volunteer", label: "Volunteer Experience", icon: "🤝" },
+  { type: "references", label: "References", icon: "📋" },
+  { type: "interests", label: "Interests & Hobbies", icon: "🎯" },
   { type: "custom", label: "Custom Section", icon: "✨" },
 ];
 
@@ -69,7 +86,7 @@ export function CVEditorPanel() {
           onClick={() => setActiveSection(activeSection === "personal" ? null : "personal")}
           className={`flex w-full items-center gap-3 rounded-xl p-4 text-left transition-all ${
             activeSection === "personal"
-              ? "bg-gradient-to-r from-neon-purple/20 via-neon-pink/15 to-neon-cyan/10"
+              ? "bg-linear-to-r from-neon-purple/20 via-neon-pink/15 to-neon-cyan/10"
               : "bg-muted/50 hover:bg-muted"
           }`}
         >
@@ -145,6 +162,11 @@ export function CVEditorPanel() {
           </p>
         </div>
       )}
+
+      {/* CV Score Meter */}
+      <div className="mt-6">
+        <CVScoreMeter />
+      </div>
     </div>
   );
 }

@@ -22,6 +22,21 @@ import {
   createDefaultEducationItem,
   createDefaultProjectItem,
   createDefaultSkillItem,
+  createDefaultCertificationItem,
+  createDefaultLanguageItem,
+  createDefaultAwardItem,
+  createDefaultVolunteerItem,
+  createDefaultReferenceItem,
+  createDefaultPublicationItem,
+  createDefaultInterestItem,
+  createDefaultAboutItem,
+  createDefaultCustomItem,
+  createDefaultPatentItem,
+  createDefaultSpeakingItem,
+  createDefaultTeachingItem,
+  createDefaultCourseItem,
+  createDefaultOpenSourceItem,
+  createDefaultMembershipItem,
 } from "@/types/cv";
 
 interface CVStore {
@@ -38,6 +53,7 @@ interface CVStore {
   // Actions
   initializeCV: (cvId: string | null, data?: Partial<CVData>) => void;
   resetCV: () => void;
+  loadCV: (data: { meta: Partial<CVMeta>; personalInfo: PersonalInfo; sections: CVSection[] }) => void;
   
   // Meta actions
   updateMeta: (updates: Partial<CVMeta>) => void;
@@ -85,6 +101,8 @@ export const useCVStore = create<CVStore>()(
         createDefaultSection("education", 1),
         createDefaultSection("skills", 2),
         createDefaultSection("projects", 3),
+        createDefaultSection("certifications", 4),
+        createDefaultSection("languages", 5),
       ],
       isDirty: false,
       isSaving: false,
@@ -112,6 +130,8 @@ export const useCVStore = create<CVStore>()(
               createDefaultSection("education", 1),
               createDefaultSection("skills", 2),
               createDefaultSection("projects", 3),
+              createDefaultSection("certifications", 4),
+              createDefaultSection("languages", 5),
             ],
             isDirty: false,
             lastSavedAt: null,
@@ -133,6 +153,16 @@ export const useCVStore = create<CVStore>()(
           isDirty: false,
           isSaving: false,
           lastSavedAt: null,
+        });
+      },
+
+      loadCV: (data) => {
+        set({
+          meta: { ...initialMeta, ...data.meta },
+          personalInfo: data.personalInfo,
+          sections: data.sections,
+          isDirty: true,
+          selectedTemplateId: data.meta.templateId || "neon-minimal",
         });
       },
 
@@ -221,15 +251,51 @@ export const useCVStore = create<CVStore>()(
           case "skills":
             newItem = createDefaultSkillItem();
             break;
+          case "certifications":
+            newItem = createDefaultCertificationItem();
+            break;
+          case "languages":
+            newItem = createDefaultLanguageItem();
+            break;
+          case "awards":
+            newItem = createDefaultAwardItem();
+            break;
+          case "volunteer":
+            newItem = createDefaultVolunteerItem();
+            break;
+          case "references":
+            newItem = createDefaultReferenceItem();
+            break;
+          case "publications":
+            newItem = createDefaultPublicationItem();
+            break;
+          case "interests":
+            newItem = createDefaultInterestItem();
+            break;
+          case "about":
+            newItem = createDefaultAboutItem();
+            break;
+          case "patents":
+            newItem = createDefaultPatentItem();
+            break;
+          case "speaking":
+            newItem = createDefaultSpeakingItem();
+            break;
+          case "teaching":
+            newItem = createDefaultTeachingItem();
+            break;
+          case "courses":
+            newItem = createDefaultCourseItem();
+            break;
+          case "opensource":
+            newItem = createDefaultOpenSourceItem();
+            break;
+          case "memberships":
+            newItem = createDefaultMembershipItem();
+            break;
+          case "custom":
           default:
-            newItem = {
-              id: crypto.randomUUID(),
-              title: "",
-              subtitle: "",
-              date: null,
-              description: "",
-              bullets: [],
-            };
+            newItem = createDefaultCustomItem();
         }
 
         set((state) => ({

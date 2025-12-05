@@ -12,7 +12,6 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
   ArrowLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -60,19 +59,19 @@ export function AdminSidebar() {
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-red-500/10 bg-gradient-to-b from-[#0a0a12] to-[#080810] transition-all duration-300 lg:flex",
+        "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-red-500/10 bg-linear-to-b from-[#0a0a12] to-[#080810] transition-all duration-300 lg:flex",
         isCollapsed ? "w-20" : "w-72"
       )}
     >
       {/* Logo */}
       <div className="flex h-16 items-center justify-between border-b border-red-500/10 px-4">
         <Link href="/admin" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 shadow-lg shadow-red-500/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-red-600 via-orange-500 to-yellow-500 shadow-lg shadow-red-500/20">
             <Shield className="h-5 w-5 text-white" />
           </div>
           {!isCollapsed && (
             <div>
-              <span className="bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-lg font-bold text-transparent">
+              <span className="bg-linear-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-lg font-bold text-transparent">
                 Admin Panel
               </span>
               <p className="text-xs text-white/40">NeonCV</p>
@@ -102,7 +101,7 @@ export function AdminSidebar() {
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
                 isActive
-                  ? "bg-gradient-to-r from-red-500/20 via-orange-500/15 to-yellow-500/10 text-white shadow-lg shadow-red-500/5"
+                  ? "bg-linear-to-r from-red-500/20 via-orange-500/15 to-yellow-500/10 text-white shadow-lg shadow-red-500/5"
                   : "text-white/50 hover:bg-white/5 hover:text-white"
               )}
             >
@@ -116,7 +115,7 @@ export function AdminSidebar() {
               />
               {!isCollapsed && <span>{item.title}</span>}
               {isActive && !isCollapsed && (
-                <div className="ml-auto h-1.5 w-1.5 rounded-full bg-gradient-to-r from-red-500 to-orange-500" />
+                <div className="ml-auto h-1.5 w-1.5 rounded-full bg-linear-to-r from-red-500 to-orange-500" />
               )}
             </Link>
           );

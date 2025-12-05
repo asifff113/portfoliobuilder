@@ -78,7 +78,7 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
           linkedin_url: formData.linkedin_url,
           github_url: formData.github_url,
           updated_at: new Date().toISOString(),
-        })
+        } as never)
         .eq("user_id", user.id);
 
       if (error) throw error;
@@ -107,7 +107,7 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold">
-          <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
             Settings
           </span>
         </h1>
@@ -121,28 +121,28 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
         <TabsList className="grid w-full grid-cols-4 bg-white/5">
           <TabsTrigger
             value="profile"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <User className="mr-2 h-4 w-4" />
             Profile
           </TabsTrigger>
           <TabsTrigger
             value="appearance"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <Palette className="mr-2 h-4 w-4" />
             Appearance
           </TabsTrigger>
           <TabsTrigger
             value="notifications"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <Bell className="mr-2 h-4 w-4" />
             Notifications
           </TabsTrigger>
           <TabsTrigger
             value="account"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <Shield className="mr-2 h-4 w-4" />
             Account
@@ -161,7 +161,7 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
             <CardContent className="space-y-4">
               {/* Avatar & Email (read-only) */}
               <div className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 p-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 text-2xl font-bold text-white">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-cyan-500 to-purple-500 text-2xl font-bold text-white">
                   {formData.full_name?.[0]?.toUpperCase() || user.email[0]?.toUpperCase()}
                 </div>
                 <div>
@@ -295,7 +295,7 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
                 <Button
                   onClick={handleSaveProfile}
                   disabled={isSaving}
-                  className="bg-gradient-to-r from-cyan-500 to-purple-500"
+                  className="bg-linear-to-r from-cyan-500 to-purple-500"
                 >
                   {isSaving ? (
                     <>
@@ -355,7 +355,7 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
                   </div>
                   <label className="relative inline-flex cursor-pointer items-center">
                     <input type="checkbox" className="peer sr-only" defaultChecked={item.id !== "marketing"} />
-                    <div className="peer h-6 w-11 rounded-full bg-white/10 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-white/50 after:transition-all after:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-cyan-500 peer-checked:to-purple-500 peer-checked:after:translate-x-full peer-checked:after:bg-white peer-focus:outline-none"></div>
+                    <div className="peer h-6 w-11 rounded-full bg-white/10 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-white/50 after:transition-all after:content-[''] peer-checked:bg-linear-to-r peer-checked:from-cyan-500 peer-checked:to-purple-500 peer-checked:after:translate-x-full peer-checked:after:bg-white peer-focus:outline-none"></div>
                   </label>
                 </div>
               ))}

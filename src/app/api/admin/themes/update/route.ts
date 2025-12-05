@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     const { data, error } = await supabase
       .from("themes")
-      .update(updateData)
+      .update(updateData as never)
       .eq("id", body.id)
       .select()
       .single();

@@ -15,9 +15,9 @@ export default function AdminSettingsPage() {
       {/* Settings Sections */}
       <div className="grid gap-6">
         {/* General Settings */}
-        <Card className="border-white/5 bg-white/[0.02] p-6">
+        <Card className="border-white/5 bg-white/2 p-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 p-2">
+            <div className="rounded-lg bg-linear-to-br from-blue-500 to-cyan-500 p-2">
               <Settings className="h-4 w-4 text-white" />
             </div>
             <h2 className="text-lg font-semibold text-white">General Settings</h2>
@@ -32,9 +32,9 @@ export default function AdminSettingsPage() {
         </Card>
 
         {/* Database Settings */}
-        <Card className="border-white/5 bg-white/[0.02] p-6">
+        <Card className="border-white/5 bg-white/2 p-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 p-2">
+            <div className="rounded-lg bg-linear-to-br from-green-500 to-emerald-500 p-2">
               <Database className="h-4 w-4 text-white" />
             </div>
             <h2 className="text-lg font-semibold text-white">Database</h2>
@@ -48,9 +48,9 @@ export default function AdminSettingsPage() {
         </Card>
 
         {/* Security Settings */}
-        <Card className="border-white/5 bg-white/[0.02] p-6">
+        <Card className="border-white/5 bg-white/2 p-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-gradient-to-br from-red-500 to-orange-500 p-2">
+            <div className="rounded-lg bg-linear-to-br from-red-500 to-orange-500 p-2">
               <Shield className="h-4 w-4 text-white" />
             </div>
             <h2 className="text-lg font-semibold text-white">Security</h2>
@@ -64,9 +64,9 @@ export default function AdminSettingsPage() {
         </Card>
 
         {/* Notification Settings */}
-        <Card className="border-white/5 bg-white/[0.02] p-6">
+        <Card className="border-white/5 bg-white/2 p-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 p-2">
+            <div className="rounded-lg bg-linear-to-br from-purple-500 to-pink-500 p-2">
               <Bell className="h-4 w-4 text-white" />
             </div>
             <h2 className="text-lg font-semibold text-white">Notifications</h2>

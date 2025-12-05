@@ -184,7 +184,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               {project.techStack.map((tech, index) => (
                 <span
                   key={index}
-                  className="flex items-center gap-1 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 px-3 py-1 text-sm text-white/80"
+                  className="flex items-center gap-1 rounded-full bg-linear-to-r from-cyan-500/20 to-purple-500/20 px-3 py-1 text-sm text-white/80"
                 >
                   {tech}
                   <button
@@ -218,7 +218,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 }
                 className="peer sr-only"
               />
-              <div className="peer h-6 w-11 rounded-full bg-white/10 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-white/50 after:transition-all after:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-cyan-500 peer-checked:to-purple-500 peer-checked:after:translate-x-full peer-checked:after:bg-white peer-focus:outline-none"></div>
+              <div className="peer h-6 w-11 rounded-full bg-white/10 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-white/50 after:transition-all after:content-[''] peer-checked:bg-linear-to-r peer-checked:from-cyan-500 peer-checked:to-purple-500 peer-checked:after:translate-x-full peer-checked:after:bg-white peer-focus:outline-none"></div>
             </label>
             <span className="text-sm text-white/70">Featured Project</span>
           </div>

@@ -59,48 +59,83 @@ export default async function EditPortfolioPage({ params }: EditPortfolioPagePro
     .eq("user_id", user.id)
     .single();
 
-  // Build portfolio data
-  const heroData = (portfolioData.hero_data || {}) as Record<string, unknown>;
+  // Build portfolio data - cast to proper type
+  const portfolio = portfolioData as {
+    id: string;
+    title: string;
+    slug: string;
+    layout_type: string;
+    is_published: boolean;
+    cv_id: string | null;
+    theme_id: string | null;
+    custom_domain: string | null;
+    hero_headline: string | null;
+    hero_summary: string | null;
+    hero_image_url: string | null;
+    created_at: string;
+    updated_at: string;
+  };
 
   const meta: PortfolioMeta = {
-    id: portfolioData.id,
-    title: portfolioData.title,
-    slug: portfolioData.slug,
-    layoutType: (portfolioData.layout_type || "hero_timeline") as PortfolioLayoutType,
-    isPublished: portfolioData.is_published,
-    cvId: portfolioData.cv_id,
-    themeId: portfolioData.theme_id,
-    customDomain: portfolioData.custom_domain,
-    createdAt: portfolioData.created_at,
-    updatedAt: portfolioData.updated_at,
+    id: portfolio.id,
+    title: portfolio.title,
+    slug: portfolio.slug,
+    layoutType: (portfolio.layout_type || "hero_timeline") as PortfolioLayoutType,
+    isPublished: portfolio.is_published,
+    cvId: portfolio.cv_id,
+    themeId: portfolio.theme_id,
+    customDomain: portfolio.custom_domain,
+    createdAt: portfolio.created_at,
+    updatedAt: portfolio.updated_at,
   };
 
   const hero: PortfolioHero = {
-    headline: (heroData.headline as string) || "",
-    summary: (heroData.summary as string) || "",
-    imageUrl: (heroData.imageUrl as string) || null,
-    ctaText: (heroData.ctaText as string) || "Get in Touch",
-    ctaUrl: (heroData.ctaUrl as string) || "",
+    headline: portfolio.hero_headline || "",
+    summary: portfolio.hero_summary || "",
+    imageUrl: portfolio.hero_image_url || null,
+    ctaText: "Get in Touch",
+    ctaUrl: "",
   };
 
-  const projects: FeaturedProject[] = (projectsData || []).map((p) => ({
+  const projectsList = (projectsData || []) as Array<{
+    id: string;
+    title: string;
+    description: string | null;
+    image_url: string | null;
+    live_url: string | null;
+    github_url: string | null;
+    tech_stack: string[];
+    is_featured: boolean;
+    order: number;
+  }>;
+
+  const projects: FeaturedProject[] = projectsList.map((p) => ({
     id: p.id,
     title: p.title,
     description: p.description || "",
     imageUrl: p.image_url,
     liveUrl: p.live_url || "",
     githubUrl: p.github_url || "",
-    techStack: (p.tech_stack as string[]) || [],
+    techStack: p.tech_stack || [],
     isFeatured: p.is_featured,
-    order: p.order_index,
+    order: p.order,
   }));
 
-  const blocks: PortfolioBlock[] = (blocksData || []).map((b) => ({
+  const blocksList = (blocksData || []) as Array<{
+    id: string;
+    type: string;
+    title: string | null;
+    content: Record<string, unknown>;
+    order: number;
+    is_visible: boolean;
+  }>;
+
+  const blocks: PortfolioBlock[] = blocksList.map((b) => ({
     id: b.id,
-    type: b.block_type as PortfolioBlock["type"],
+    type: b.type as PortfolioBlock["type"],
     title: b.title,
-    content: (b.content as Record<string, unknown>) || {},
-    order: b.order_index,
+    content: b.content || {},
+    order: b.order,
     isVisible: b.is_visible,
   }));
 
@@ -111,18 +146,30 @@ export default async function EditPortfolioPage({ params }: EditPortfolioPagePro
     blocks,
   };
 
-  const profile: PortfolioProfile | null = profileData
+  const profileRow = profileData as {
+    full_name: string | null;
+    headline: string | null;
+    phone: string | null;
+    location: string | null;
+    website_url: string | null;
+    linkedin_url: string | null;
+    github_url: string | null;
+    bio: string | null;
+    avatar_url: string | null;
+  } | null;
+
+  const profile: PortfolioProfile | null = profileRow
     ? {
-        fullName: profileData.full_name || "",
-        headline: profileData.headline || "",
+        fullName: profileRow.full_name || "",
+        headline: profileRow.headline || "",
         email: user.email || "",
-        phone: profileData.phone || "",
-        location: profileData.location || "",
-        website: profileData.website_url || "",
-        linkedinUrl: profileData.linkedin_url || "",
-        githubUrl: profileData.github_url || "",
-        bio: profileData.bio || "",
-        avatarUrl: profileData.avatar_url || null,
+        phone: profileRow.phone || "",
+        location: profileRow.location || "",
+        website: profileRow.website_url || "",
+        linkedinUrl: profileRow.linkedin_url || "",
+        githubUrl: profileRow.github_url || "",
+        bio: profileRow.bio || "",
+        avatarUrl: profileRow.avatar_url || null,
       }
     : null;
 

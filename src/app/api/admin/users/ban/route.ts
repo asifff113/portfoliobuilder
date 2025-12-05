@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
       .eq("user_id", userId)
       .single();
 
-    if (targetProfile?.is_admin) {
+    const profile = targetProfile as { is_admin: boolean } | null;
+    if (profile?.is_admin) {
       return NextResponse.json({ error: "Cannot ban an admin" }, { status: 400 });
     }
 
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest) {
         is_banned: true,
         banned_at: new Date().toISOString(),
         ban_reason: reason || null,
-      })
+      } as never)
       .eq("user_id", userId);
 
     if (error) {

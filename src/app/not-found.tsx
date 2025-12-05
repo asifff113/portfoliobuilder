@@ -23,7 +23,7 @@ export default function NotFound() {
       <div className="text-center">
         {/* 404 Number */}
         <h1 className="mb-4 text-[12rem] font-black leading-none tracking-tighter">
-          <span className="bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan bg-clip-text text-transparent">
             404
           </span>
         </h1>
@@ -37,7 +37,7 @@ export default function NotFound() {
         {/* Actions */}
         <div className="flex items-center justify-center gap-4">
           <Link href="/">
-            <Button className="glow-sm bg-gradient-to-r from-neon-purple to-neon-pink text-white">
+            <Button className="glow-sm bg-linear-to-r from-neon-purple to-neon-pink text-white">
               <Home className="mr-2 h-4 w-4" />
               Go Home
             </Button>

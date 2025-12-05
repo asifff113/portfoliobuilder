@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         category: category || "modern",
         is_premium: is_premium || false,
         config: {},
-      })
+      } as never)
       .select()
       .single();
 

@@ -33,7 +33,7 @@ export default function Home() {
       <nav className="glass-strong fixed left-0 right-0 top-0 z-50 border-b border-white/5">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2">
-            <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <span className="text-gradient text-xl font-bold tracking-tight">NeonCV</span>
@@ -69,7 +69,7 @@ export default function Home() {
             </Link>
             <Link
               href="/auth"
-              className="glow-sm rounded-lg bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan px-5 py-2 text-sm font-semibold text-white transition-all hover:scale-105 hover:opacity-90"
+              className="glow-sm rounded-lg bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan px-5 py-2 text-sm font-semibold text-white transition-all hover:scale-105 hover:opacity-90"
             >
               Get Started
             </Link>
@@ -131,7 +131,7 @@ export default function Home() {
         <div className="animate-fade-in flex flex-col items-center gap-4 sm:flex-row">
           <Link
             href="/app/cv/new"
-            className="animate-pulse-glow group flex items-center gap-2 rounded-xl bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan px-8 py-4 text-lg font-semibold text-white transition-all hover:scale-105"
+            className="animate-pulse-glow group flex items-center gap-2 rounded-xl bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan px-8 py-4 text-lg font-semibold text-white transition-all hover:scale-105"
           >
             Start Building
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -238,7 +238,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="relative z-10 px-6 py-32">
-        <div className="border-gradient mx-auto max-w-4xl rounded-3xl bg-gradient-to-br from-neon-purple/10 via-neon-pink/5 to-neon-cyan/10 p-12 text-center backdrop-blur-xl md:p-16">
+        <div className="border-gradient mx-auto max-w-4xl rounded-3xl bg-linear-to-br from-neon-purple/10 via-neon-pink/5 to-neon-cyan/10 p-12 text-center backdrop-blur-xl md:p-16">
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
             Ready to create your <span className="text-gradient">perfect CV</span>?
           </h2>
@@ -247,7 +247,7 @@ export default function Home() {
           </p>
           <Link
             href="/app/cv/new"
-            className="glow-md inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan px-10 py-4 text-lg font-semibold text-white transition-all hover:scale-105"
+            className="glow-md inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan px-10 py-4 text-lg font-semibold text-white transition-all hover:scale-105"
           >
             Get Started Free
             <ArrowRight className="h-5 w-5" />
@@ -259,7 +259,7 @@ export default function Home() {
       <footer className="relative z-10 border-t border-white/5 px-6 py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
             <span className="font-semibold">NeonCV</span>

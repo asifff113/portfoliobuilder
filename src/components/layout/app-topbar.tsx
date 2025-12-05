@@ -79,7 +79,7 @@ export function AppTopbar({ user }: AppTopbarProps) {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-white/5 bg-background/80 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
       {/* Accent Bar */}
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan" />
+      <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan" />
 
       {/* Mobile Menu Button */}
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
@@ -90,7 +90,7 @@ export function AppTopbar({ user }: AppTopbarProps) {
         </SheetTrigger>
         <SheetContent side="left" className="w-72 p-0">
           <div className="flex h-16 items-center gap-2 border-b border-white/5 px-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <span className="text-gradient text-xl font-bold">NeonCV</span>
@@ -106,7 +106,7 @@ export function AppTopbar({ user }: AppTopbarProps) {
                   className={cn(
                     "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
                     isActive
-                      ? "bg-gradient-to-r from-neon-purple/20 via-neon-pink/15 to-neon-cyan/10 text-foreground"
+                      ? "bg-linear-to-r from-neon-purple/20 via-neon-pink/15 to-neon-cyan/10 text-foreground"
                       : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                   )}
                 >
@@ -157,7 +157,7 @@ export function AppTopbar({ user }: AppTopbarProps) {
             <Button variant="ghost" className="flex items-center gap-2 px-2">
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user.user_metadata?.avatar_url} />
-                <AvatarFallback className="bg-gradient-to-br from-neon-purple to-neon-pink text-white text-xs">
+                <AvatarFallback className="bg-linear-to-br from-neon-purple to-neon-pink text-white text-xs">
                   {userInitials}
                 </AvatarFallback>
               </Avatar>

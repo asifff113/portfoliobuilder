@@ -30,7 +30,7 @@ export default function Error({ error, reset }: ErrorProps) {
       {/* Content */}
       <div className="text-center">
         {/* Icon */}
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500/20 to-orange-500/20">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-red-500/20 to-orange-500/20">
           <AlertTriangle className="h-10 w-10 text-red-400" />
         </div>
 
@@ -54,7 +54,7 @@ export default function Error({ error, reset }: ErrorProps) {
         <div className="flex items-center justify-center gap-4">
           <Button
             onClick={reset}
-            className="bg-gradient-to-r from-red-500 to-orange-500 text-white"
+            className="bg-linear-to-r from-red-500 to-orange-500 text-white"
           >
             <RotateCcw className="mr-2 h-4 w-4" />
             Try Again

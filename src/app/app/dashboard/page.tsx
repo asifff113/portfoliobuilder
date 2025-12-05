@@ -93,7 +93,7 @@ export default async function DashboardPage() {
         <Link href="/app/cv/new">
           <Card className="glass group cursor-pointer transition-all hover:border-neon-purple/50 hover:glow-sm">
             <CardContent className="flex items-center gap-4 p-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple to-neon-pink">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple to-neon-pink">
                 <Plus className="h-6 w-6 text-white" />
               </div>
               <div className="flex-1">
@@ -110,7 +110,7 @@ export default async function DashboardPage() {
         <Link href="/app/portfolio/new">
           <Card className="glass group cursor-pointer transition-all hover:border-neon-cyan/50 hover:glow-cyan">
             <CardContent className="flex items-center gap-4 p-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-cyan to-neon-blue">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-neon-cyan to-neon-blue">
                 <Plus className="h-6 w-6 text-white" />
               </div>
               <div className="flex-1">
@@ -228,7 +228,7 @@ export default async function DashboardPage() {
                 Create your first CV to get started
               </p>
               <Link href="/app/cv/new">
-                <Button className="mt-4 glow-sm bg-gradient-to-r from-neon-purple to-neon-pink text-white">
+                <Button className="mt-4 glow-sm bg-linear-to-r from-neon-purple to-neon-pink text-white">
                   <Plus className="mr-2 h-4 w-4" />
                   Create CV
                 </Button>
@@ -287,7 +287,7 @@ export default async function DashboardPage() {
                 Create your first portfolio to showcase your work
               </p>
               <Link href="/app/portfolio/new">
-                <Button className="mt-4 glow-cyan bg-gradient-to-r from-neon-cyan to-neon-blue text-white">
+                <Button className="mt-4 glow-cyan bg-linear-to-r from-neon-cyan to-neon-blue text-white">
                   <Plus className="mr-2 h-4 w-4" />
                   Create Portfolio
                 </Button>
@@ -298,9 +298,9 @@ export default async function DashboardPage() {
       </div>
 
       {/* Tips */}
-      <Card className="border-gradient bg-gradient-to-r from-neon-purple/5 via-neon-pink/5 to-neon-cyan/5">
+      <Card className="border-gradient bg-linear-to-r from-neon-purple/5 via-neon-pink/5 to-neon-cyan/5">
         <CardContent className="flex items-center gap-4 p-6">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
           <div>

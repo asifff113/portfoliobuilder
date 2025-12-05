@@ -108,6 +108,7 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
       setDialogOpen(false);
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to save template");
     } finally {
       setIsLoading(false);
@@ -129,6 +130,7 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
       toast.success("Template deleted");
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete template");
     }
   };
@@ -149,6 +151,7 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
       toast.success(template.is_premium ? "Template marked as free" : "Template marked as premium");
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to update template");
     }
   };
@@ -168,7 +171,7 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
         <p className="text-sm text-white/50">{templates.length} templates</p>
         <Button
           onClick={handleOpenCreate}
-          className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+          className="bg-linear-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
         >
           <Plus className="mr-2 h-4 w-4" />
           Add Template
@@ -180,10 +183,10 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
         {templates.map((template) => (
           <Card
             key={template.id}
-            className="group relative overflow-hidden border-white/5 bg-white/[0.02] transition-all hover:border-white/10 hover:bg-white/[0.04]"
+            className="group relative overflow-hidden border-white/5 bg-white/2 transition-all hover:border-white/10 hover:bg-white/4"
           >
             {/* Preview Area */}
-            <div className={`relative h-40 bg-gradient-to-br ${categoryColors[template.category]} p-4`}>
+            <div className={`relative h-40 bg-linear-to-br ${categoryColors[template.category]} p-4`}>
               <div className="flex h-full items-center justify-center">
                 <FileText className="h-16 w-16 text-white/30" />
               </div>
@@ -266,7 +269,7 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
 
               {/* Category Badge */}
               <div className="mt-3 flex items-center gap-2">
-                <span className={`rounded-full bg-gradient-to-r ${categoryColors[template.category]} px-2 py-0.5 text-xs font-medium text-white`}>
+                <span className={`rounded-full bg-linear-to-r ${categoryColors[template.category]} px-2 py-0.5 text-xs font-medium text-white`}>
                   {template.category}
                 </span>
                 <span className="text-xs text-white/30">
@@ -372,7 +375,7 @@ export function CVTemplatesManager({ templates }: CVTemplatesManagerProps) {
             <Button
               onClick={handleSubmit}
               disabled={isLoading}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+              className="bg-linear-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
             >
               {isLoading ? "Saving..." : editingTemplate ? "Update" : "Create"}
             </Button>

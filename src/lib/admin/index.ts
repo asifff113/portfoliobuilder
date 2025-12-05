@@ -28,7 +28,8 @@ export async function isAdmin(): Promise<boolean> {
     .eq("user_id", user.id)
     .single();
 
-  return profile?.is_admin ?? false;
+  const profileData = profile as { is_admin: boolean } | null;
+  return profileData?.is_admin ?? false;
 }
 
 /**
@@ -45,8 +46,9 @@ export async function hasPremiumAccess(): Promise<boolean> {
     .eq("user_id", user.id)
     .single();
 
+  const profileData = profile as { is_admin: boolean } | null;
   // Admins always have premium access
-  if (profile?.is_admin) return true;
+  if (profileData?.is_admin) return true;
 
   // TODO: Add subscription check here when implementing payments
   return false;
@@ -68,14 +70,15 @@ export async function requireAdmin(): Promise<AdminUser> {
     .eq("user_id", user.id)
     .single();
 
-  if (!profile?.is_admin) {
+  const profileData = profile as Profile | null;
+  if (!profileData?.is_admin) {
     redirect("/app/dashboard");
   }
 
   return {
     id: user.id,
     email: user.email || "",
-    profile: profile as Profile,
+    profile: profileData,
   };
 }
 
@@ -100,10 +103,31 @@ export async function getAdminStats() {
   };
 }
 
+export interface UserProfile {
+  id: string;
+  user_id: string;
+  email: string | null;
+  full_name: string | null;
+  headline: string | null;
+  bio: string | null;
+  avatar_url: string | null;
+  location: string | null;
+  phone: string | null;
+  website_url: string | null;
+  linkedin_url: string | null;
+  github_url: string | null;
+  is_admin: boolean;
+  is_banned: boolean;
+  banned_at: string | null;
+  ban_reason: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 /**
  * Get all users with pagination
  */
-export async function getUsers(page = 1, limit = 20, search?: string) {
+export async function getUsers(page = 1, limit = 20, search?: string): Promise<{ users: UserProfile[]; total: number }> {
   const supabase = await createClient();
   const offset = (page - 1) * limit;
 
@@ -125,7 +149,7 @@ export async function getUsers(page = 1, limit = 20, search?: string) {
   }
 
   return {
-    users: data || [],
+    users: (data || []) as UserProfile[],
     total: count || 0,
   };
 }
@@ -142,7 +166,7 @@ export async function banUser(userId: string, reason?: string) {
       is_banned: true,
       banned_at: new Date().toISOString(),
       ban_reason: reason || null,
-    })
+    } as never)
     .eq("user_id", userId);
 
   if (error) {
@@ -165,7 +189,7 @@ export async function unbanUser(userId: string) {
       is_banned: false,
       banned_at: null,
       ban_reason: null,
-    })
+    } as never)
     .eq("user_id", userId);
 
   if (error) {
@@ -211,5 +235,55 @@ export async function getThemes() {
   }
 
   return data || [];
+}
+
+/**
+ * Get all CVs with pagination and search
+ */
+export async function getAllCVs(page = 1, limit = 20, search?: string) {
+  const supabase = await createClient();
+  const offset = (page - 1) * limit;
+
+  let query = supabase
+    .from("cvs")
+    .select("*", { count: "exact" });
+
+  if (search) {
+    query = query.or(`title.ilike.%${search}%,slug.ilike.%${search}%`);
+  }
+
+  const { data: cvs, error, count } = await query
+    .order("created_at", { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error("Error fetching CVs:", error);
+    return { cvs: [], total: 0 };
+  }
+
+  if (!cvs || cvs.length === 0) {
+    return { cvs: [], total: count || 0 };
+  }
+
+  // Fetch profiles for these CVs manually since there's no direct FK
+  const userIds = Array.from(new Set(cvs.map((cv) => cv.user_id)));
+  const { data: profiles } = await supabase
+    .from("profiles")
+    .select("user_id, email, full_name")
+    .in("user_id", userIds);
+
+  // Map profiles to CVs
+  const cvsWithProfiles = cvs.map((cv) => {
+    const profile = profiles?.find((p) => p.user_id === cv.user_id);
+    return {
+      ...cv,
+      profiles: profile || { email: "Unknown", full_name: "Unknown" },
+    };
+  });
+
+  return {
+    cvs: cvsWithProfiles,
+    total: count || 0,
+  };
 }
 

@@ -111,7 +111,7 @@ export function SignUpForm() {
 
       <Button
         type="submit"
-        className="glow-sm w-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
+        className="glow-sm w-full bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
         disabled={isLoading}
       >
         {isLoading ? (

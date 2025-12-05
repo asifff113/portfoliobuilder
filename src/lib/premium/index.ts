@@ -26,8 +26,9 @@ export async function canAccessPremiumClient(): Promise<boolean> {
     .eq("user_id", user.id)
     .single();
 
+  const profileData = profile as { is_admin: boolean } | null;
   // Admins always have premium access
-  if (profile?.is_admin) return true;
+  if (profileData?.is_admin) return true;
 
   // TODO: Add subscription check
   return false;
@@ -50,6 +51,7 @@ export async function isUserAdminClient(): Promise<boolean> {
     .eq("user_id", user.id)
     .single();
 
-  return profile?.is_admin ?? false;
+  const profileData = profile as { is_admin: boolean } | null;
+  return profileData?.is_admin ?? false;
 }
 

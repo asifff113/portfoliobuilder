@@ -171,13 +171,13 @@ function TemplateCard({ template, type }: TemplateCardProps) {
         {/* Badges */}
         <div className="absolute left-3 top-3 flex gap-2">
           {template.isPro && (
-            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-2 py-0.5 text-xs font-medium text-white">
+            <span className="flex items-center gap-1 rounded-full bg-linear-to-r from-amber-500 to-orange-500 px-2 py-0.5 text-xs font-medium text-white">
               <Lock className="h-3 w-3" />
               Pro
             </span>
           )}
           {template.isPopular && (
-            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 px-2 py-0.5 text-xs font-medium text-white">
+            <span className="flex items-center gap-1 rounded-full bg-linear-to-r from-cyan-500 to-purple-500 px-2 py-0.5 text-xs font-medium text-white">
               <Star className="h-3 w-3" />
               Popular
             </span>
@@ -196,7 +196,7 @@ function TemplateCard({ template, type }: TemplateCardProps) {
               Preview
             </Button>
             <Link href={type === "cv" ? "/app/cv/new" : "/app/portfolio/new"}>
-              <Button size="sm" className="bg-gradient-to-r from-cyan-500 to-purple-500">
+              <Button size="sm" className="bg-linear-to-r from-cyan-500 to-purple-500">
                 Use Template
               </Button>
             </Link>
@@ -236,7 +236,7 @@ export default function TemplatesPage() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-3xl font-bold">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Templates
             </span>
           </h1>
@@ -246,16 +246,16 @@ export default function TemplatesPage() {
         </div>
 
         {/* Pro Badge */}
-        <Card className="border-amber-500/30 bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-4">
+        <Card className="border-amber-500/30 bg-linear-to-r from-amber-500/10 to-orange-500/10 p-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div>
               <p className="font-medium text-white">Unlock Pro Templates</p>
               <p className="text-sm text-white/50">Get access to all 20+ premium templates</p>
             </div>
-            <Button size="sm" className="ml-4 bg-gradient-to-r from-amber-500 to-orange-500">
+            <Button size="sm" className="ml-4 bg-linear-to-r from-amber-500 to-orange-500">
               Upgrade
             </Button>
           </div>
@@ -267,14 +267,14 @@ export default function TemplatesPage() {
         <TabsList className="bg-white/5">
           <TabsTrigger
             value="cv"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <FileText className="mr-2 h-4 w-4" />
             CV Templates ({cvTemplates.length})
           </TabsTrigger>
           <TabsTrigger
             value="portfolio"
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
+            className="data-[state=active]:bg-linear-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-purple-500/20"
           >
             <Briefcase className="mr-2 h-4 w-4" />
             Portfolio Templates ({portfolioTemplates.length})
@@ -301,7 +301,7 @@ export default function TemplatesPage() {
       </Tabs>
 
       {/* Features Section */}
-      <div className="mt-12 rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5 p-8">
+      <div className="mt-12 rounded-2xl border border-white/10 bg-linear-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5 p-8">
         <h2 className="mb-6 text-center text-2xl font-bold text-white">
           Why Choose Our Templates?
         </h2>
@@ -329,7 +329,7 @@ export default function TemplatesPage() {
             },
           ].map((feature, i) => (
             <div key={i} className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-cyan-500/20 to-purple-500/20">
                 <feature.icon className="h-6 w-6 text-cyan-400" />
               </div>
               <h3 className="font-semibold text-white">{feature.title}</h3>

@@ -29,7 +29,7 @@ export default function AuthPage() {
       <div className="glass-strong relative z-10 w-full max-w-md rounded-2xl p-8">
         {/* Logo */}
         <Link href="/" className="mb-8 flex items-center justify-center gap-2">
-          <div className="glow-sm flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+          <div className="glow-sm flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
           <span className="text-gradient text-2xl font-bold tracking-tight">NeonCV</span>
@@ -44,13 +44,13 @@ export default function AuthPage() {
           <TabsList className="mb-6 grid w-full grid-cols-2 bg-muted/50">
             <TabsTrigger
               value="signin"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-purple/20 data-[state=active]:to-neon-pink/20"
+              className="data-[state=active]:bg-linear-to-r data-[state=active]:from-neon-purple/20 data-[state=active]:to-neon-pink/20"
             >
               Sign In
             </TabsTrigger>
             <TabsTrigger
               value="signup"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-neon-pink/20 data-[state=active]:to-neon-cyan/20"
+              className="data-[state=active]:bg-linear-to-r data-[state=active]:from-neon-pink/20 data-[state=active]:to-neon-cyan/20"
             >
               Sign Up
             </TabsTrigger>

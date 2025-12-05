@@ -42,6 +42,7 @@ export function ThemePicker() {
   const setTheme = useThemeStore((s) => s.setTheme);
   const addCustomTheme = useThemeStore((s) => s.addCustomTheme);
   const deleteCustomTheme = useThemeStore((s) => s.deleteCustomTheme);
+  const applyThemeToDOM = useThemeStore((s) => s.applyThemeToDOM);
 
   const [isCreating, setIsCreating] = useState(false);
   const [newTheme, setNewTheme] = useState<{
@@ -77,10 +78,39 @@ export function ThemePicker() {
   };
 
   const updateNewThemeColor = (key: keyof ThemeColors, value: string) => {
+    const updatedColors = { ...newTheme.colors, [key]: value };
     setNewTheme((prev) => ({
       ...prev,
-      colors: { ...prev.colors, [key]: value },
+      colors: updatedColors,
     }));
+
+    // Live preview
+    applyThemeToDOM({
+      id: "preview",
+      name: newTheme.name,
+      isDark: newTheme.isDark,
+      colors: updatedColors,
+      createdAt: new Date().toISOString(),
+    });
+  };
+
+  const toggleNewThemeMode = () => {
+    const newIsDark = !newTheme.isDark;
+    setNewTheme((prev) => ({ ...prev, isDark: newIsDark }));
+
+    // Live preview
+    applyThemeToDOM({
+      id: "preview",
+      name: newTheme.name,
+      isDark: newIsDark,
+      colors: newTheme.colors,
+      createdAt: new Date().toISOString(),
+    });
+  };
+
+  const handleCancelCreation = () => {
+    setIsCreating(false);
+    applyThemeToDOM(currentTheme); // Revert to current theme
   };
 
   return (
@@ -239,9 +269,7 @@ export function ThemePicker() {
             <div className="flex items-center gap-3">
               <label className="text-sm font-medium text-white/70">Mode</label>
               <button
-                onClick={() =>
-                  setNewTheme((prev) => ({ ...prev, isDark: !prev.isDark }))
-                }
+                onClick={toggleNewThemeMode}
                 className={`relative inline-flex h-8 w-16 items-center rounded-full transition-colors ${
                   newTheme.isDark ? "bg-gray-700" : "bg-yellow-400"
                 }`}
@@ -331,12 +359,12 @@ export function ThemePicker() {
             <div className="flex gap-3">
               <Button
                 onClick={handleCreateTheme}
-                className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-500"
+                className="flex-1 bg-linear-to-r from-cyan-500 to-purple-500"
               >
                 Create Theme
               </Button>
               <Button
-                onClick={() => setIsCreating(false)}
+                onClick={handleCancelCreation}
                 variant="outline"
                 className="border-white/20"
               >

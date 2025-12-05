@@ -51,7 +51,7 @@ export function AdminTopbar({ admin }: AdminTopbarProps) {
       {/* Right side */}
       <div className="flex items-center gap-3">
         {/* Admin Badge */}
-        <div className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-red-500/20 to-orange-500/20 px-3 py-1.5 sm:flex">
+        <div className="hidden items-center gap-2 rounded-full bg-linear-to-r from-red-500/20 to-orange-500/20 px-3 py-1.5 sm:flex">
           <Shield className="h-3.5 w-3.5 text-red-400" />
           <span className="text-xs font-medium text-red-400">Admin</span>
         </div>
@@ -75,7 +75,7 @@ export function AdminTopbar({ admin }: AdminTopbarProps) {
             >
               <Avatar className="h-10 w-10">
                 <AvatarImage src={admin.profile.avatar_url || undefined} />
-                <AvatarFallback className="bg-gradient-to-br from-red-600 to-orange-500 text-white">
+                <AvatarFallback className="bg-linear-to-br from-red-600 to-orange-500 text-white">
                   {initials}
                 </AvatarFallback>
               </Avatar>

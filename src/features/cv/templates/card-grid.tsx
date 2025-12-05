@@ -2,26 +2,39 @@
 
 import { Mail, Phone, MapPin, Globe, Linkedin, Github } from "lucide-react";
 import type { PersonalInfo, CVSection, ExperienceItem, EducationItem, SkillItem, ProjectItem } from "@/types/cv";
+import type { TemplateSettings } from "../stores/template-settings";
 
 interface TemplateProps {
   personalInfo: PersonalInfo;
   sections: CVSection[];
+  settings?: TemplateSettings;
 }
 
-export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
+export function CardGridTemplate({ personalInfo, sections, settings }: TemplateProps) {
   return (
-    <div className="min-h-[1000px] bg-gradient-to-br from-slate-50 to-slate-100 p-8 text-gray-900">
+    <div 
+      className="min-h-[1000px] bg-linear-to-br from-slate-50 to-slate-100 p-8 text-gray-900"
+      style={{ 
+        fontFamily: 'var(--cv-font-family, sans-serif)',
+        color: 'var(--cv-text, #111827)'
+      }}
+    >
       {/* Header Card */}
-      <div className="mb-8 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 p-8 text-white shadow-xl">
+      <div 
+        className="mb-8 rounded-2xl p-8 text-white shadow-xl"
+        style={{ 
+          background: 'linear-gradient(to right, var(--cv-primary, #06b6d4), var(--cv-secondary, #2563eb))' 
+        }}
+      >
         <h1 className="text-4xl font-bold">
           {personalInfo.fullName || "Your Name"}
         </h1>
-        <p className="mt-2 text-xl text-cyan-100">
+        <p className="mt-2 text-xl text-white/90">
           {personalInfo.headline || "Professional Title"}
         </p>
 
         {/* Contact Info */}
-        <div className="mt-6 flex flex-wrap gap-4 text-sm text-cyan-100">
+        <div className="mt-6 flex flex-wrap gap-4 text-sm text-white/90">
           {personalInfo.email && (
             <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1 hover:text-white">
               <Mail className="h-4 w-4" />
@@ -62,7 +75,7 @@ export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
 
         {/* Summary */}
         {personalInfo.summary && (
-          <p className="mt-6 text-cyan-50 leading-relaxed">{personalInfo.summary}</p>
+          <p className="mt-6 text-white/80 leading-relaxed">{personalInfo.summary}</p>
         )}
       </div>
 
@@ -73,16 +86,23 @@ export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
             key={section.id}
             className="rounded-xl bg-white p-6 shadow-lg"
           >
-            <h2 className="mb-4 text-lg font-semibold text-cyan-600">
+            <h2 
+              className="mb-4 text-lg font-semibold"
+              style={{ color: 'var(--cv-primary, #0891b2)' }}
+            >
               {section.title}
             </h2>
 
             {section.type === "experience" && (
               <div className="space-y-4">
                 {(section.items as ExperienceItem[]).map((item) => (
-                  <div key={item.id} className="border-l-2 border-cyan-200 pl-4">
+                  <div 
+                    key={item.id} 
+                    className="border-l-2 pl-4"
+                    style={{ borderColor: 'var(--cv-primary, #0891b2)' }}
+                  >
                     <h3 className="font-semibold text-gray-900">{item.role || "Role"}</h3>
-                    <p className="text-cyan-600">{item.company || "Company"}</p>
+                    <p style={{ color: 'var(--cv-primary, #0891b2)' }}>{item.company || "Company"}</p>
                     <p className="text-sm text-gray-500">
                       {item.startDate} - {item.isCurrent ? "Present" : item.endDate}
                     </p>
@@ -97,11 +117,15 @@ export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
             {section.type === "education" && (
               <div className="space-y-4">
                 {(section.items as EducationItem[]).map((item) => (
-                  <div key={item.id} className="border-l-2 border-cyan-200 pl-4">
+                  <div 
+                    key={item.id} 
+                    className="border-l-2 pl-4"
+                    style={{ borderColor: 'var(--cv-primary, #0891b2)' }}
+                  >
                     <h3 className="font-semibold text-gray-900">
                       {item.degree} {item.fieldOfStudy && `in ${item.fieldOfStudy}`}
                     </h3>
-                    <p className="text-cyan-600">{item.institution}</p>
+                    <p style={{ color: 'var(--cv-primary, #0891b2)' }}>{item.institution}</p>
                     <p className="text-sm text-gray-500">
                       {item.startDate} - {item.isCurrent ? "Present" : item.endDate}
                     </p>
@@ -115,9 +139,10 @@ export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
                 {(section.items as SkillItem[]).map((item) => (
                   <div
                     key={item.id}
-                    className="rounded-lg bg-gradient-to-r from-cyan-50 to-blue-50 px-3 py-2"
+                    className="rounded-lg bg-gray-50 px-3 py-2"
+                    style={{ color: 'var(--cv-primary, #0891b2)' }}
                   >
-                    <span className="font-medium text-cyan-700">{item.name}</span>
+                    <span className="font-medium">{item.name}</span>
                     {item.proficiency && (
                       <div className="mt-1 flex gap-0.5">
                         {[1, 2, 3, 4, 5].map((level) => (
@@ -125,9 +150,12 @@ export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
                             key={level}
                             className={`h-1.5 w-4 rounded-full ${
                               level <= item.proficiency
-                                ? "bg-cyan-500"
+                                ? ""
                                 : "bg-gray-200"
                             }`}
+                            style={{ 
+                              backgroundColor: level <= item.proficiency ? 'var(--cv-primary, #06b6d4)' : undefined 
+                            }}
                           />
                         ))}
                       </div>
@@ -145,12 +173,24 @@ export function CardGridTemplate({ personalInfo, sections }: TemplateProps) {
                       <h3 className="font-semibold text-gray-900">{item.title || "Project"}</h3>
                       <div className="flex gap-2 text-sm">
                         {item.liveUrl && (
-                          <a href={item.liveUrl} target="_blank" rel="noopener" className="text-cyan-600 hover:underline">
+                          <a 
+                            href={item.liveUrl} 
+                            target="_blank" 
+                            rel="noopener" 
+                            className="hover:underline"
+                            style={{ color: 'var(--cv-primary, #0891b2)' }}
+                          >
                             Live
                           </a>
                         )}
                         {item.githubUrl && (
-                          <a href={item.githubUrl} target="_blank" rel="noopener" className="text-cyan-600 hover:underline">
+                          <a 
+                            href={item.githubUrl} 
+                            target="_blank" 
+                            rel="noopener" 
+                            className="hover:underline"
+                            style={{ color: 'var(--cv-primary, #0891b2)' }}
+                          >
                             Code
                           </a>
                         )}

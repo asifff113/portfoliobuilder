@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
     const { data, error } = await supabase
       .from("cv_templates")
-      .update(updateData)
+      .update(updateData as never)
       .eq("id", id)
       .select()
       .single();

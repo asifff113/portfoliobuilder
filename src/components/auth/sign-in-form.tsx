@@ -133,7 +133,7 @@ export function SignInForm() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-neon-purple to-neon-pink text-white"
+              className="w-full bg-linear-to-r from-neon-purple to-neon-pink text-white"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -199,7 +199,7 @@ export function SignInForm() {
 
       <Button
         type="submit"
-        className="glow-sm w-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
+        className="glow-sm w-full bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
         disabled={isLoading}
       >
         {isLoading ? (

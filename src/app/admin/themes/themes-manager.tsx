@@ -6,7 +6,6 @@ import {
   Plus,
   Edit,
   Trash2,
-  Star,
   MoreHorizontal,
   Palette,
   Globe,
@@ -137,6 +136,7 @@ export function ThemesManager({ themes }: ThemesManagerProps) {
       setDialogOpen(false);
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to save theme");
     } finally {
       setIsLoading(false);
@@ -158,12 +158,13 @@ export function ThemesManager({ themes }: ThemesManagerProps) {
       toast.success("Theme deleted");
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete theme");
     }
   };
 
   const ThemeCard = ({ theme }: { theme: Theme }) => (
-    <Card className="group relative overflow-hidden border-white/5 bg-white/[0.02] transition-all hover:border-white/10 hover:bg-white/[0.04]">
+    <Card className="group relative overflow-hidden border-white/5 bg-white/2 transition-all hover:border-white/10 hover:bg-white/4">
       {/* Color Preview */}
       <div
         className="relative h-32 p-4"
@@ -259,7 +260,7 @@ export function ThemesManager({ themes }: ThemesManagerProps) {
         <p className="text-sm text-white/50">{themes.length} themes total</p>
         <Button
           onClick={handleOpenCreate}
-          className="bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
+          className="bg-linear-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
         >
           <Plus className="mr-2 h-4 w-4" />
           Add System Theme
@@ -512,7 +513,7 @@ export function ThemesManager({ themes }: ThemesManagerProps) {
             <Button
               onClick={handleSubmit}
               disabled={isLoading}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
+              className="bg-linear-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
             >
               {isLoading ? "Saving..." : editingTheme ? "Update" : "Create"}
             </Button>

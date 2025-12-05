@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
 import { HeroTimelineTemplate } from "@/features/portfolio/templates/hero-timeline";
 import { ProjectGridTemplate } from "@/features/portfolio/templates/project-grid";
+import { AnalyticsTracker } from "./analytics-tracker";
 import type {
   PortfolioHero,
   FeaturedProject,
@@ -36,7 +37,7 @@ export async function generateMetadata({
 
   const { data: portfolio } = await supabase
     .from("portfolios")
-    .select("title, hero_data")
+    .select("title, hero_headline, hero_summary")
     .eq("slug", slug)
     .eq("is_published", true)
     .single();
@@ -47,14 +48,12 @@ export async function generateMetadata({
     };
   }
 
-  const heroData = (portfolio.hero_data || {}) as Record<string, unknown>;
-
   return {
     title: portfolio.title,
-    description: (heroData.summary as string) || `${portfolio.title} - Portfolio`,
+    description: portfolio.hero_summary || `${portfolio.title} - Portfolio`,
     openGraph: {
       title: portfolio.title,
-      description: (heroData.summary as string) || `${portfolio.title} - Portfolio`,
+      description: portfolio.hero_summary || `${portfolio.title} - Portfolio`,
       type: "website",
     },
   };
@@ -99,15 +98,14 @@ export default async function PublicPortfolioPage({
     .order("order_index", { ascending: true });
 
   // Build the data
-  const heroData = (portfolioData.hero_data || {}) as Record<string, unknown>;
   const profileRow = portfolioData.profiles as Record<string, unknown> | null;
 
   const hero: PortfolioHero = {
-    headline: (heroData.headline as string) || "",
-    summary: (heroData.summary as string) || "",
-    imageUrl: (heroData.imageUrl as string) || null,
-    ctaText: (heroData.ctaText as string) || "Get in Touch",
-    ctaUrl: (heroData.ctaUrl as string) || "",
+    headline: portfolioData.hero_headline || "",
+    summary: portfolioData.hero_summary || "",
+    imageUrl: portfolioData.hero_image_url || null,
+    ctaText: "Get in Touch",
+    ctaUrl: "",
   };
 
   const profile: PortfolioProfile = {
@@ -151,6 +149,7 @@ export default async function PublicPortfolioPage({
 
   return (
     <>
+      <AnalyticsTracker portfolioId={portfolioData.id} />
       {layoutType === "hero_timeline" && <HeroTimelineTemplate {...templateProps} />}
       {layoutType === "project_grid" && <ProjectGridTemplate {...templateProps} />}
       {!["hero_timeline", "project_grid"].includes(layoutType) && (

@@ -36,10 +36,10 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import type { Profile } from "@/types/db";
+import type { UserProfile } from "@/lib/admin";
 
 interface UsersTableProps {
-  users: Profile[];
+  users: UserProfile[];
   total: number;
   currentPage: number;
   currentSearch?: string;
@@ -57,7 +57,7 @@ export function UsersTable({
   const searchParams = useSearchParams();
   const [search, setSearch] = useState(currentSearch || "");
   const [banDialogOpen, setBanDialogOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<Profile | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null);
   const [banReason, setBanReason] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -114,13 +114,14 @@ export function UsersTable({
       setBanReason("");
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to ban user");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleUnbanUser = async (user: Profile) => {
+  const handleUnbanUser = async (user: UserProfile) => {
     setIsLoading(true);
 
     try {
@@ -135,6 +136,7 @@ export function UsersTable({
       toast.success(`User ${user.email} has been unbanned`);
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to unban user");
     } finally {
       setIsLoading(false);
@@ -143,7 +145,7 @@ export function UsersTable({
 
   return (
     <>
-      <Card className="border-white/5 bg-white/[0.02]">
+      <Card className="border-white/5 bg-white/2">
         {/* Toolbar */}
         <div className="flex flex-col gap-4 border-b border-white/5 p-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Search */}
@@ -230,11 +232,11 @@ export function UsersTable({
                 users.map((user) => (
                   <tr
                     key={user.id}
-                    className="border-b border-white/5 transition-colors hover:bg-white/[0.02]"
+                    className="border-b border-white/5 transition-colors hover:bg-white/2"
                   >
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-medium text-white">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-pink-500 text-sm font-medium text-white">
                           {user.full_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || "?"}
                         </div>
                         <div>

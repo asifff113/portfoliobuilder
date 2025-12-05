@@ -67,7 +67,7 @@ export function AppSidebar() {
         {/* Logo */}
         <div className="flex h-16 items-center justify-between border-b border-white/5 px-4">
           <Link href="/app/dashboard" className="flex items-center gap-2">
-            <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             {!isCollapsed && (
@@ -99,7 +99,7 @@ export function AppSidebar() {
                 className={cn(
                   "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
                   isActive
-                    ? "bg-gradient-to-r from-neon-purple/20 via-neon-pink/15 to-neon-cyan/10 text-foreground"
+                    ? "bg-linear-to-r from-neon-purple/20 via-neon-pink/15 to-neon-cyan/10 text-foreground"
                     : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
                 )}
               >
@@ -125,7 +125,7 @@ export function AppSidebar() {
               href="/admin"
               className={cn(
                 "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
-                "bg-gradient-to-r from-red-500/10 via-orange-500/10 to-yellow-500/10 text-orange-400 hover:from-red-500/20 hover:via-orange-500/20 hover:to-yellow-500/20"
+                "bg-linear-to-r from-red-500/10 via-orange-500/10 to-yellow-500/10 text-orange-400 hover:from-red-500/20 hover:via-orange-500/20 hover:to-yellow-500/20"
               )}
             >
               <Shield className="h-5 w-5 shrink-0" />
@@ -137,14 +137,14 @@ export function AppSidebar() {
         {/* Footer */}
         {!isCollapsed && !isAdmin && (
           <div className="border-t border-white/5 p-4">
-            <div className="rounded-xl bg-gradient-to-r from-neon-purple/10 via-neon-pink/10 to-neon-cyan/10 p-4">
+            <div className="rounded-xl bg-linear-to-r from-neon-purple/10 via-neon-pink/10 to-neon-cyan/10 p-4">
               <p className="text-sm font-medium">Upgrade to Pro</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 Unlock all templates and features
               </p>
               <Button
                 size="sm"
-                className="glow-sm mt-3 w-full bg-gradient-to-r from-neon-purple to-neon-pink text-white"
+                className="glow-sm mt-3 w-full bg-linear-to-r from-neon-purple to-neon-pink text-white"
               >
                 Upgrade
               </Button>

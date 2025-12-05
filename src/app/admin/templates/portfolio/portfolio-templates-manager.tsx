@@ -106,6 +106,7 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
       setDialogOpen(false);
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to save template");
     } finally {
       setIsLoading(false);
@@ -127,6 +128,7 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
       toast.success("Template deleted");
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to delete template");
     }
   };
@@ -147,6 +149,7 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
       toast.success(template.is_premium ? "Template marked as free" : "Template marked as premium");
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error("Failed to update template");
     }
   };
@@ -174,7 +177,7 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
         <p className="text-sm text-white/50">{templates.length} templates</p>
         <Button
           onClick={handleOpenCreate}
-          className="bg-gradient-to-r from-orange-600 to-yellow-600 text-white hover:from-orange-700 hover:to-yellow-700"
+          className="bg-linear-to-r from-orange-600 to-yellow-600 text-white hover:from-orange-700 hover:to-yellow-700"
         >
           <Plus className="mr-2 h-4 w-4" />
           Add Template
@@ -186,10 +189,10 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
         {templates.map((template) => (
           <Card
             key={template.id}
-            className="group relative overflow-hidden border-white/5 bg-white/[0.02] transition-all hover:border-white/10 hover:bg-white/[0.04]"
+            className="group relative overflow-hidden border-white/5 bg-white/2 transition-all hover:border-white/10 hover:bg-white/4"
           >
             {/* Preview Area */}
-            <div className={`relative h-40 bg-gradient-to-br ${layoutColors[template.layout_type]} p-4`}>
+            <div className={`relative h-40 bg-linear-to-br ${layoutColors[template.layout_type]} p-4`}>
               <div className="flex h-full items-center justify-center">
                 <Briefcase className="h-16 w-16 text-white/30" />
               </div>
@@ -272,7 +275,7 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
 
               {/* Layout Badge */}
               <div className="mt-3 flex items-center gap-2">
-                <span className={`rounded-full bg-gradient-to-r ${layoutColors[template.layout_type]} px-2 py-0.5 text-xs font-medium text-white`}>
+                <span className={`rounded-full bg-linear-to-r ${layoutColors[template.layout_type]} px-2 py-0.5 text-xs font-medium text-white`}>
                   {layoutLabels[template.layout_type]}
                 </span>
                 <span className="text-xs text-white/30">
@@ -378,7 +381,7 @@ export function PortfolioTemplatesManager({ templates }: PortfolioTemplatesManag
             <Button
               onClick={handleSubmit}
               disabled={isLoading}
-              className="bg-gradient-to-r from-orange-600 to-yellow-600 text-white hover:from-orange-700 hover:to-yellow-700"
+              className="bg-linear-to-r from-orange-600 to-yellow-600 text-white hover:from-orange-700 hover:to-yellow-700"
             >
               {isLoading ? "Saving..." : editingTemplate ? "Update" : "Create"}
             </Button>

@@ -20,18 +20,30 @@ export default async function NewPortfolioPage() {
     .eq("user_id", user.id)
     .single();
 
-  const profile: PortfolioProfile | null = profileData
+  const profileRow = profileData as {
+    full_name: string | null;
+    headline: string | null;
+    phone: string | null;
+    location: string | null;
+    website_url: string | null;
+    linkedin_url: string | null;
+    github_url: string | null;
+    bio: string | null;
+    avatar_url: string | null;
+  } | null;
+
+  const profile: PortfolioProfile | null = profileRow
     ? {
-        fullName: profileData.full_name || "",
-        headline: profileData.headline || "",
+        fullName: profileRow.full_name || "",
+        headline: profileRow.headline || "",
         email: user.email || "",
-        phone: profileData.phone || "",
-        location: profileData.location || "",
-        website: profileData.website_url || "",
-        linkedinUrl: profileData.linkedin_url || "",
-        githubUrl: profileData.github_url || "",
-        bio: profileData.bio || "",
-        avatarUrl: profileData.avatar_url || null,
+        phone: profileRow.phone || "",
+        location: profileRow.location || "",
+        website: profileRow.website_url || "",
+        linkedinUrl: profileRow.linkedin_url || "",
+        githubUrl: profileRow.github_url || "",
+        bio: profileRow.bio || "",
+        avatarUrl: profileRow.avatar_url || null,
       }
     : null;
 

@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         border_radius: body.border_radius || "lg",
         shadow_intensity: body.shadow_intensity || "md",
         user_id: null, // System themes don't have a user
-      })
+      } as never)
       .select()
       .single();
 

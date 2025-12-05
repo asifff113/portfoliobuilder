@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
       <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
         <div className="w-full max-w-md text-center">
           <div className="mb-6 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-8 w-8 text-white" />
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function ResetPasswordPage() {
             This password reset link is invalid or has expired. Please request a new one.
           </p>
           <Link href="/auth">
-            <Button className="bg-gradient-to-r from-neon-purple to-neon-pink text-white">
+            <Button className="bg-linear-to-r from-neon-purple to-neon-pink text-white">
               Back to Sign In
             </Button>
           </Link>
@@ -134,7 +134,7 @@ export default function ResetPasswordPage() {
         {/* Logo */}
         <div className="mb-8 flex justify-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-6 w-6 text-white" />
             </div>
             <span className="text-gradient text-2xl font-bold">NeonCV</span>
@@ -189,7 +189,7 @@ export default function ResetPasswordPage() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white"
+              className="w-full bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white"
               disabled={isLoading}
             >
               {isLoading ? (

@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         is_banned: false,
         banned_at: null,
         ban_reason: null,
-      })
+      } as never)
       .eq("user_id", userId);
 
     if (error) {

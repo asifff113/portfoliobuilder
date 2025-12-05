@@ -25,7 +25,7 @@ export function HeroTimelineTemplate({
       <section className="relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/10 to-pink-500/20" />
+          <div className="absolute inset-0 bg-linear-to-br from-cyan-500/20 via-purple-500/10 to-pink-500/20" />
           <div className="absolute left-1/4 top-1/4 h-96 w-96 animate-pulse rounded-full bg-cyan-500/30 blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 h-96 w-96 animate-pulse rounded-full bg-purple-500/30 blur-3xl" style={{ animationDelay: "1s" }} />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
@@ -42,7 +42,7 @@ export function HeroTimelineTemplate({
               </div>
 
               <h1 className="text-5xl font-bold leading-tight lg:text-6xl">
-                <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
                   {profile.fullName}
                 </span>
               </h1>
@@ -60,7 +60,7 @@ export function HeroTimelineTemplate({
                 {hero.ctaUrl && (
                   <a
                     href={hero.ctaUrl}
-                    className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 px-6 py-3 font-medium text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40"
+                    className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-cyan-500 to-purple-500 px-6 py-3 font-medium text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40"
                   >
                     <Mail className="h-5 w-5" />
                     {hero.ctaText || "Get in Touch"}
@@ -91,7 +91,7 @@ export function HeroTimelineTemplate({
             {/* Hero Image */}
             {hero.imageUrl && (
               <div className="relative mx-auto lg:mx-0">
-                <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-cyan-500 to-purple-500 opacity-20 blur-2xl" />
+                <div className="absolute -inset-4 rounded-3xl bg-linear-to-r from-cyan-500 to-purple-500 opacity-20 blur-2xl" />
                 <div className="relative overflow-hidden rounded-3xl border border-white/10">
                   <img
                     src={hero.imageUrl}
@@ -110,7 +110,7 @@ export function HeroTimelineTemplate({
         <section className="relative py-24">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="mb-12 text-center text-3xl font-bold">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 Featured Projects
               </span>
             </h2>
@@ -126,7 +126,7 @@ export function HeroTimelineTemplate({
                   {/* Project Image */}
                   {project.imageUrl && (
                     <div className="relative flex-1">
-                      <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-xl" />
+                      <div className="absolute -inset-2 rounded-2xl bg-linear-to-r from-cyan-500/20 to-purple-500/20 blur-xl" />
                       <div className="relative overflow-hidden rounded-xl border border-white/10">
                         <img
                           src={project.imageUrl}
@@ -190,7 +190,7 @@ export function HeroTimelineTemplate({
         <div className="mx-auto max-w-6xl px-6 text-center">
           <p className="text-white/40">
             Built with{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               NeonCV
             </span>
           </p>

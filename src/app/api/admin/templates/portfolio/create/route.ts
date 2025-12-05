@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         layout_type: layout_type || "hero_timeline",
         is_premium: is_premium || false,
         config: {},
-      })
+      } as never)
       .select()
       .single();
 

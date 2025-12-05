@@ -66,19 +66,23 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
             slug,
             layout_type: meta.layoutType,
             is_published: false,
-            hero_data: hero,
+            hero_headline: hero.headline || null,
+            hero_summary: hero.summary || null,
+            hero_image_url: hero.imageUrl || null,
             theme_id: meta.themeId,
             custom_domain: meta.customDomain,
-          })
+          } as never)
           .select()
           .single();
 
         if (createError) throw createError;
 
+        const newPortfolioData = newPortfolio as { id: string };
+
         // Save projects
         if (projects.length > 0) {
           const projectsToInsert = projects.map((p) => ({
-            portfolio_id: newPortfolio.id,
+            portfolio_id: newPortfolioData.id,
             title: p.title,
             description: p.description,
             image_url: p.imageUrl,
@@ -86,28 +90,28 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
             github_url: p.githubUrl,
             tech_stack: p.techStack,
             is_featured: p.isFeatured,
-            order_index: p.order,
+            order: p.order,
           }));
 
-          await supabase.from("featured_projects").insert(projectsToInsert);
+          await supabase.from("featured_projects").insert(projectsToInsert as never);
         }
 
         // Save blocks
         if (blocks.length > 0) {
           const blocksToInsert = blocks.map((b) => ({
-            portfolio_id: newPortfolio.id,
-            block_type: b.type,
+            portfolio_id: newPortfolioData.id,
+            type: b.type,
             title: b.title,
             content: b.content,
-            order_index: b.order,
+            order: b.order,
             is_visible: b.isVisible,
           }));
 
-          await supabase.from("portfolio_blocks").insert(blocksToInsert);
+          await supabase.from("portfolio_blocks").insert(blocksToInsert as never);
         }
 
         markAsSaved();
-        router.replace(`/app/portfolio/${newPortfolio.id}`);
+        router.replace(`/app/portfolio/${newPortfolioData.id}`);
       } else {
         // Update existing portfolio
         const { error: updateError } = await supabase
@@ -117,11 +121,13 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
             slug: meta.slug,
             layout_type: meta.layoutType,
             is_published: meta.isPublished,
-            hero_data: hero,
+            hero_headline: hero.headline || null,
+            hero_summary: hero.summary || null,
+            hero_image_url: hero.imageUrl || null,
             theme_id: meta.themeId,
             custom_domain: meta.customDomain,
             updated_at: new Date().toISOString(),
-          })
+          } as never)
           .eq("id", portfolioId);
 
         if (updateError) throw updateError;
@@ -138,10 +144,10 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
             github_url: p.githubUrl,
             tech_stack: p.techStack,
             is_featured: p.isFeatured,
-            order_index: p.order,
+            order: p.order,
           }));
 
-          await supabase.from("featured_projects").insert(projectsToInsert);
+          await supabase.from("featured_projects").insert(projectsToInsert as never);
         }
 
         // Delete and re-insert blocks
@@ -149,14 +155,14 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         if (blocks.length > 0) {
           const blocksToInsert = blocks.map((b) => ({
             portfolio_id: portfolioId,
-            block_type: b.type,
+            type: b.type,
             title: b.title,
             content: b.content,
-            order_index: b.order,
+            order: b.order,
             is_visible: b.isVisible,
           }));
 
-          await supabase.from("portfolio_blocks").insert(blocksToInsert);
+          await supabase.from("portfolio_blocks").insert(blocksToInsert as never);
         }
 
         markAsSaved();
@@ -231,7 +237,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
       <div className="border-b border-white/10 bg-black/40 px-4 py-3 backdrop-blur-md">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <h1 className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-xl font-bold text-transparent">
+            <h1 className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-xl font-bold text-transparent">
               Portfolio Builder
             </h1>
 
@@ -314,7 +320,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         </div>
 
         {/* Preview panel */}
-        <div className="w-1/2 overflow-y-auto bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
+        <div className="w-1/2 overflow-y-auto bg-linear-to-br from-gray-900 via-purple-900/20 to-gray-900">
           <PortfolioPreviewPanel profile={profile} />
         </div>
       </div>

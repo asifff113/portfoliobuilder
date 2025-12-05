@@ -30,7 +30,7 @@ export default async function AdminDashboard() {
       icon: FileText,
       gradient: "from-purple-500 to-pink-500",
       shadowColor: "shadow-purple-500/20",
-      href: "/admin/templates/cv",
+      href: "/admin/cvs",
     },
     {
       title: "Total Portfolios",
@@ -64,9 +64,9 @@ export default async function AdminDashboard() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat) => (
           <Link key={stat.title} href={stat.href}>
-            <Card className={`group relative overflow-hidden border-white/5 bg-white/[0.02] p-6 transition-all hover:border-white/10 hover:bg-white/[0.04] ${stat.shadowColor}`}>
+            <Card className={`group relative overflow-hidden border-white/5 bg-white/2 p-6 transition-all hover:border-white/10 hover:bg-white/4 ${stat.shadowColor}`}>
               {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 transition-opacity group-hover:opacity-5`} />
+              <div className={`absolute inset-0 bg-linear-to-br ${stat.gradient} opacity-0 transition-opacity group-hover:opacity-5`} />
               
               <div className="relative flex items-start justify-between">
                 <div>
@@ -75,7 +75,7 @@ export default async function AdminDashboard() {
                     {stat.value.toLocaleString()}
                   </p>
                 </div>
-                <div className={`rounded-xl bg-gradient-to-br ${stat.gradient} p-3 shadow-lg ${stat.shadowColor}`}>
+                <div className={`rounded-xl bg-linear-to-br ${stat.gradient} p-3 shadow-lg ${stat.shadowColor}`}>
                   <stat.icon className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -93,10 +93,10 @@ export default async function AdminDashboard() {
       {/* Recent Activity */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Recent Users */}
-        <Card className="border-white/5 bg-white/[0.02] p-6">
+        <Card className="border-white/5 bg-white/2 p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 p-2">
+              <div className="rounded-lg bg-linear-to-br from-blue-500 to-cyan-500 p-2">
                 <Users className="h-4 w-4 text-white" />
               </div>
               <h2 className="text-lg font-semibold text-white">Recent Users</h2>
@@ -116,10 +116,10 @@ export default async function AdminDashboard() {
               recentUsers.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between rounded-lg bg-white/[0.02] p-3 transition-colors hover:bg-white/[0.04]"
+                  className="flex items-center justify-between rounded-lg bg-white/2 p-3 transition-colors hover:bg-white/4"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-sm font-medium text-white">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-purple-500 to-pink-500 text-sm font-medium text-white">
                       {user.full_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || "?"}
                     </div>
                     <div>
@@ -151,9 +151,9 @@ export default async function AdminDashboard() {
         </Card>
 
         {/* Quick Actions */}
-        <Card className="border-white/5 bg-white/[0.02] p-6">
+        <Card className="border-white/5 bg-white/2 p-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-gradient-to-br from-orange-500 to-yellow-500 p-2">
+            <div className="rounded-lg bg-linear-to-br from-orange-500 to-yellow-500 p-2">
               <Activity className="h-4 w-4 text-white" />
             </div>
             <h2 className="text-lg font-semibold text-white">Quick Actions</h2>
@@ -162,9 +162,9 @@ export default async function AdminDashboard() {
           <div className="mt-6 grid gap-3">
             <Link
               href="/admin/users"
-              className="flex items-center gap-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 p-4 transition-all hover:from-blue-500/20 hover:to-cyan-500/20"
+              className="flex items-center gap-4 rounded-xl bg-linear-to-r from-blue-500/10 to-cyan-500/10 p-4 transition-all hover:from-blue-500/20 hover:to-cyan-500/20"
             >
-              <div className="rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 p-2.5">
+              <div className="rounded-lg bg-linear-to-br from-blue-500 to-cyan-500 p-2.5">
                 <Users className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -175,9 +175,9 @@ export default async function AdminDashboard() {
 
             <Link
               href="/admin/templates/cv"
-              className="flex items-center gap-4 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4 transition-all hover:from-purple-500/20 hover:to-pink-500/20"
+              className="flex items-center gap-4 rounded-xl bg-linear-to-r from-purple-500/10 to-pink-500/10 p-4 transition-all hover:from-purple-500/20 hover:to-pink-500/20"
             >
-              <div className="rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 p-2.5">
+              <div className="rounded-lg bg-linear-to-br from-purple-500 to-pink-500 p-2.5">
                 <FileText className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -188,9 +188,9 @@ export default async function AdminDashboard() {
 
             <Link
               href="/admin/themes"
-              className="flex items-center gap-4 rounded-xl bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 transition-all hover:from-green-500/20 hover:to-emerald-500/20"
+              className="flex items-center gap-4 rounded-xl bg-linear-to-r from-green-500/10 to-emerald-500/10 p-4 transition-all hover:from-green-500/20 hover:to-emerald-500/20"
             >
-              <div className="rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 p-2.5">
+              <div className="rounded-lg bg-linear-to-br from-green-500 to-emerald-500 p-2.5">
                 <span className="text-lg">🎨</span>
               </div>
               <div>
@@ -203,24 +203,24 @@ export default async function AdminDashboard() {
       </div>
 
       {/* System Info */}
-      <Card className="border-white/5 bg-white/[0.02] p-6">
+      <Card className="border-white/5 bg-white/2 p-6">
         <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-gradient-to-br from-gray-500 to-gray-600 p-2">
+          <div className="rounded-lg bg-linear-to-br from-gray-500 to-gray-600 p-2">
             <Clock className="h-4 w-4 text-white" />
           </div>
           <h2 className="text-lg font-semibold text-white">System Information</h2>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-lg bg-white/[0.02] p-4">
+          <div className="rounded-lg bg-white/2 p-4">
             <p className="text-sm text-white/50">Platform</p>
             <p className="mt-1 font-medium text-white">NeonCV</p>
           </div>
-          <div className="rounded-lg bg-white/[0.02] p-4">
+          <div className="rounded-lg bg-white/2 p-4">
             <p className="text-sm text-white/50">Version</p>
             <p className="mt-1 font-medium text-white">1.0.0</p>
           </div>
-          <div className="rounded-lg bg-white/[0.02] p-4">
+          <div className="rounded-lg bg-white/2 p-4">
             <p className="text-sm text-white/50">Database</p>
             <p className="mt-1 font-medium text-white">Supabase (PostgreSQL)</p>
           </div>

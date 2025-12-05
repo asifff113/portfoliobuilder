@@ -157,7 +157,7 @@ export default function OnboardingPage() {
       <div className="glass-strong relative z-10 w-full max-w-lg rounded-2xl p-8">
         {/* Header */}
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
             <Sparkles className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-gradient text-2xl font-bold">Welcome to NeonCV</h1>
@@ -174,7 +174,7 @@ export default function OnboardingPage() {
               className={cn(
                 "h-2 w-12 rounded-full transition-all",
                 s <= step
-                  ? "bg-gradient-to-r from-neon-purple to-neon-pink"
+                  ? "bg-linear-to-r from-neon-purple to-neon-pink"
                   : "bg-muted"
               )}
             />
@@ -225,7 +225,7 @@ export default function OnboardingPage() {
 
             <Button
               onClick={() => setStep(2)}
-              className="glow-sm mt-6 w-full bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
+              className="glow-sm mt-6 w-full bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
               disabled={!fullName || !headline}
             >
               Continue
@@ -258,7 +258,7 @@ export default function OnboardingPage() {
               </Button>
               <Button
                 onClick={() => setStep(3)}
-                className="glow-sm flex-1 bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
+                className="glow-sm flex-1 bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
               >
                 Continue
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -333,7 +333,7 @@ export default function OnboardingPage() {
               <Button
                 onClick={handleComplete}
                 disabled={isLoading}
-                className="glow-sm flex-1 bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
+                className="glow-sm flex-1 bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white hover:opacity-90"
               >
                 {isLoading ? (
                   <>

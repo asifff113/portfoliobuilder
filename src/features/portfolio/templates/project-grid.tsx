@@ -24,12 +24,12 @@ export function ProjectGridTemplate({
       {/* Sidebar + Main Content Layout */}
       <div className="flex flex-col lg:flex-row">
         {/* Sidebar */}
-        <aside className="sticky top-0 h-auto w-full shrink-0 border-b border-white/10 bg-gradient-to-b from-gray-900 to-gray-950 p-8 lg:h-screen lg:w-80 lg:border-b-0 lg:border-r">
+        <aside className="sticky top-0 h-auto w-full shrink-0 border-b border-white/10 bg-linear-to-b from-gray-900 to-gray-950 p-8 lg:h-screen lg:w-80 lg:border-b-0 lg:border-r">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             {/* Avatar */}
             {hero.imageUrl && (
               <div className="relative mb-6">
-                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-75 blur" />
+                <div className="absolute -inset-1 rounded-full bg-linear-to-r from-cyan-500 to-purple-500 opacity-75 blur" />
                 <img
                   src={hero.imageUrl}
                   alt={profile.fullName}
@@ -40,7 +40,7 @@ export function ProjectGridTemplate({
 
             {/* Name & Title */}
             <h1 className="text-2xl font-bold text-white">{profile.fullName}</h1>
-            <p className="mt-1 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-lg text-transparent">
+            <p className="mt-1 bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-lg text-transparent">
               {hero.headline || profile.headline}
             </p>
 
@@ -97,7 +97,7 @@ export function ProjectGridTemplate({
             {hero.ctaUrl && (
               <a
                 href={hero.ctaUrl}
-                className="mt-8 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 py-3 text-center font-medium text-white transition-all hover:shadow-lg hover:shadow-cyan-500/25"
+                className="mt-8 w-full rounded-xl bg-linear-to-r from-cyan-500 to-purple-500 py-3 text-center font-medium text-white transition-all hover:shadow-lg hover:shadow-cyan-500/25"
               >
                 {hero.ctaText || "Get in Touch"}
               </a>
@@ -108,7 +108,7 @@ export function ProjectGridTemplate({
         {/* Main Content */}
         <main className="flex-1 p-8">
           <h2 className="mb-8 text-3xl font-bold">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
@@ -130,7 +130,7 @@ export function ProjectGridTemplate({
                     />
                   </div>
                 ) : (
-                  <div className="flex aspect-video items-center justify-center bg-gradient-to-br from-cyan-500/10 to-purple-500/10">
+                  <div className="flex aspect-video items-center justify-center bg-linear-to-br from-cyan-500/10 to-purple-500/10">
                     <Globe className="h-12 w-12 text-white/20" />
                   </div>
                 )}
@@ -188,7 +188,7 @@ export function ProjectGridTemplate({
 
                 {/* Featured Badge */}
                 {project.isFeatured && (
-                  <div className="absolute right-3 top-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 px-2.5 py-0.5 text-xs font-medium text-white">
+                  <div className="absolute right-3 top-3 rounded-full bg-linear-to-r from-cyan-500 to-purple-500 px-2.5 py-0.5 text-xs font-medium text-white">
                     Featured
                   </div>
                 )}
@@ -210,7 +210,7 @@ export function ProjectGridTemplate({
       <footer className="border-t border-white/10 py-6 text-center">
         <p className="text-sm text-white/40">
           Built with{" "}
-          <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
             NeonCV
           </span>
         </p>

@@ -157,13 +157,13 @@ function TemplateCard({ template }: TemplateCardProps) {
         {/* Badges */}
         <div className="absolute left-3 top-3 flex gap-2">
           {template.isPro && (
-            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-2 py-0.5 text-xs font-medium text-white">
+            <span className="flex items-center gap-1 rounded-full bg-linear-to-r from-amber-500 to-orange-500 px-2 py-0.5 text-xs font-medium text-white">
               <Lock className="h-3 w-3" />
               Pro
             </span>
           )}
           {template.isPopular && (
-            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 px-2 py-0.5 text-xs font-medium text-white">
+            <span className="flex items-center gap-1 rounded-full bg-linear-to-r from-cyan-500 to-purple-500 px-2 py-0.5 text-xs font-medium text-white">
               <Star className="h-3 w-3" />
               Popular
             </span>
@@ -173,7 +173,7 @@ function TemplateCard({ template }: TemplateCardProps) {
         {/* Hover overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100">
           <Link href="/auth">
-            <Button size="sm" className="bg-gradient-to-r from-cyan-500 to-purple-500">
+            <Button size="sm" className="bg-linear-to-r from-cyan-500 to-purple-500">
               Use Template
             </Button>
           </Link>
@@ -215,7 +215,7 @@ export default function PublicTemplatesPage() {
       <nav className="glass-strong sticky top-0 z-50 border-b border-white/5">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2">
-            <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple via-neon-pink to-neon-cyan">
+            <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <span className="text-gradient text-xl font-bold tracking-tight">NeonCV</span>
@@ -229,7 +229,7 @@ export default function PublicTemplatesPage() {
               </Button>
             </Link>
             <Link href="/auth">
-              <Button className="glow-sm bg-gradient-to-r from-neon-purple to-neon-pink text-white">
+              <Button className="glow-sm bg-linear-to-r from-neon-purple to-neon-pink text-white">
                 Get Started
               </Button>
             </Link>
@@ -242,7 +242,7 @@ export default function PublicTemplatesPage() {
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Beautiful Templates
             </span>
           </h1>
@@ -254,9 +254,9 @@ export default function PublicTemplatesPage() {
 
         {/* Pro Badge */}
         <div className="mb-12 flex justify-center">
-          <Card className="border-amber-500/30 bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-6">
+          <Card className="border-amber-500/30 bg-linear-to-r from-amber-500/10 to-orange-500/10 p-6">
             <div className="flex flex-col items-center gap-4 sm:flex-row">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-amber-500 to-orange-500">
                 <Sparkles className="h-6 w-6 text-white" />
               </div>
               <div className="text-center sm:text-left">
@@ -264,7 +264,7 @@ export default function PublicTemplatesPage() {
                 <p className="text-sm text-white/50">Get access to 20+ premium templates with Pro</p>
               </div>
               <Link href="/auth">
-                <Button className="bg-gradient-to-r from-amber-500 to-orange-500">
+                <Button className="bg-linear-to-r from-amber-500 to-orange-500">
                   Upgrade to Pro
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -276,7 +276,7 @@ export default function PublicTemplatesPage() {
         {/* CV Templates */}
         <section className="mb-16">
           <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-purple/20 to-neon-pink/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple/20 to-neon-pink/20">
               <FileText className="h-5 w-5 text-neon-purple" />
             </div>
             <div>
@@ -295,7 +295,7 @@ export default function PublicTemplatesPage() {
         {/* Portfolio Templates */}
         <section className="mb-16">
           <div className="mb-8 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-neon-cyan/20 to-neon-blue/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-cyan/20 to-neon-blue/20">
               <Briefcase className="h-5 w-5 text-neon-cyan" />
             </div>
             <div>
@@ -313,7 +313,7 @@ export default function PublicTemplatesPage() {
 
         {/* CTA */}
         <section className="text-center">
-          <Card className="border-white/10 bg-gradient-to-r from-neon-purple/10 via-neon-pink/10 to-neon-cyan/10 p-12">
+          <Card className="border-white/10 bg-linear-to-r from-neon-purple/10 via-neon-pink/10 to-neon-cyan/10 p-12">
             <h2 className="mb-4 text-3xl font-bold text-white">
               Ready to create your perfect CV?
             </h2>
@@ -321,7 +321,7 @@ export default function PublicTemplatesPage() {
               Sign up now and start building your professional CV or portfolio in minutes.
             </p>
             <Link href="/auth">
-              <Button size="lg" className="glow-sm bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white">
+              <Button size="lg" className="glow-sm bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white">
                 Get Started Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

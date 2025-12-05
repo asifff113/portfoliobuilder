@@ -44,7 +44,7 @@ export default async function CVListPage() {
           <p className="mt-1 text-muted-foreground">Create and manage your CVs</p>
         </div>
         <Link href="/app/cv/new">
-          <Button className="glow-sm bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white">
+          <Button className="glow-sm bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white">
             <Plus className="mr-2 h-4 w-4" />
             Create New CV
           </Button>
@@ -115,7 +115,7 @@ export default async function CVListPage() {
       ) : (
         <Card className="glass">
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-neon-purple/20 to-neon-pink/20">
+            <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-neon-purple/20 to-neon-pink/20">
               <FileText className="h-10 w-10 text-neon-purple" />
             </div>
             <h2 className="text-xl font-semibold">No CVs yet</h2>
@@ -123,7 +123,7 @@ export default async function CVListPage() {
               Create your first CV to showcase your experience, skills, and achievements.
             </p>
             <Link href="/app/cv/new">
-              <Button className="glow-sm mt-6 bg-gradient-to-r from-neon-purple via-neon-pink to-neon-cyan text-white">
+              <Button className="glow-sm mt-6 bg-linear-to-r from-neon-purple via-neon-pink to-neon-cyan text-white">
                 <Plus className="mr-2 h-4 w-4" />
                 Create Your First CV
               </Button>
