@@ -1016,5 +1016,26 @@ export const cvTemplates: CVTemplate[] = [
     previewImageUrl: null,
     category: "minimal",
   },
+  {
+    id: "glitch-cyber",
+    name: "Glitch Cyber",
+    description: "Futuristic glitch art aesthetic with RGB split effects and cyber typography",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "minimalist-luxe",
+    name: "Minimalist Luxe",
+    description: "High-end luxury brand aesthetic with elegant serif typography and gold accents",
+    previewImageUrl: null,
+    category: "professional",
+  },
+  {
+    id: "data-stream",
+    name: "Data Stream",
+    description: "Advanced matrix-inspired data stream layout with vertical data lines",
+    previewImageUrl: null,
+    category: "creative",
+  },
 ];
 

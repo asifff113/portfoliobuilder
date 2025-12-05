@@ -54,6 +54,9 @@ import { NeuralNetworkTemplate } from "../templates/neural-network";
 import { LiquidMercuryTemplate } from "../templates/liquid-mercury";
 import { NeonHorizonTemplate } from "../templates/neon-horizon";
 import { FrostMinimalTemplate } from "../templates/frost-minimal";
+import { GlitchCyberTemplate } from "../templates/glitch-cyber";
+import { MinimalistLuxeTemplate } from "../templates/minimalist-luxe";
+import { DataStreamTemplate } from "../templates/data-stream";
 import type { PersonalInfo, CVSection } from "@/types/cv";
 
 // Template props interface that all templates should implement
@@ -121,6 +124,9 @@ const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
   "liquid-mercury": LiquidMercuryTemplate,
   "neon-horizon": NeonHorizonTemplate,
   "frost-minimal": FrostMinimalTemplate,
+  "glitch-cyber": GlitchCyberTemplate,
+  "minimalist-luxe": MinimalistLuxeTemplate,
+  "data-stream": DataStreamTemplate,
 };
 
 export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(
