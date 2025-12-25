@@ -322,7 +322,7 @@ Experienced software engineer with 5+ years...
 
 Skills:
 JavaScript, React, Node.js, Python..."
-                className="min-h-[200px] bg-white/5"
+                className="min-h-52 bg-white/5"
               />
               <div className="flex gap-2">
                 <Button

@@ -37,7 +37,7 @@ export function TemplateSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8 max-w-[140px] px-2">
+        <Button variant="outline" size="sm" className="h-8 max-w-36 px-2">
           <Palette className="h-4 w-4 shrink-0" />
           <span className="ml-1 truncate hidden sm:inline">{currentTemplate?.name || "Template"}</span>
         </Button>

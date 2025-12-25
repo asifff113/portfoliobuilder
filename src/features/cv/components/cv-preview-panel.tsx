@@ -225,7 +225,7 @@ export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(
           className={`rounded-xl bg-white shadow-2xl overflow-hidden ${
             isFullPreview 
               ? 'w-full max-w-4xl' // Responsive full width with max constraint
-              : 'mx-auto max-w-[800px]'
+              : 'mx-auto max-w-3xl'
           }`}
           style={customStyles}
         >
