@@ -7,8 +7,8 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize Gemini
-const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "AIzaSyDN4TgY3dX5NxgFf0iX-tf8cofF3y-57Wo";
+// Initialize Gemini - API key must be set in environment variables
+const API_KEY = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY || "";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Use gemini-2.0-flash model
