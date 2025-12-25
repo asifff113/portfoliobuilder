@@ -62,6 +62,7 @@ import { GradientWaveCVTemplate } from "../templates/gradient-wave";
 import { NewspaperCVTemplate } from "../templates/newspaper";
 import { OrigamiCVTemplate } from "../templates/origami";
 import { IsometricCVTemplate } from "../templates/isometric";
+import { PersonalBioTemplate } from "../templates/personal-bio";
 import type { PersonalInfo, CVSection } from "@/types/cv";
 
 // Template props interface that all templates should implement
@@ -138,6 +139,7 @@ const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
   "newspaper": NewspaperCVTemplate,
   "origami": OrigamiCVTemplate,
   "isometric": IsometricCVTemplate,
+  "personal-bio": PersonalBioTemplate,
 };
 
 export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(

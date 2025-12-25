@@ -798,7 +798,14 @@ export const cvTemplates: CVTemplate[] = [
   {
     id: "neo-brutalist",
     name: "Neo-Brutalist",
-    description: "Trendy, high-contrast design with thick borders and hard shadows",
+    description: "Bold, raw design with strong geometric shapes and striking contrasts",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "personal-bio",
+    name: "Personal Bio",
+    description: "Fun, creative personal profile with pink/purple pastel aesthetic and decorative elements",
     previewImageUrl: null,
     category: "creative",
   },
