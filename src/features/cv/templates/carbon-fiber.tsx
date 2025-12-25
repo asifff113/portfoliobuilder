@@ -276,8 +276,8 @@ export function CarbonFiberTemplate({ personalInfo, sections, settings }: Templa
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-xs text-amber-500 hover:text-amber-400">
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-xs text-amber-500 hover:text-amber-400">
                               <Globe className="w-3 h-3" /> View Project
                             </a>
                           )}
