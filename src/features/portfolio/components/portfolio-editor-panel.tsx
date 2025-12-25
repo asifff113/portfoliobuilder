@@ -24,6 +24,12 @@ import {
   MessageSquare,
   Layers,
   ChevronDown,
+  ChevronUp,
+  Trophy,
+  Clock,
+  Zap,
+  Star,
+  Palette,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -32,11 +38,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePortfolioStore } from "../store";
 import { HeroForm } from "./hero-form";
 import { ProjectCard } from "./project-card";
+import { BlockCard } from "./block-card";
 import { PortfolioTemplateSelector } from "./portfolio-template-selector";
 import { portfolioTemplates, type PortfolioProfile } from "@/types/portfolio";
 
@@ -45,18 +53,32 @@ interface PortfolioEditorPanelProps {
 }
 
 const blockTypes = [
-  { type: "about", label: "About", icon: FileText },
-  { type: "experience", label: "Experience", icon: Briefcase },
-  { type: "skills", label: "Skills", icon: Code2 },
-  { type: "contact", label: "Contact", icon: MessageSquare },
-  { type: "custom", label: "Custom", icon: Layers },
+  { type: "testimonials", label: "Testimonials", icon: Star, category: "content" },
+  { type: "achievements", label: "Achievements", icon: Trophy, category: "content" },
+  { type: "timeline", label: "Timeline", icon: Clock, category: "content" },
+  { type: "tech_stack", label: "Tech Stack", icon: Zap, category: "content" },
+  { type: "gallery", label: "Gallery", icon: Layers, category: "content" },
+  { type: "services", label: "Services", icon: Briefcase, category: "content" },
+  { type: "contact_form", label: "Contact Form", icon: MessageSquare, category: "content" },
+  { type: "social_proof", label: "Social Proof", icon: Star, category: "content" },
+  { type: "newsletter", label: "Newsletter", icon: MessageSquare, category: "content" },
+  { type: "blog", label: "Blog / Notes", icon: FileText, category: "content" },
+  { type: "cv_section", label: "CV Download", icon: FileText, category: "content" },
+  { type: "skills_radar", label: "Skills Radar", icon: Zap, category: "content" },
+  { type: "about", label: "About", icon: FileText, category: "basic" },
+  { type: "experience", label: "Experience", icon: Briefcase, category: "basic" },
+  { type: "skills", label: "Skills", icon: Code2, category: "basic" },
+  { type: "contact", label: "Contact", icon: MessageSquare, category: "basic" },
+  { type: "custom", label: "Custom", icon: Layers, category: "basic" },
 ] as const;
 
 export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
   const [activeTab, setActiveTab] = useState("hero");
+  const [isThemesOpen, setIsThemesOpen] = useState(false);
 
   const meta = usePortfolioStore((s) => s.meta);
   const projects = usePortfolioStore((s) => s.projects);
+  const blocks = usePortfolioStore((s) => s.blocks);
   const addProject = usePortfolioStore((s) => s.addProject);
   const reorderProjects = usePortfolioStore((s) => s.reorderProjects);
   const addBlock = usePortfolioStore((s) => s.addBlock);
@@ -126,10 +148,39 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
           </div>
         </div>
 
-        <PortfolioTemplateSelector
-          selected={meta.layoutType}
-          onSelect={handleTemplateSelect}
-        />
+        {/* Collapsible Theme Selector */}
+        <div className="border-t border-white/10 pt-4">
+          <button
+            onClick={() => setIsThemesOpen(!isThemesOpen)}
+            className="flex w-full items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-left transition-colors hover:border-cyan-400/50 hover:bg-white/10"
+          >
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-linear-to-br from-cyan-500/20 to-purple-500/20 p-2">
+                <Palette className="h-5 w-5 text-cyan-400" />
+              </div>
+              <div>
+                <span className="font-medium text-white">Template Style</span>
+                <p className="text-xs text-white/50">
+                  {portfolioTemplates.find(t => t.layoutType === meta.layoutType)?.name || "Select a template"}
+                </p>
+              </div>
+            </div>
+            {isThemesOpen ? (
+              <ChevronUp className="h-5 w-5 text-white/50" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-white/50" />
+            )}
+          </button>
+          
+          {isThemesOpen && (
+            <div className="mt-4 animate-in slide-in-from-top-2 duration-200">
+              <PortfolioTemplateSelector
+                selected={meta.layoutType}
+                onSelect={handleTemplateSelect}
+              />
+            </div>
+          )}
+        </div>
       </Card>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -201,10 +252,22 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
         </TabsContent>
 
         <TabsContent value="blocks" className="mt-4 space-y-4">
-          <div className="rounded-lg border border-dashed border-white/20 p-6 text-center">
-            <p className="mb-4 text-white/50">
-              Add content blocks to customize your portfolio
-            </p>
+          {/* Added blocks list */}
+          {blocks.length > 0 && (
+            <div className="space-y-3">
+              {blocks.map((block) => (
+                <BlockCard key={block.id} block={block} />
+              ))}
+            </div>
+          )}
+
+          {/* Add block button with categorized dropdown */}
+          <div className={`rounded-lg border border-dashed border-white/20 p-6 text-center ${blocks.length > 0 ? "mt-4" : ""}`}>
+            {blocks.length === 0 && (
+              <p className="mb-4 text-white/50">
+                Add content blocks to customize your portfolio
+              </p>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className="neon-gradient">
@@ -213,8 +276,21 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="border-white/10 bg-gray-900">
-                {blockTypes.map(({ type, label, icon: Icon }) => (
+              <DropdownMenuContent className="border-white/10 bg-gray-900 w-48">
+                <div className="px-2 py-1.5 text-xs font-medium text-cyan-400">Advanced Blocks</div>
+                {blockTypes.filter(b => b.category === "content").map(({ type, label, icon: Icon }) => (
+                  <DropdownMenuItem
+                    key={type}
+                    onClick={() => addBlock(type)}
+                    className="text-white/80 hover:bg-white/10 hover:text-white"
+                  >
+                    <Icon className="mr-2 h-4 w-4" />
+                    {label}
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator className="bg-white/10" />
+                <div className="px-2 py-1.5 text-xs font-medium text-white/50">Basic Blocks</div>
+                {blockTypes.filter(b => b.category === "basic").map(({ type, label, icon: Icon }) => (
                   <DropdownMenuItem
                     key={type}
                     onClick={() => addBlock(type)}
@@ -228,9 +304,11 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
             </DropdownMenu>
           </div>
 
-          <p className="text-center text-sm text-white/40">
-            Content blocks let you add additional sections like About, Experience, Skills, and more.
-          </p>
+          {blocks.length === 0 && (
+            <p className="text-center text-sm text-white/40">
+              Content blocks let you add Testimonials, Achievements, Timeline, and more.
+            </p>
+          )}
         </TabsContent>
       </Tabs>
     </div>

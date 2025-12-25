@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Save, Download, Loader2, Check, FileImage, FileText, ChevronDown, FileType, FileJson, Upload } from "lucide-react";
+import { Save, Download, Loader2, Check, FileImage, FileText, ChevronDown, FileType, FileJson, Upload, PanelLeftClose, PanelLeftOpen, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -47,6 +47,8 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
   const previewRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [isEditorCollapsed, setIsEditorCollapsed] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Export handlers
   const handleExportPDF = async () => {
@@ -383,36 +385,51 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
   }, [saveCV]);
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col">
+    <div className={`flex flex-col ${isFullscreen ? 'fixed inset-0 z-50 bg-background' : 'h-[calc(100vh-4rem)]'}`}>
       {/* Top Toolbar */}
-      <div className="flex items-center justify-between border-b border-white/5 bg-background/80 px-4 py-3 backdrop-blur-xl">
-        <div className="flex items-center gap-4">
+      <div className={`flex items-center justify-between border-b border-white/5 bg-background/80 px-2 py-2 backdrop-blur-xl ${isFullscreen ? 'absolute top-0 left-0 right-0 z-10' : ''}`}>
+        <div className="flex items-center gap-2">
+          {/* Toggle Editor Panel Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsEditorCollapsed(!isEditorCollapsed)}
+            className="h-8 w-8 shrink-0"
+            title={isEditorCollapsed ? "Show Editor" : "Hide Editor"}
+          >
+            {isEditorCollapsed ? (
+              <PanelLeftOpen className="h-4 w-4" />
+            ) : (
+              <PanelLeftClose className="h-4 w-4" />
+            )}
+          </Button>
+
           <input
             type="text"
             value={meta.title}
             onChange={(e) => updateMeta({ title: e.target.value })}
             placeholder="Untitled CV"
-            className="border-none bg-transparent text-xl font-semibold outline-none placeholder:text-muted-foreground focus:ring-0"
+            className="w-24 min-w-0 border-none bg-transparent text-base font-semibold outline-none placeholder:text-muted-foreground focus:ring-0 sm:w-auto"
           />
           {/* Save Status */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="hidden items-center gap-1 text-xs text-muted-foreground sm:flex">
             {isSaving ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-3 w-3 animate-spin" />
                 <span>Saving...</span>
               </>
             ) : isDirty ? (
-              <span className="text-neon-orange">Unsaved changes</span>
+              <span className="text-neon-orange">Unsaved</span>
             ) : lastSavedAt ? (
               <>
-                <Check className="h-4 w-4 text-neon-green" />
+                <Check className="h-3 w-3 text-neon-green" />
                 <span>Saved</span>
               </>
             ) : null}
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <AIAssistant />
           
           <ImportCVDialog />
@@ -421,21 +438,20 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
 
           <ShareCVDialog cvId={cvId} />
 
-          <Button variant="outline" size="sm" onClick={saveCV} disabled={isSaving || !isDirty}>
-            <Save className="mr-2 h-4 w-4" />
-            Save
+          <Button variant="outline" size="icon" onClick={saveCV} disabled={isSaving || !isDirty} className="h-8 w-8" title="Save">
+            <Save className="h-4 w-4" />
           </Button>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" disabled={isExporting}>
+              <Button variant="outline" size="sm" disabled={isExporting} className="h-8 px-2">
                 {isExporting ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <Download className="mr-2 h-4 w-4" />
+                  <Download className="h-4 w-4" />
                 )}
-                Export
-                <ChevronDown className="ml-2 h-4 w-4" />
+                <span className="ml-1 hidden sm:inline">Export</span>
+                <ChevronDown className="ml-1 h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="border-white/10 bg-gray-900">
@@ -489,21 +505,48 @@ export function CVBuilder({ isNew = false }: CVBuilderProps) {
           <KeyboardShortcuts />
 
           <TemplateSettingsPanel />
+
+          {/* Fullscreen Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            className="h-8 w-8"
+            title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Preview"}
+          >
+            {isFullscreen ? (
+              <Minimize2 className="h-4 w-4" />
+            ) : (
+              <Maximize2 className="h-4 w-4" />
+            )}
+          </Button>
         </div>
       </div>
 
       {/* Main Content - Split View */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Left Panel - Editor */}
-        <div className="w-1/2 overflow-y-auto border-r border-white/5 bg-background">
+      <div className={`flex flex-1 overflow-hidden ${isFullscreen ? 'pt-12' : ''}`}>
+        {/* Left Panel - Editor (Collapsible) */}
+        <div 
+          className={`overflow-y-auto border-r border-white/5 bg-background transition-all duration-300 ease-in-out ${
+            isEditorCollapsed ? 'w-0 opacity-0 overflow-hidden' : 'w-1/2'
+          }`}
+        >
           <CVEditorPanel />
         </div>
 
-        {/* Right Panel - Preview */}
-        <div className="w-1/2 overflow-y-auto bg-muted/30">
-          <CVPreviewPanel ref={previewRef} personalInfo={personalInfo} sections={sections} />
+        {/* Right Panel - Preview (Full width when editor collapsed) */}
+        <div className={`overflow-y-auto bg-muted/30 transition-all duration-300 ease-in-out ${
+          isEditorCollapsed ? 'w-full' : 'w-1/2'
+        }`}>
+          <CVPreviewPanel 
+            ref={previewRef} 
+            personalInfo={personalInfo} 
+            sections={sections}
+            isFullPreview={isEditorCollapsed}
+          />
         </div>
       </div>
+
     </div>
   );
 }

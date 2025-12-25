@@ -18,11 +18,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "NeonCV - Futuristic CV & Portfolio Builder",
-    template: "%s | NeonCV",
+    default: "AMCV - Futuristic CV & Portfolio Builder",
+    template: "%s | AMCV",
   },
   description:
-    "Create stunning, modern CVs and portfolios with NeonCV. Featuring vibrant designs, multiple templates, and export to PDF, DOCX, and more.",
+    "Create stunning, modern CVs and portfolios with AMCV. Featuring vibrant designs, multiple templates, and export to PDF, DOCX, and more.",
   keywords: [
     "CV builder",
     "portfolio builder",

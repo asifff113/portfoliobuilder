@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Globe,
@@ -9,6 +9,10 @@ import {
   ExternalLink,
   Loader2,
   CheckCircle,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePortfolioStore } from "../store";
@@ -38,6 +42,8 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
   const togglePublish = usePortfolioStore((s) => s.togglePublish);
 
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isEditorCollapsed, setIsEditorCollapsed] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Generate a unique slug
   const generateSlug = useCallback((title: string) => {
@@ -58,13 +64,17 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
       if (!portfolioId) {
         // Create new portfolio
         const slug = meta.slug || generateSlug(meta.title || "portfolio");
+        // Supported layout types in the database
+        const dbSupportedLayouts = ["hero_timeline", "project_grid", "minimal", "creative", "developer", "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial", "terminal_dev", "particle_network", "3d_cards"];
+        const layoutType = dbSupportedLayouts.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
+        
         const { data: newPortfolio, error: createError } = await supabase
           .from("portfolios")
           .insert({
             user_id: user.id,
             title: meta.title || "Untitled Portfolio",
             slug,
-            layout_type: meta.layoutType,
+            layout_type: layoutType,
             is_published: false,
             hero_headline: hero.headline || null,
             hero_summary: hero.summary || null,
@@ -114,12 +124,16 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         router.replace(`/app/portfolio/${newPortfolioData.id}`);
       } else {
         // Update existing portfolio
+        // Supported layout types in the database
+        const dbSupportedLayouts2 = ["hero_timeline", "project_grid", "minimal", "creative", "developer", "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial", "terminal_dev", "particle_network", "3d_cards"];
+        const layoutType2 = dbSupportedLayouts2.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
+        
         const { error: updateError } = await supabase
           .from("portfolios")
           .update({
             title: meta.title,
             slug: meta.slug,
-            layout_type: meta.layoutType,
+            layout_type: layoutType2,
             is_published: meta.isPublished,
             hero_headline: hero.headline || null,
             hero_summary: hero.summary || null,
@@ -168,7 +182,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         markAsSaved();
       }
     } catch (error) {
-      console.error("Failed to save portfolio:", error);
+      console.error("Failed to save portfolio:", error instanceof Error ? error.message : JSON.stringify(error));
       setIsSaving(false);
     }
   }, [
@@ -232,11 +246,26 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
   };
 
   return (
-    <div className="flex h-full flex-col">
+    <div className={`flex flex-col ${isFullscreen ? 'fixed inset-0 z-50 bg-gray-950' : 'h-full'}`}>
       {/* Toolbar */}
-      <div className="border-b border-white/10 bg-black/40 px-4 py-3 backdrop-blur-md">
+      <div className={`border-b border-white/10 bg-black/40 px-4 py-3 backdrop-blur-md ${isFullscreen ? 'absolute top-0 left-0 right-0 z-10' : ''}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
+            {/* Toggle Editor Panel Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsEditorCollapsed(!isEditorCollapsed)}
+              className="h-9 w-9"
+              title={isEditorCollapsed ? "Show Editor" : "Hide Editor"}
+            >
+              {isEditorCollapsed ? (
+                <PanelLeftOpen className="h-5 w-5" />
+              ) : (
+                <PanelLeftClose className="h-5 w-5" />
+              )}
+            </Button>
+
             <h1 className="bg-linear-to-r from-cyan-400 to-purple-500 bg-clip-text text-xl font-bold text-transparent">
               Portfolio Builder
             </h1>
@@ -308,22 +337,42 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
               <Save className="mr-2 h-4 w-4" />
               Save
             </Button>
+
+            {/* Fullscreen Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsFullscreen(!isFullscreen)}
+              className="h-9 w-9"
+              title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Preview"}
+            >
+              {isFullscreen ? (
+                <Minimize2 className="h-5 w-5" />
+              ) : (
+                <Maximize2 className="h-5 w-5" />
+              )}
+            </Button>
           </div>
         </div>
       </div>
 
       {/* Split view */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Editor panel */}
-        <div className="w-1/2 overflow-y-auto border-r border-white/10 bg-black/20 p-6">
+      <div className={`flex flex-1 overflow-hidden ${isFullscreen ? 'pt-16' : ''}`}>
+        {/* Editor panel (Collapsible) */}
+        <div className={`overflow-y-auto border-r border-white/10 bg-black/20 p-6 transition-all duration-300 ease-in-out ${
+          isEditorCollapsed ? 'w-0 opacity-0 overflow-hidden p-0' : 'w-1/2'
+        }`}>
           <PortfolioEditorPanel profile={profile} />
         </div>
 
-        {/* Preview panel */}
-        <div className="w-1/2 overflow-y-auto bg-linear-to-br from-gray-900 via-purple-900/20 to-gray-900">
-          <PortfolioPreviewPanel profile={profile} />
+        {/* Preview panel (Full width when editor collapsed) */}
+        <div className={`overflow-y-auto bg-linear-to-br from-gray-900 via-purple-900/20 to-gray-900 transition-all duration-300 ease-in-out ${
+          isEditorCollapsed ? 'w-full' : 'w-1/2'
+        }`}>
+          <PortfolioPreviewPanel profile={profile} isFullPreview={isEditorCollapsed} />
         </div>
       </div>
+
     </div>
   );
 }

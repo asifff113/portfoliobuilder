@@ -168,11 +168,11 @@ export function AIAssistant() {
           <Button
             variant="outline"
             size="sm"
-            className="border-neon-purple/50 bg-neon-purple/10 text-neon-purple hover:bg-neon-purple/20"
+            className="h-8 border-neon-purple/50 bg-neon-purple/10 px-2 text-neon-purple hover:bg-neon-purple/20"
           >
-            <Sparkles className="mr-2 h-4 w-4" />
-            AI Assistant
-            <ChevronDown className="ml-2 h-4 w-4" />
+            <Sparkles className="h-4 w-4" />
+            <span className="ml-1 hidden sm:inline">AI Assistant</span>
+            <ChevronDown className="ml-1 h-3 w-3" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56 border-white/10 bg-gray-900">

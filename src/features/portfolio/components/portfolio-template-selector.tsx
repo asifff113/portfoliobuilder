@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout, LayoutGrid } from "lucide-react";
+import { Layout, LayoutGrid, Sparkles, Zap, Terminal, Layers3, Box, Palette, Mountain, Globe, Code2, Waves, Triangle } from "lucide-react";
 import { portfolioTemplates, type PortfolioLayoutType } from "@/types/portfolio";
 
 interface PortfolioTemplateSelectorProps {
@@ -12,8 +12,28 @@ const templateIcons: Record<PortfolioLayoutType, React.ReactNode> = {
   hero_timeline: <Layout className="h-6 w-6" />,
   project_grid: <LayoutGrid className="h-6 w-6" />,
   minimal: <Layout className="h-6 w-6" />,
-  creative: <Layout className="h-6 w-6" />,
-  developer: <Layout className="h-6 w-6" />,
+  creative: <Sparkles className="h-6 w-6" />,
+  developer: <Terminal className="h-6 w-6" />,
+  neon_cyber: <Zap className="h-6 w-6" />,
+  minimal_luxe: <Palette className="h-6 w-6" />,
+  interactive_grid: <LayoutGrid className="h-6 w-6" />,
+  glassmorphism: <Layers3 className="h-6 w-6" />,
+  magazine_editorial: <Layout className="h-6 w-6" />,
+  terminal_dev: <Terminal className="h-6 w-6" />,
+  particle_network: <Sparkles className="h-6 w-6" />,
+  "3d_cards": <Box className="h-6 w-6" />,
+  brutalist: <Layout className="h-6 w-6" />,
+  retro_vaporwave: <Mountain className="h-6 w-6" />,
+  aurora: <Globe className="h-6 w-6" />,
+  holographic: <Sparkles className="h-6 w-6" />,
+  tokyo_night: <Code2 className="h-6 w-6" />,
+  gradient_wave: <Waves className="h-6 w-6" />,
+  isometric: <Triangle className="h-6 w-6" />,
+  noir_film: <Layout className="h-6 w-6" />,
+  cosmic_space: <Sparkles className="h-6 w-6" />,
+  newspaper: <Layout className="h-6 w-6" />,
+  origami: <Box className="h-6 w-6" />,
+  liquid_metal: <Layers3 className="h-6 w-6" />,
 };
 
 export function PortfolioTemplateSelector({

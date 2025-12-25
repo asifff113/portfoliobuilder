@@ -57,6 +57,11 @@ import { FrostMinimalTemplate } from "../templates/frost-minimal";
 import { GlitchCyberTemplate } from "../templates/glitch-cyber";
 import { MinimalistLuxeTemplate } from "../templates/minimalist-luxe";
 import { DataStreamTemplate } from "../templates/data-stream";
+import { TokyoNightCVTemplate } from "../templates/tokyo-night";
+import { GradientWaveCVTemplate } from "../templates/gradient-wave";
+import { NewspaperCVTemplate } from "../templates/newspaper";
+import { OrigamiCVTemplate } from "../templates/origami";
+import { IsometricCVTemplate } from "../templates/isometric";
 import type { PersonalInfo, CVSection } from "@/types/cv";
 
 // Template props interface that all templates should implement
@@ -69,6 +74,7 @@ export interface TemplateProps {
 interface CVPreviewPanelProps {
   personalInfo: PersonalInfo;
   sections: CVSection[];
+  isFullPreview?: boolean;
 }
 
 const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
@@ -127,10 +133,15 @@ const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
   "glitch-cyber": GlitchCyberTemplate,
   "minimalist-luxe": MinimalistLuxeTemplate,
   "data-stream": DataStreamTemplate,
+  "tokyo-night": TokyoNightCVTemplate,
+  "gradient-wave": GradientWaveCVTemplate,
+  "newspaper": NewspaperCVTemplate,
+  "origami": OrigamiCVTemplate,
+  "isometric": IsometricCVTemplate,
 };
 
 export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(
-  function CVPreviewPanel({ personalInfo, sections }, ref) {
+  function CVPreviewPanel({ personalInfo, sections, isFullPreview = false }, ref) {
     const selectedTemplateId = useCVStore((state) => state.selectedTemplateId);
     const { settings } = useTemplateSettings();
     
@@ -208,10 +219,14 @@ export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(
     } as React.CSSProperties;
 
     return (
-      <div className="p-6">
+      <div className={`p-4 ${isFullPreview ? 'flex items-start justify-center min-h-full bg-muted/50' : ''}`}>
         <div
           ref={ref}
-          className="mx-auto max-w-[800px] rounded-xl bg-white shadow-2xl overflow-hidden"
+          className={`rounded-xl bg-white shadow-2xl overflow-hidden ${
+            isFullPreview 
+              ? 'w-full max-w-4xl' // Responsive full width with max constraint
+              : 'mx-auto max-w-[800px]'
+          }`}
           style={customStyles}
         >
           <TemplateComponent

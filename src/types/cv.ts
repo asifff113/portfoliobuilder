@@ -1037,5 +1037,41 @@ export const cvTemplates: CVTemplate[] = [
     previewImageUrl: null,
     category: "creative",
   },
+  // New Portfolio-Style CV Templates
+  {
+    id: "tokyo-night",
+    name: "Tokyo Night",
+    description: "Code-inspired Japanese nighttime aesthetics with syntax highlighting",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "gradient-wave",
+    name: "Gradient Wave",
+    description: "Flowing colorful gradients with modern vibrant aesthetics",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "newspaper",
+    name: "Newspaper",
+    description: "Classic newspaper print layout with columns and vintage typography",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "origami",
+    name: "Origami",
+    description: "Japanese paper-folding aesthetic with delicate rose patterns",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
+    id: "isometric",
+    name: "Isometric",
+    description: "3D geometric blocks with purple/pink gradient aesthetic",
+    previewImageUrl: null,
+    category: "modern",
+  },
 ];
 

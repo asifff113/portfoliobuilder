@@ -260,9 +260,8 @@ export function ImportCVDialog() {
       if (!open) resetState();
     }}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Upload className="mr-2 h-4 w-4" />
-          Import
+        <Button variant="outline" size="icon" className="h-8 w-8" title="Import">
+          <Upload className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg">

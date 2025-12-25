@@ -37,9 +37,9 @@ export function TemplateSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Palette className="mr-2 h-4 w-4" />
-          {currentTemplate?.name || "Select Template"}
+        <Button variant="outline" size="sm" className="h-8 max-w-[140px] px-2">
+          <Palette className="h-4 w-4 shrink-0" />
+          <span className="ml-1 truncate hidden sm:inline">{currentTemplate?.name || "Template"}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-72 border-white/10 bg-gray-900">
@@ -70,7 +70,7 @@ export function TemplateSelector() {
                 <div className="flex items-center gap-2">
                   <span className="font-medium truncate">{template.name}</span>
                   {selectedTemplateId === template.id && (
-                    <Check className="h-4 w-4 flex-shrink-0 text-neon-green" />
+                    <Check className="h-4 w-4 shrink-0 text-neon-green" />
                   )}
                 </div>
                 <p className="text-xs text-white/50 line-clamp-1">{template.description}</p>

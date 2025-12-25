@@ -28,7 +28,15 @@ export type PortfolioLayoutType =
   | "project_grid"
   | "minimal"
   | "creative"
-  | "developer";
+  | "developer"
+  | "neon_cyber"
+  | "minimal_luxe"
+  | "interactive_grid"
+  | "glassmorphism"
+  | "magazine_editorial"
+  | "terminal_dev"
+  | "particle_network"
+  | "3d_cards";
 
 export type BackgroundStyle = "solid" | "gradient" | "pattern" | "mesh";
 

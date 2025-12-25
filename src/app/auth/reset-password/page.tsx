@@ -137,7 +137,7 @@ export default function ResetPasswordPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-6 w-6 text-white" />
             </div>
-            <span className="text-gradient text-2xl font-bold">NeonCV</span>
+            <span className="text-gradient text-2xl font-bold">AMCV</span>
           </Link>
         </div>
 

@@ -72,9 +72,8 @@ export function TemplateSettingsPanel() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Settings className="mr-2 h-4 w-4" />
-          Customize
+        <Button variant="outline" size="icon" className="h-8 w-8" title="Customize Template">
+          <Settings className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto border-white/10 bg-gray-900">

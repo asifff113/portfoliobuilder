@@ -93,7 +93,7 @@ export function AppTopbar({ user }: AppTopbarProps) {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="text-gradient text-xl font-bold">NeonCV</span>
+            <span className="text-gradient text-xl font-bold">AMCV</span>
           </div>
           <nav className="space-y-1 p-3">
             {mobileNavItems.map((item) => {

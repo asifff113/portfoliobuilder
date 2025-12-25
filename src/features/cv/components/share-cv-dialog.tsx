@@ -149,9 +149,8 @@ export function ShareCVDialog({ cvId }: ShareCVDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Share2 className="mr-2 h-4 w-4" />
-          Share
+        <Button variant="outline" size="icon" className="h-8 w-8" title="Share">
+          <Share2 className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">

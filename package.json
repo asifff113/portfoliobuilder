@@ -1,5 +1,5 @@
 {
-  "name": "neoncv",
+  "name": "AMCV",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -37,6 +37,7 @@
     "clsx": "^2.1.1",
     "docx": "^9.5.1",
     "file-saver": "^2.0.5",
+    "framer-motion": "^12.23.25",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.4",
     "lucide-react": "^0.555.0",

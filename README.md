@@ -1,4 +1,4 @@
-# ✨ NeonCV - Futuristic CV & Portfolio Builder
+# ✨ AMCV - Futuristic CV & Portfolio Builder
 
 A modern, stylish, and colorful CV & Portfolio builder web application featuring neon gradients, glassmorphism, and a futuristic design aesthetic.
 
