@@ -10,7 +10,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function CardGridTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function CardGridTemplate({ personalInfo, sections, settings: _settings }: TemplateProps) {
   return (
     <div 
       className="min-h-[1000px] bg-linear-to-br from-slate-50 to-slate-100 p-8 text-gray-900"
