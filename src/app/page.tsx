@@ -36,7 +36,7 @@ export default function Home() {
             <div className="glow-sm flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="text-gradient text-xl font-bold tracking-tight">NeonCV</span>
+            <span className="text-gradient text-xl font-bold tracking-tight">AMCV</span>
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -243,7 +243,7 @@ export default function Home() {
             Ready to create your <span className="text-gradient">perfect CV</span>?
           </h2>
           <p className="mb-8 text-lg text-muted-foreground">
-            Join thousands of professionals who&apos;ve landed their dream jobs with NeonCV.
+            Join thousands of professionals who&apos;ve landed their dream jobs with AMCV.
           </p>
           <Link
             href="/app/cv/new"
@@ -262,11 +262,11 @@ export default function Home() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-neon-purple via-neon-pink to-neon-cyan">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
-            <span className="font-semibold">NeonCV</span>
+            <span className="font-semibold">AMCV</span>
           </div>
 
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} NeonCV. All rights reserved.
+            © {new Date().getFullYear()} AMCV. All rights reserved.
           </p>
 
           <div className="flex items-center gap-4">

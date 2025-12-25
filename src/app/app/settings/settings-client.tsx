@@ -320,7 +320,7 @@ export function SettingsClient({ user, profile }: SettingsClientProps) {
             <CardHeader>
               <CardTitle>Theme & Appearance</CardTitle>
               <CardDescription>
-                Customize the look and feel of your NeonCV experience
+                Customize the look and feel of your AMCV experience
               </CardDescription>
             </CardHeader>
             <CardContent>

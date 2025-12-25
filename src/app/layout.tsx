@@ -31,20 +31,20 @@ export const metadata: Metadata = {
     "futuristic design",
     "PDF export",
   ],
-  authors: [{ name: "NeonCV" }],
-  creator: "NeonCV",
+  authors: [{ name: "AMCV" }],
+  creator: "AMCV",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://neoncv.app",
-    title: "NeonCV - Futuristic CV & Portfolio Builder",
+    url: "https://amcv.app",
+    title: "AMCV - Futuristic CV & Portfolio Builder",
     description:
       "Create stunning, modern CVs and portfolios with vibrant designs and powerful export options.",
-    siteName: "NeonCV",
+    siteName: "AMCV",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NeonCV - Futuristic CV & Portfolio Builder",
+    title: "AMCV - Futuristic CV & Portfolio Builder",
     description:
       "Create stunning, modern CVs and portfolios with vibrant designs and powerful export options.",
   },
