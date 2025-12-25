@@ -4,16 +4,16 @@
  * Personal Bio Template
  * 
  * A fun, creative personal profile template with:
- * - Pink/purple pastel aesthetic
- * - Decorative leaf/floral elements
- * - Circular profile photo with purple border
- * - "Hello! I'm" intro header
- * - About Me, My Hobby, What I Love sections
- * - Personal details (birthday, age, etc.)
+ * - Pink/lavender pastel background with purple/blue blob decorations
+ * - Decorative dark purple leaf/vine SVG elements in corners
+ * - "Hello! I'm" cursive intro header
+ * - Square purple-bordered photo frame with circular photo
+ * - Personal details (Birthday, Age, Height)
+ * - My Pets section
+ * - About Me, My Hobby, What I Love sections with black header bars
  * - Playful, friendly design perfect for personal branding
  */
 
-import { Mail, Phone, MapPin, Calendar, Heart, Star, Sparkles } from "lucide-react";
 import type { 
   PersonalInfo, 
   CVSection, 
@@ -28,12 +28,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function PersonalBioTemplate({ personalInfo, sections, settings }: TemplateProps) {
-  const primaryColor = "var(--cv-primary, #9333ea)";
-  const bgColor = "var(--cv-background, #f5d0fe)";
-  const accentColor = "var(--cv-accent, #a855f7)";
-  const textColor = "var(--cv-text, #1f2937)";
-
+export function PersonalBioTemplate({ personalInfo, sections }: TemplateProps) {
   // Get sections
   const aboutSection = sections.find(s => s.type === "about" && s.isVisible);
   const skillsSection = sections.find(s => s.type === "skills" && s.isVisible);
@@ -41,77 +36,137 @@ export function PersonalBioTemplate({ personalInfo, sections, settings }: Templa
 
   return (
     <div 
-      className="relative min-h-[1100px] overflow-hidden p-8"
+      className="relative min-h-[1100px] overflow-hidden"
       style={{ 
-        fontFamily: "var(--cv-font-family, 'Georgia', serif)",
-        backgroundColor: bgColor,
+        fontFamily: "'Georgia', 'Times New Roman', serif",
+        backgroundColor: "#f0b8d8",
+        backgroundImage: `
+          radial-gradient(ellipse 120px 80px at 5% 15%, rgba(167, 139, 250, 0.6) 0%, transparent 70%),
+          radial-gradient(ellipse 100px 100px at 95% 10%, rgba(147, 197, 253, 0.5) 0%, transparent 70%),
+          radial-gradient(ellipse 80px 60px at 8% 85%, rgba(147, 197, 253, 0.4) 0%, transparent 70%),
+          radial-gradient(ellipse 100px 80px at 92% 90%, rgba(167, 139, 250, 0.4) 0%, transparent 70%),
+          radial-gradient(ellipse 60px 80px at 50% 95%, rgba(147, 197, 253, 0.3) 0%, transparent 70%)
+        `,
       }}
     >
-      {/* Decorative Elements - Top Left */}
-      <div className="absolute left-0 top-0 h-32 w-32 opacity-60">
-        <svg viewBox="0 0 100 100" className="h-full w-full" style={{ color: primaryColor }}>
-          <path 
-            d="M20,80 Q10,60 20,40 Q30,20 50,20 Q40,40 45,60 Q50,80 30,90 Q20,95 20,80" 
-            fill="currentColor" 
-            opacity="0.4"
-          />
-          <path 
-            d="M30,70 Q25,55 35,45 Q45,35 55,40 Q50,50 52,62 Q54,74 40,78 Q32,80 30,70" 
-            fill="currentColor" 
-            opacity="0.6"
-          />
-          <ellipse cx="60" cy="25" rx="15" ry="8" fill="currentColor" opacity="0.3" transform="rotate(-30 60 25)" />
-        </svg>
-      </div>
+      {/* Decorative Vine/Leaf Elements - Top Left */}
+      <svg 
+        className="absolute left-0 top-0 h-40 w-32" 
+        viewBox="0 0 120 160" 
+        fill="none"
+      >
+        {/* Main branch */}
+        <path 
+          d="M60 160 Q50 130 55 100 Q60 70 45 50 Q30 30 40 10" 
+          stroke="#581c87" 
+          strokeWidth="3" 
+          fill="none"
+        />
+        {/* Leaves */}
+        <ellipse cx="35" cy="30" rx="18" ry="10" fill="#581c87" transform="rotate(-45 35 30)" />
+        <ellipse cx="25" cy="50" rx="15" ry="8" fill="#581c87" transform="rotate(-30 25 50)" />
+        <ellipse cx="30" cy="75" rx="14" ry="7" fill="#581c87" transform="rotate(-50 30 75)" />
+        <ellipse cx="45" cy="95" rx="12" ry="6" fill="#581c87" transform="rotate(-40 45 95)" />
+        <ellipse cx="50" cy="120" rx="10" ry="5" fill="#581c87" transform="rotate(-35 50 120)" />
+        {/* Small decorative dots */}
+        <circle cx="20" cy="65" r="3" fill="#581c87" />
+        <circle cx="15" cy="85" r="2" fill="#581c87" />
+      </svg>
 
       {/* Decorative Elements - Top Right */}
-      <div className="absolute right-0 top-0 h-40 w-40 opacity-50">
-        <svg viewBox="0 0 100 100" className="h-full w-full" style={{ color: accentColor }}>
-          <path 
-            d="M80,10 Q95,30 85,50 Q75,70 60,65 Q70,50 68,35 Q66,20 80,10" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2"
-          />
-          <path 
-            d="M70,5 Q90,15 90,35 Q90,55 75,50 Q82,40 80,28 Q78,16 70,5" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="1.5"
-          />
-        </svg>
-      </div>
+      <svg 
+        className="absolute right-0 top-0 h-36 w-36" 
+        viewBox="0 0 140 140" 
+        fill="none"
+      >
+        {/* Curved branches */}
+        <path 
+          d="M140 30 Q110 35 90 50 Q70 65 75 90" 
+          stroke="#3b82f6" 
+          strokeWidth="2" 
+          fill="none"
+        />
+        <path 
+          d="M120 0 Q100 20 95 45 Q90 70 100 90" 
+          stroke="#3b82f6" 
+          strokeWidth="1.5" 
+          fill="none"
+        />
+        {/* Leaf sprigs */}
+        <ellipse cx="100" cy="35" rx="12" ry="5" fill="#3b82f6" transform="rotate(30 100 35)" opacity="0.7" />
+        <ellipse cx="85" cy="55" rx="10" ry="4" fill="#3b82f6" transform="rotate(45 85 55)" opacity="0.7" />
+        {/* Decorative berry cluster */}
+        <circle cx="110" cy="60" r="2" fill="#581c87" />
+        <circle cx="115" cy="55" r="2" fill="#581c87" />
+        <circle cx="105" cy="55" r="2" fill="#581c87" />
+        <circle cx="110" cy="50" r="2" fill="#581c87" />
+        <path d="M110 65 L110 80 M105 68 L100 78 M115 68 L120 78" stroke="#581c87" strokeWidth="1" />
+      </svg>
 
       {/* Decorative Elements - Bottom Left */}
-      <div className="absolute bottom-0 left-0 h-32 w-32 opacity-40">
-        <svg viewBox="0 0 100 100" className="h-full w-full" style={{ color: primaryColor }}>
-          <path 
-            d="M10,90 Q5,70 20,60 Q35,50 40,70 Q25,75 15,85 Q12,88 10,90" 
-            fill="currentColor"
-          />
-          <circle cx="50" cy="85" r="8" fill={accentColor} opacity="0.4" />
-        </svg>
-      </div>
+      <svg 
+        className="absolute bottom-0 left-0 h-32 w-32" 
+        viewBox="0 0 120 120" 
+        fill="none"
+      >
+        <path 
+          d="M0 80 Q20 70 35 85 Q50 100 40 120" 
+          stroke="#581c87" 
+          strokeWidth="2" 
+          fill="none"
+        />
+        <path 
+          d="M10 120 Q25 100 45 105 Q65 110 60 120" 
+          stroke="#581c87" 
+          strokeWidth="1.5" 
+          fill="none"
+        />
+        {/* Curly decorative element */}
+        <path 
+          d="M5 100 Q15 95 20 105 Q25 115 15 120" 
+          stroke="#581c87" 
+          strokeWidth="1.5" 
+          fill="none"
+        />
+      </svg>
 
       {/* Decorative Elements - Bottom Right */}
-      <div className="absolute bottom-0 right-0 h-36 w-36 opacity-40">
-        <svg viewBox="0 0 100 100" className="h-full w-full" style={{ color: accentColor }}>
-          <path 
-            d="M90,100 Q85,80 70,75 Q55,70 60,85 Q75,82 85,92 Q88,96 90,100" 
-            fill="currentColor"
-          />
-        </svg>
-      </div>
+      <svg 
+        className="absolute bottom-0 right-0 h-36 w-36" 
+        viewBox="0 0 140 140" 
+        fill="none"
+      >
+        <path 
+          d="M140 100 Q120 95 105 105 Q90 115 95 140" 
+          stroke="#581c87" 
+          strokeWidth="2" 
+          fill="none"
+        />
+        {/* Curly flourish */}
+        <path 
+          d="M120 140 Q115 120 130 115 Q145 110 140 95" 
+          stroke="#581c87" 
+          strokeWidth="1.5" 
+          fill="none"
+        />
+        <path 
+          d="M100 140 Q105 125 95 120 Q85 115 90 105" 
+          stroke="#581c87" 
+          strokeWidth="1" 
+          fill="none"
+        />
+      </svg>
 
-      {/* Content */}
-      <div className="relative z-10">
+      {/* Content Container */}
+      <div className="relative z-10 p-8">
         {/* Header - Hello! I'm */}
-        <div className="mb-6 text-center">
+        <div className="mb-4 text-center">
           <p 
-            className="mb-1 text-2xl italic"
+            className="mb-0 text-3xl"
             style={{ 
-              fontFamily: "'Brush Script MT', 'Segoe Script', cursive",
-              color: textColor,
+              fontFamily: "'Brush Script MT', 'Segoe Script', 'Bradley Hand', cursive",
+              color: "#1f2937",
+              fontStyle: "italic",
             }}
           >
             Hello! I'm
@@ -119,8 +174,8 @@ export function PersonalBioTemplate({ personalInfo, sections, settings }: Templa
           <h1 
             className="text-4xl font-bold tracking-wide"
             style={{ 
-              fontFamily: "var(--cv-font-family, 'Georgia', serif)",
-              color: textColor,
+              fontFamily: "'Georgia', 'Times New Roman', serif",
+              color: "#1f2937",
             }}
           >
             {personalInfo.fullName || "Your Name"}
@@ -128,25 +183,28 @@ export function PersonalBioTemplate({ personalInfo, sections, settings }: Templa
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-4">
           {/* Left Column */}
-          <div className="space-y-5">
-            {/* Profile Photo */}
+          <div className="space-y-4">
+            {/* Profile Photo with Square Purple Border */}
             <div className="flex justify-center">
               <div 
-                className="rounded-lg p-2"
-                style={{ backgroundColor: primaryColor }}
+                className="p-2"
+                style={{ 
+                  backgroundColor: "#a855f7",
+                  border: "3px solid #7c3aed",
+                }}
               >
                 {personalInfo.avatarUrl ? (
                   <img
                     src={personalInfo.avatarUrl}
                     alt={personalInfo.fullName}
-                    className="h-44 w-44 rounded-full border-4 border-white object-cover"
+                    className="h-40 w-40 rounded-full border-4 border-white object-cover"
                   />
                 ) : (
                   <div 
-                    className="flex h-44 w-44 items-center justify-center rounded-full border-4 border-white text-4xl font-bold"
-                    style={{ backgroundColor: bgColor, color: primaryColor }}
+                    className="flex h-40 w-40 items-center justify-center rounded-full border-4 border-white text-4xl font-bold"
+                    style={{ backgroundColor: "#f5d0fe", color: "#7c3aed" }}
                   >
                     {personalInfo.fullName?.charAt(0)?.toUpperCase() || "?"}
                   </div>
@@ -154,124 +212,153 @@ export function PersonalBioTemplate({ personalInfo, sections, settings }: Templa
               </div>
             </div>
 
-            {/* Personal Details */}
-            <div className="space-y-2 pl-4">
+            {/* Personal Details - Bullet Points */}
+            <div className="space-y-1 text-sm" style={{ color: "#1f2937" }}>
               {personalInfo.headline && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Calendar className="h-4 w-4" style={{ color: primaryColor }} />
-                  <span style={{ color: textColor }}>{personalInfo.headline}</span>
-                </div>
+                <p className="flex items-start">
+                  <span className="mr-2 font-bold">•</span>
+                  <span>{personalInfo.headline}</span>
+                </p>
               )}
               {personalInfo.location && (
-                <div className="flex items-center gap-2 text-sm">
-                  <MapPin className="h-4 w-4" style={{ color: primaryColor }} />
-                  <span style={{ color: textColor }}>{personalInfo.location}</span>
-                </div>
+                <p className="flex items-start">
+                  <span className="mr-2 font-bold">•</span>
+                  <span>{personalInfo.location}</span>
+                </p>
               )}
               {personalInfo.email && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Mail className="h-4 w-4" style={{ color: primaryColor }} />
-                  <span style={{ color: textColor }}>{personalInfo.email}</span>
-                </div>
+                <p className="flex items-start">
+                  <span className="mr-2 font-bold">•</span>
+                  <span>{personalInfo.email}</span>
+                </p>
               )}
               {personalInfo.phone && (
-                <div className="flex items-center gap-2 text-sm">
-                  <Phone className="h-4 w-4" style={{ color: primaryColor }} />
-                  <span style={{ color: textColor }}>{personalInfo.phone}</span>
-                </div>
+                <p className="flex items-start">
+                  <span className="mr-2 font-bold">•</span>
+                  <span>{personalInfo.phone}</span>
+                </p>
               )}
             </div>
 
-            {/* My Hobbies / Skills Section */}
-            {skillsSection && (
-              <div>
-                <div 
-                  className="mb-3 rounded-md px-4 py-2 text-center"
-                  style={{ backgroundColor: textColor }}
-                >
-                  <h2 className="text-lg font-bold text-white">My Skills</h2>
-                </div>
-                <ul className="space-y-1 pl-4 text-sm" style={{ color: textColor }}>
-                  {(skillsSection.items as SkillItem[])?.slice(0, 6).map((skill, idx) => (
-                    <li key={skill.id || idx} className="flex items-start gap-2">
-                      <span style={{ color: primaryColor }}>•</span>
-                      <span>{skill.name}</span>
-                    </li>
-                  ))}
-                </ul>
+            {/* My Pets Section */}
+            <div>
+              <div 
+                className="mb-3 rounded-full px-6 py-2 text-center inline-block"
+                style={{ backgroundColor: "#1f2937" }}
+              >
+                <h2 className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>
+                  My Pets
+                </h2>
               </div>
-            )}
+              {/* Pet Illustrations Placeholder */}
+              <div className="flex justify-center gap-6 mt-2">
+                {/* Dog silhouette */}
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="#1f2937">
+                  <ellipse cx="30" cy="45" rx="15" ry="12" />
+                  <circle cx="30" cy="25" r="12" />
+                  <ellipse cx="20" cy="18" rx="5" ry="8" />
+                  <ellipse cx="40" cy="18" rx="5" ry="8" />
+                  <circle cx="26" cy="23" r="2" fill="white" />
+                  <circle cx="34" cy="23" r="2" fill="white" />
+                  <ellipse cx="30" cy="28" rx="3" ry="2" fill="#ec4899" />
+                </svg>
+                {/* Cat silhouette */}
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="#1f2937" strokeWidth="2">
+                  <ellipse cx="30" cy="42" rx="12" ry="15" fill="none" />
+                  <circle cx="30" cy="22" r="10" fill="none" />
+                  <path d="M22 15 L18 5 L24 12" fill="none" />
+                  <path d="M38 15 L42 5 L36 12" fill="none" />
+                  <circle cx="26" cy="20" r="1.5" fill="#1f2937" />
+                  <circle cx="34" cy="20" r="1.5" fill="#1f2937" />
+                  <path d="M28 25 Q30 27 32 25" fill="none" />
+                  <path d="M20 24 L10 22 M20 26 L10 28 M40 24 L50 22 M40 26 L50 28" strokeWidth="1" />
+                </svg>
+              </div>
+            </div>
           </div>
 
           {/* Right Column */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             {/* About Me */}
-            {(aboutSection || personalInfo.summary) && (
-              <div>
-                <div 
-                  className="mb-3 rounded-md px-4 py-2 text-center"
-                  style={{ backgroundColor: textColor }}
-                >
-                  <h2 className="text-lg font-bold text-white">About Me</h2>
-                </div>
-                <p 
-                  className="text-sm leading-relaxed text-justify"
-                  style={{ color: textColor }}
-                >
-                  {personalInfo.summary || "Add your personal summary here to tell people about yourself, your passions, and what makes you unique."}
-                </p>
+            <div>
+              <div 
+                className="mb-2 px-4 py-2 text-center"
+                style={{ backgroundColor: "#1f2937" }}
+              >
+                <h2 className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>
+                  About Me
+                </h2>
               </div>
-            )}
+              <p 
+                className="text-sm leading-relaxed text-justify"
+                style={{ color: "#1f2937" }}
+              >
+                {personalInfo.summary || "I am a positive and creative person who enjoys learning new things and expressing myself through design and technology. I like exploring new ideas, improving my skills, and taking on new challenges. In my free time, I enjoy listening to music, spending time with my pets."}
+              </p>
+            </div>
 
-            {/* My Hobby / Interests */}
-            {interestsSection && (
-              <div>
-                <div 
-                  className="mb-3 rounded-md px-4 py-2 text-center"
-                  style={{ backgroundColor: textColor }}
-                >
-                  <h2 className="text-lg font-bold text-white">My Hobbies</h2>
-                </div>
-                <ul className="space-y-1 pl-4 text-sm" style={{ color: textColor }}>
-                  {(interestsSection.items as InterestItem[])?.slice(0, 6).map((interest, idx) => (
-                    <li key={interest.id || idx} className="flex items-start gap-2">
-                      <span style={{ color: primaryColor }}>•</span>
+            {/* My Hobby */}
+            <div>
+              <div 
+                className="mb-2 px-4 py-2 text-center"
+                style={{ backgroundColor: "#1f2937" }}
+              >
+                <h2 className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>
+                  My Hobby
+                </h2>
+              </div>
+              <ul className="space-y-1 text-sm" style={{ color: "#1f2937" }}>
+                {interestsSection && (interestsSection.items as InterestItem[])?.length > 0 ? (
+                  (interestsSection.items as InterestItem[])?.slice(0, 5).map((interest, idx) => (
+                    <li key={interest.id || idx} className="flex items-start">
+                      <span className="mr-2 font-bold">•</span>
                       <span>{interest.name}</span>
                     </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+                  ))
+                ) : (
+                  <>
+                    <li className="flex items-start"><span className="mr-2 font-bold">•</span><span>Reading books and articles</span></li>
+                    <li className="flex items-start"><span className="mr-2 font-bold">•</span><span>Listening to music</span></li>
+                    <li className="flex items-start"><span className="mr-2 font-bold">•</span><span>Exploring new technologies</span></li>
+                    <li className="flex items-start"><span className="mr-2 font-bold">•</span><span>Spending time with pets</span></li>
+                    <li className="flex items-start"><span className="mr-2 font-bold">•</span><span>Browsing social media and creating content</span></li>
+                  </>
+                )}
+              </ul>
+            </div>
 
             {/* What I Love */}
             <div>
               <div 
-                className="mb-3 rounded-md px-4 py-2 text-center"
-                style={{ backgroundColor: textColor }}
+                className="mb-2 px-4 py-2 text-center"
+                style={{ backgroundColor: "#1f2937" }}
               >
-                <h2 className="text-lg font-bold text-white">What I Love</h2>
+                <h2 className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>
+                  What I Love
+                </h2>
               </div>
-              <div className="border-t-2 pt-3" style={{ borderColor: textColor }}>
-                <div className="grid grid-cols-2 gap-2 text-sm" style={{ color: textColor }}>
-                  {/* Default loves or from custom section */}
-                  {["Family", "Music", "Nature", "Travel", "Learning", "Creativity"].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <span style={{ color: primaryColor }}>•</span>
-                      <span>{item}</span>
-                    </div>
-                  ))}
+              <div className="border-t-2 border-gray-800 pt-3">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm" style={{ color: "#1f2937" }}>
+                  {skillsSection && (skillsSection.items as SkillItem[])?.length > 0 ? (
+                    (skillsSection.items as SkillItem[])?.slice(0, 6).map((skill, idx) => (
+                      <div key={skill.id || idx} className="flex items-start">
+                        <span className="mr-2 font-bold">•</span>
+                        <span>{skill.name}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <div className="flex items-start"><span className="mr-2 font-bold">•</span><span>Family</span></div>
+                      <div className="flex items-start"><span className="mr-2 font-bold">•</span><span>Music</span></div>
+                      <div className="flex items-start"><span className="mr-2 font-bold">•</span><span>Flowers</span></div>
+                      <div className="flex items-start"><span className="mr-2 font-bold">•</span><span>Plants</span></div>
+                      <div className="flex items-start"><span className="mr-2 font-bold">•</span><span>My Partner</span></div>
+                      <div className="flex items-start"><span className="mr-2 font-bold">•</span><span>Pets</span></div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Footer decoration */}
-        <div className="mt-8 flex justify-center">
-          <div className="flex items-center gap-2 opacity-50">
-            <Sparkles className="h-4 w-4" style={{ color: primaryColor }} />
-            <Heart className="h-4 w-4" style={{ color: accentColor }} />
-            <Star className="h-4 w-4" style={{ color: primaryColor }} />
           </div>
         </div>
       </div>
