@@ -9,7 +9,6 @@ import {
   Palette,
   Settings,
   Sparkles,
-  Menu,
   X,
   Shield,
 } from "lucide-react";
