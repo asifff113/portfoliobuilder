@@ -36,7 +36,19 @@ export type PortfolioLayoutType =
   | "magazine_editorial"
   | "terminal_dev"
   | "particle_network"
-  | "3d_cards";
+  | "3d_cards"
+  | "brutalist"
+  | "retro_vaporwave"
+  | "aurora"
+  | "holographic"
+  | "tokyo_night"
+  | "gradient_wave"
+  | "isometric"
+  | "noir_film"
+  | "cosmic_space"
+  | "newspaper"
+  | "origami"
+  | "liquid_metal";
 
 export type BackgroundStyle = "solid" | "gradient" | "pattern" | "mesh";
 
