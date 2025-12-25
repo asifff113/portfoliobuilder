@@ -264,7 +264,7 @@ export function CyberGridTemplate({ personalInfo, sections, settings }: Template
                         <div key={proj.id} className="p-3 border" style={{ borderColor: `${neonGreen}30` }}>
                           <h4 className="text-sm font-semibold uppercase flex items-center gap-2" style={{ color: neonGreen }}>
                             <Cpu className="w-3.5 h-3.5" style={{ color: neonCyan }} />
-                            {proj.name || "PROJECT"}
+                            {proj.title || "PROJECT"}
                           </h4>
                           {proj.description && <p className="mt-1 text-xs" style={{ color: `${neonGreen}aa` }}>{proj.description}</p>}
                           {proj.techStack?.length > 0 && (
@@ -276,8 +276,8 @@ export function CyberGridTemplate({ personalInfo, sections, settings }: Template
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-[10px] uppercase hover:opacity-70" style={{ color: neonCyan }}>
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-[10px] uppercase hover:opacity-70" style={{ color: neonCyan }}>
                               <Wifi className="w-3 h-3" /> LINK
                             </a>
                           )}

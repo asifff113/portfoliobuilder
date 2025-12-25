@@ -41,18 +41,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-// Professional color scheme (fallback)
-const defaultColors = {
-  primary: "#1e3a5f", // Navy blue
-  secondary: "#2c5282",
-  accent: "#3182ce",
-  text: "#1a202c",
-  textMuted: "#4a5568",
-  textLight: "#718096",
-  border: "#e2e8f0",
-  background: "#ffffff",
-  cardBg: "#f7fafc",
-};
+// Professional color scheme defaults defined inline in colors object below
 
 export function ExecutiveProfessionalTemplate({ personalInfo, sections, settings }: TemplateProps) {
   // Apply settings with fallbacks

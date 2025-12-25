@@ -20,9 +20,7 @@ interface TemplateProps {
 }
 
 const primary = "var(--cv-primary, #2563eb)";
-const accent = "var(--cv-accent, #06b6d4)";
 const text = "var(--cv-text, #0f172a)";
-const textMuted = "var(--cv-text-muted, #64748b)";
 
 const chip = "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs uppercase tracking-[0.18em]";
 
@@ -114,7 +112,7 @@ export function CobaltPrecisionTemplate({ personalInfo, sections }: TemplateProp
                           <h4 className="text-lg font-semibold" style={{ color: primary }}>{item.title || "Project"}</h4>
                           <p className="text-sm text-slate-600">{item.role || "Lead"}</p>
                         </div>
-                        <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-slate-600">{item.status || "Built"}</span>
+                        <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-slate-600">Built</span>
                       </div>
                       {item.description && <p className="mt-2 text-sm text-slate-700">{item.description}</p>}
                       {item.techStack && item.techStack.length > 0 && (

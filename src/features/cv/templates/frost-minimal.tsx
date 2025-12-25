@@ -20,7 +20,6 @@ import {
   Linkedin,
   Github,
   Snowflake,
-  ChevronRight,
   Circle,
 } from "lucide-react";
 import type {

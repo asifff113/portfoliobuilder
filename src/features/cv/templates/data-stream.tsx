@@ -11,7 +11,7 @@
  * - Code-like styling
  */
 
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, Hash, Code, Terminal, Database, Cpu, Server } from "lucide-react";
+import { Globe, Code, Database, Cpu, Server } from "lucide-react";
 import type { 
   PersonalInfo, 
   CVSection, 
@@ -22,7 +22,6 @@ import type {
   LanguageItem,
 } from "@/types/cv";
 import type { TemplateSettings } from "../stores/template-settings";
-import { cn } from "@/lib/utils";
 
 interface TemplateProps {
   personalInfo: PersonalInfo;
@@ -30,7 +29,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function DataStreamTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function DataStreamTemplate({ personalInfo, sections }: TemplateProps) {
   // Default colors if not provided
   const primaryColor = "var(--cv-primary, #00ff41)"; // Matrix Green
   const secondaryColor = "var(--cv-secondary, #008f11)"; // Darker Green
@@ -122,7 +121,7 @@ export function DataStreamTemplate({ personalInfo, sections, settings }: Templat
                     <div key={i} className="relative">
                       <div className="absolute -left-3 top-1.5 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: primaryColor }} />
                       <div className="flex justify-between items-baseline mb-1">
-                        <h3 className="text-lg font-bold" style={{ color: "#fff" }}>{item.position}</h3>
+                        <h3 className="text-lg font-bold" style={{ color: "#fff" }}>{item.role}</h3>
                         <span className="text-xs font-mono opacity-60">
                           [{item.startDate} :: {item.endDate || "NOW"}]
                         </span>
@@ -151,9 +150,9 @@ export function DataStreamTemplate({ personalInfo, sections, settings }: Templat
                   {(section.items as ProjectItem[]).map((item, i) => (
                     <div key={i} className="bg-white/5 p-4 border border-white/5 hover:border-white/10 transition-colors">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-bold">{item.name}</h3>
-                        {item.url && (
-                          <a href={item.url} className="text-xs opacity-50 hover:opacity-100 hover:text-primary transition-opacity">
+                        <h3 className="font-bold">{item.title}</h3>
+                        {item.liveUrl && (
+                          <a href={item.liveUrl} className="text-xs opacity-50 hover:opacity-100 hover:text-primary transition-opacity">
                             LINK ↗
                           </a>
                         )}
@@ -162,9 +161,9 @@ export function DataStreamTemplate({ personalInfo, sections, settings }: Templat
                         className="text-sm opacity-70 mb-3"
                         dangerouslySetInnerHTML={{ __html: item.description }} 
                       />
-                      {item.technologies && item.technologies.length > 0 && (
+                      {item.techStack && item.techStack.length > 0 && (
                         <div className="flex flex-wrap gap-2">
-                          {item.technologies.map((tech, t) => (
+                          {item.techStack.map((tech: string, t: number) => (
                             <span key={t} className="text-xs px-1.5 py-0.5 bg-white/10 rounded text-primary-foreground">
                               {tech}
                             </span>
@@ -192,12 +191,12 @@ export function DataStreamTemplate({ personalInfo, sections, settings }: Templat
                     <div key={i}>
                       <div className="flex justify-between text-xs mb-1">
                         <span>{item.name}</span>
-                        <span style={{ color: secondaryColor }}>{item.level}%</span>
+                        <span style={{ color: secondaryColor }}>{item.proficiency * 20}%</span>
                       </div>
                       <div className="h-1 w-full bg-white/10">
                         <div 
                           className="h-full" 
-                          style={{ width: `${item.level}%`, backgroundColor: primaryColor }}
+                          style={{ width: `${item.proficiency * 20}%`, backgroundColor: primaryColor }}
                         />
                       </div>
                     </div>
@@ -237,7 +236,7 @@ export function DataStreamTemplate({ personalInfo, sections, settings }: Templat
                 <div className="space-y-2">
                   {(section.items as LanguageItem[]).map((item, i) => (
                     <div key={i} className="flex justify-between text-sm border-b border-dashed pb-1 border-white/10">
-                      <span>{item.language}</span>
+                      <span>{item.name}</span>
                       <span className="opacity-50 text-xs">{item.proficiency}</span>
                     </div>
                   ))}

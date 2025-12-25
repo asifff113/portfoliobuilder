@@ -13,18 +13,16 @@
  * - Data-visualization style skills
  */
 
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, ExternalLink, Terminal, Cpu, Wifi, Share2, Database, Code, Zap } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Github, ExternalLink, Terminal, Cpu, Share2, Database, Code } from "lucide-react";
 import type { 
   PersonalInfo, 
   CVSection, 
   ExperienceItem, 
-  EducationItem, 
   SkillItem, 
   ProjectItem,
   LanguageItem,
 } from "@/types/cv";
 import type { TemplateSettings } from "../stores/template-settings";
-import { cn } from "@/lib/utils";
 
 interface TemplateProps {
   personalInfo: PersonalInfo;
@@ -32,7 +30,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function CyberpunkFuturisticTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function CyberpunkFuturisticTemplate({ personalInfo, sections }: TemplateProps) {
   // Default colors if not provided
   const primaryColor = "var(--cv-primary, #00f3ff)"; // Cyan
   const secondaryColor = "var(--cv-secondary, #bc13fe)"; // Magenta

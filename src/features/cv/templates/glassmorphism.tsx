@@ -27,7 +27,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function GlassmorphismTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function GlassmorphismTemplate({ personalInfo, sections }: TemplateProps) {
   const primaryColor = "var(--cv-primary, #3b82f6)"; // Default blue
   
   return (

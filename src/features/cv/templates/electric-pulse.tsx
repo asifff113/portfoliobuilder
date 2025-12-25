@@ -250,7 +250,7 @@ export function ElectricPulseTemplate({ personalInfo, sections, settings }: Temp
                         <div key={proj.id} className="p-4 rounded-xl bg-slate-800/50 border border-cyan-500/20">
                           <h4 className="font-semibold text-white flex items-center gap-2">
                             <Bolt className="w-4 h-4 text-cyan-400" />
-                            {proj.name || "Project"}
+                            {proj.title || "Project"}
                           </h4>
                           {proj.description && <p className="mt-1 text-sm text-slate-400">{proj.description}</p>}
                           {proj.techStack?.length > 0 && (
@@ -260,8 +260,8 @@ export function ElectricPulseTemplate({ personalInfo, sections, settings }: Temp
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300">
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300">
                               <Globe className="w-3 h-3" /> Launch
                             </a>
                           )}

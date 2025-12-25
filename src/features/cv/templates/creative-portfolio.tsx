@@ -11,7 +11,7 @@
  * - Overlapping design elements
  */
 
-import { Mail, Phone, MapPin, Globe, Linkedin, Github, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Linkedin, Github } from "lucide-react";
 import type { 
   PersonalInfo, 
   CVSection, 
@@ -19,7 +19,6 @@ import type {
   EducationItem, 
   SkillItem, 
   ProjectItem,
-  LanguageItem,
 } from "@/types/cv";
 import type { TemplateSettings } from "../stores/template-settings";
 

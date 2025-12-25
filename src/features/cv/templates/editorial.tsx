@@ -26,7 +26,7 @@ interface TemplateProps {
   settings?: TemplateSettings;
 }
 
-export function EditorialTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function EditorialTemplate({ personalInfo, sections }: TemplateProps) {
   const primaryColor = "var(--cv-primary, #1a1a1a)";
   
   return (
@@ -75,7 +75,7 @@ export function EditorialTemplate({ personalInfo, sections, settings }: Template
                     Competencies
                   </h2>
                   <div className="flex flex-wrap gap-x-4 gap-y-2">
-                    {(section.items as SkillItem[]).map((item, idx) => (
+                    {(section.items as SkillItem[]).map((item, _idx) => (
                       <span key={item.id} className="text-sm italic border-b border-gray-300 pb-1">
                         {item.name}
                       </span>

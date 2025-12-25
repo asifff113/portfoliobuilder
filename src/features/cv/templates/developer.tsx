@@ -13,7 +13,7 @@
  * - Support for all section types
  */
 
-import { Terminal, Code, Folder, GitBranch, Award, Globe, BookOpen, Users, Mic, FileText, Package } from "lucide-react";
+import { Terminal, Folder, GitBranch, Award, Globe, BookOpen, FileText } from "lucide-react";
 import type { 
   PersonalInfo, 
   CVSection, 
@@ -59,7 +59,7 @@ const colors = {
   orange: "#dcb67a",
 };
 
-export function DeveloperTemplate({ personalInfo, sections, settings }: TemplateProps) {
+export function DeveloperTemplate({ personalInfo, sections }: TemplateProps) {
   return (
     <div 
       className="min-h-[1100px] p-6"
@@ -193,7 +193,7 @@ export function DeveloperTemplate({ personalInfo, sections, settings }: Template
                     <section key={section.id}>
                       <SectionHeader icon={<GitBranch className="h-4 w-4" />} title="experience" />
                       <div className="space-y-4 mt-3">
-                        {(section.items as ExperienceItem[]).map((item, index) => (
+                        {(section.items as ExperienceItem[]).map((item, _index) => (
                           <div key={item.id} className="rounded-lg p-3" style={{ backgroundColor: colors.bgLight }}>
                             <div className="flex items-start justify-between">
                               <div>
