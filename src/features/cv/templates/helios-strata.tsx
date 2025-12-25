@@ -63,7 +63,6 @@ export function HeliosStrataTemplate({ personalInfo, sections }: TemplateProps) 
       githubUrl: "",
       imageUrl: null,
       highlights: [],
-      status: "Built",
     },
   ];
 
@@ -188,7 +187,7 @@ export function HeliosStrataTemplate({ personalInfo, sections }: TemplateProps) 
                           <h4 className="text-lg font-semibold leading-tight" style={{ color: basePrimary }}>{item.title || "Project"}</h4>
                           <p className="text-sm text-white/70 break-words">{item.role || "Lead"}</p>
                         </div>
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/70 whitespace-nowrap">{item.status || "Built"}</span>
+                        <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/70 whitespace-nowrap">Built</span>
                       </div>
                       {item.description && <p className="mt-2 text-sm leading-relaxed text-white/85 break-words">{item.description}</p>}
                       {item.techStack && item.techStack.length > 0 && (

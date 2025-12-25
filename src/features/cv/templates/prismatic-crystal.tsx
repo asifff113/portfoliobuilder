@@ -294,7 +294,7 @@ export function PrismaticCrystalTemplate({ personalInfo, sections, settings }: T
                           <div key={proj.id} className={cn("p-4 rounded-xl border", colors.bg, colors.border)}>
                             <h4 className="font-semibold text-slate-900 flex items-center gap-2">
                               <Diamond className={cn("w-4 h-4", colors.text)} />
-                              {proj.name || "Project"}
+                              {proj.title || "Project"}
                             </h4>
                             {proj.description && <p className="mt-1 text-sm text-slate-600 font-sans">{proj.description}</p>}
                             {proj.techStack?.length > 0 && (
@@ -304,8 +304,8 @@ export function PrismaticCrystalTemplate({ personalInfo, sections, settings }: T
                                 ))}
                               </div>
                             )}
-                            {proj.url && (
-                              <a href={proj.url} className={cn("mt-2 inline-flex items-center gap-1 text-xs font-sans hover:underline", colors.text)}>
+                            {proj.liveUrl && (
+                              <a href={proj.liveUrl} className={cn("mt-2 inline-flex items-center gap-1 text-xs font-sans hover:underline", colors.text)}>
                                 <Globe className="w-3 h-3" /> View Project
                               </a>
                             )}

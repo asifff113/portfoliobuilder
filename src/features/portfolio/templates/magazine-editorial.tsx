@@ -204,3 +204,4 @@ export function MagazineEditorialTemplate({ hero, profile, projects, blocks: _bl
     </div>
   );
 }
+

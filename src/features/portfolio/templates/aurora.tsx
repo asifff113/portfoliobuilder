@@ -2,16 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface AuroraTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -100,7 +94,7 @@ export function AuroraTemplate({ hero, projects, isPreview = false }: AuroraTemp
                 className="mb-8"
               >
                 <div className="w-32 h-32 mx-auto rounded-full overflow-hidden ring-4 ring-white/20 ring-offset-4 ring-offset-slate-950">
-                  <img src={hero.avatarUrl} alt={hero.name} className="w-full h-full object-cover" />
+                  <img src={hero.avatarUrl} alt={hero.headline} className="w-full h-full object-cover" />
                 </div>
               </motion.div>
             )}
@@ -111,7 +105,7 @@ export function AuroraTemplate({ hero, projects, isPreview = false }: AuroraTemp
               transition={{ delay: 0.2 }}
               className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
             >
-              {hero.name}
+              {hero.headline}
             </motion.h1>
 
             <motion.p
@@ -120,17 +114,17 @@ export function AuroraTemplate({ hero, projects, isPreview = false }: AuroraTemp
               transition={{ delay: 0.4 }}
               className="text-xl md:text-2xl text-white/60 mb-4"
             >
-              {hero.title}
+              {hero.headline}
             </motion.p>
 
-            {hero.subtitle && (
+            {hero.summary && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
                 className="text-lg text-white/40"
               >
-                {hero.subtitle}
+                {hero.summary}
               </motion.p>
             )}
 
@@ -211,9 +205,10 @@ export function AuroraTemplate({ hero, projects, isPreview = false }: AuroraTemp
 
         {/* Footer */}
         <footer className="py-12 px-6 text-center text-white/40">
-          <p>© {new Date().getFullYear()} {hero.name}. Crafted with ✨</p>
+          <p>© {new Date().getFullYear()} {hero.headline}. Crafted with ✨</p>
         </footer>
       </div>
     </div>
   );
 }
+

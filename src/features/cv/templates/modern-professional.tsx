@@ -114,8 +114,8 @@ export function ModernProfessionalTemplate({ personalInfo, sections, settings }:
               style={{ 
                 width: photoSize, 
                 height: photoSize, 
-                borderColor: colors.accent, 
-                ringColor: colors.accent,
+                borderColor: colors.accent,
+                ["--tw-ring-color" as string]: colors.accent,
               }}
             />
           )}

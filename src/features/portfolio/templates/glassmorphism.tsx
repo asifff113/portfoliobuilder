@@ -178,3 +178,4 @@ export function GlassmorphismTemplate({ hero, profile, projects, blocks: _blocks
     </div>
   );
 }
+

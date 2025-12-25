@@ -266,15 +266,18 @@ export async function getAllCVs(page = 1, limit = 20, search?: string) {
   }
 
   // Fetch profiles for these CVs manually since there's no direct FK
-  const userIds = Array.from(new Set(cvs.map((cv) => cv.user_id)));
+  const cvsData = cvs as Array<{ user_id: string; [key: string]: unknown }>;
+  const userIds = Array.from(new Set(cvsData.map((cv) => cv.user_id)));
   const { data: profiles } = await supabase
     .from("profiles")
     .select("user_id, email, full_name")
     .in("user_id", userIds);
 
+  const profilesData = profiles as Array<{ user_id: string; email: string; full_name: string }> | null;
+
   // Map profiles to CVs
-  const cvsWithProfiles = cvs.map((cv) => {
-    const profile = profiles?.find((p) => p.user_id === cv.user_id);
+  const cvsWithProfiles = cvsData.map((cv) => {
+    const profile = profilesData?.find((p) => p.user_id === cv.user_id);
     return {
       ...cv,
       profiles: profile || { email: "Unknown", full_name: "Unknown" },

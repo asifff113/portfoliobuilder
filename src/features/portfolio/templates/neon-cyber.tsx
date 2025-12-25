@@ -216,3 +216,4 @@ export function NeonCyberTemplate({ hero, profile, projects, isPreview = false }
     </div>
   );
 }
+

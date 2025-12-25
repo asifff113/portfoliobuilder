@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface OrigamiTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -47,7 +41,7 @@ export function OrigamiTemplate({ hero, projects, isPreview = false }: OrigamiTe
               className="text-5xl md:text-7xl font-light mb-6 tracking-wide"
               style={{ fontFamily: "'Noto Serif JP', serif" }}
             >
-              {hero.name}
+              {hero.headline}
             </motion.h1>
 
             {/* Decorative fold line */}
@@ -59,17 +53,17 @@ export function OrigamiTemplate({ hero, projects, isPreview = false }: OrigamiTe
               transition={{ delay: 0.3 }}
               className="text-xl text-gray-600 font-light"
             >
-              {hero.title}
+              {hero.headline}
             </motion.p>
 
-            {hero.subtitle && (
+            {hero.summary && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className="text-gray-500 mt-4"
               >
-                {hero.subtitle}
+                {hero.summary}
               </motion.p>
             )}
           </div>
@@ -125,9 +119,10 @@ export function OrigamiTemplate({ hero, projects, isPreview = false }: OrigamiTe
 
         {/* Footer */}
         <footer className="py-12 text-center text-gray-400">
-          <p className="font-light">千羽鶴 — {hero.name}</p>
+          <p className="font-light">千羽鶴 — {hero.headline}</p>
         </footer>
       </div>
     </div>
   );
 }
+

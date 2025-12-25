@@ -1,9 +1,20 @@
 "use client";
 
-import type { TemplateProps } from "@/types/cv";
+import type { PersonalInfo, CVSection, ExperienceItem, EducationItem, SkillItem, ProjectItem, CertificationItem } from "@/types/cv";
+import type { TemplateSettings } from "../stores/template-settings";
 
-export function VelvetRoseTemplate({ cv }: TemplateProps) {
-  const { personalInfo, workExperiences, educations, skills, certifications, projects } = cv;
+interface TemplateProps {
+  personalInfo: PersonalInfo;
+  sections: CVSection[];
+  settings?: TemplateSettings;
+}
+
+export function VelvetRoseTemplate({ personalInfo, sections }: TemplateProps) {
+  const experienceSection = sections.find(s => s.type === "experience" && s.isVisible);
+  const educationSection = sections.find(s => s.type === "education" && s.isVisible);
+  const skillsSection = sections.find(s => s.type === "skills" && s.isVisible);
+  const certificationsSection = sections.find(s => s.type === "certifications" && s.isVisible);
+  const projectsSection = sections.find(s => s.type === "projects" && s.isVisible);
 
   return (
     <div className="min-h-[297mm] w-[210mm] bg-[#1a1418] text-[#e8e0e4] p-0 font-['Cormorant_Garamond',_serif] relative overflow-hidden">
@@ -65,7 +76,7 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
         </h1>
         
         <p className="text-lg tracking-[0.3em] text-[#c9a0dc]/80 uppercase mb-6 font-light">
-          {personalInfo?.title || "Professional Title"}
+          {personalInfo?.headline || "Professional Title"}
         </p>
 
         {/* Elegant divider */}
@@ -119,23 +130,23 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
         )}
 
         {/* Experience Section */}
-        {workExperiences && workExperiences.length > 0 && (
+        {experienceSection && experienceSection.items.length > 0 && (
           <section>
             <div className="flex items-center gap-4 mb-6">
               <h2 className="text-xs tracking-[0.4em] text-[#d4a574] uppercase">Experience</h2>
               <div className="flex-1 h-px bg-gradient-to-r from-[#d4a574]/30 to-transparent"/>
             </div>
             <div className="space-y-6">
-              {workExperiences.map((exp, index) => (
-                <div key={index} className="relative pl-6">
+              {(experienceSection.items as ExperienceItem[]).map((exp, index) => (
+                <div key={exp.id || index} className="relative pl-6">
                   {/* Timeline decoration */}
                   <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-gradient-to-br from-[#d4a574] to-[#c9a0dc]"/>
-                  {index < workExperiences.length - 1 && (
+                  {index < experienceSection.items.length - 1 && (
                     <div className="absolute left-[3px] top-4 w-0.5 h-full bg-gradient-to-b from-[#d4a574]/30 to-transparent"/>
                   )}
                   
                   <div className="flex justify-between items-baseline mb-1">
-                    <h3 className="text-lg text-[#e8d5c4] font-medium">{exp.position}</h3>
+                    <h3 className="text-lg text-[#e8d5c4] font-medium">{exp.role}</h3>
                     <span className="text-xs text-[#b08d8d] tracking-wider">
                       {exp.startDate} — {exp.endDate || "Present"}
                     </span>
@@ -153,15 +164,15 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
         {/* Two Column Section */}
         <div className="grid grid-cols-2 gap-8">
           {/* Education */}
-          {educations && educations.length > 0 && (
+          {educationSection && educationSection.items.length > 0 && (
             <section>
               <div className="flex items-center gap-4 mb-4">
                 <h2 className="text-xs tracking-[0.4em] text-[#d4a574] uppercase">Education</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-[#d4a574]/30 to-transparent"/>
               </div>
               <div className="space-y-4">
-                {educations.map((edu, index) => (
-                  <div key={index} className="relative pl-4 border-l border-[#c9a0dc]/20">
+                {(educationSection.items as EducationItem[]).map((edu) => (
+                  <div key={edu.id} className="relative pl-4 border-l border-[#c9a0dc]/20">
                     <h3 className="text-sm text-[#e8d5c4] font-medium">{edu.degree}</h3>
                     <p className="text-xs text-[#c9a0dc]">{edu.institution}</p>
                     <p className="text-xs text-[#b08d8d]">
@@ -177,27 +188,23 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
           )}
 
           {/* Skills */}
-          {skills && skills.length > 0 && (
+          {skillsSection && skillsSection.items.length > 0 && (
             <section>
               <div className="flex items-center gap-4 mb-4">
                 <h2 className="text-xs tracking-[0.4em] text-[#d4a574] uppercase">Expertise</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-[#d4a574]/30 to-transparent"/>
               </div>
               <div className="space-y-3">
-                {skills.map((skill, index) => (
-                  <div key={index}>
+                {(skillsSection.items as SkillItem[]).map((skill) => (
+                  <div key={skill.id}>
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-sm text-[#e8e0e4]">{skill.name}</span>
-                      <span className="text-xs text-[#b08d8d] capitalize">{skill.level}</span>
+                      <span className="text-xs text-[#b08d8d]">{skill.proficiency}/5</span>
                     </div>
                     <div className="h-1 bg-[#2a2025] rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-[#d4a574] via-[#c9a0dc] to-[#b08d8d]"
-                        style={{
-                          width: skill.level === "expert" ? "100%" :
-                                 skill.level === "advanced" ? "80%" :
-                                 skill.level === "intermediate" ? "60%" : "40%"
-                        }}
+                        style={{ width: `${(skill.proficiency / 5) * 100}%` }}
                       />
                     </div>
                   </div>
@@ -208,16 +215,16 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
         </div>
 
         {/* Certifications */}
-        {certifications && certifications.length > 0 && (
+        {certificationsSection && certificationsSection.items.length > 0 && (
           <section>
             <div className="flex items-center gap-4 mb-4">
               <h2 className="text-xs tracking-[0.4em] text-[#d4a574] uppercase">Certifications</h2>
               <div className="flex-1 h-px bg-gradient-to-r from-[#d4a574]/30 to-transparent"/>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {certifications.map((cert, index) => (
+              {(certificationsSection.items as CertificationItem[]).map((cert) => (
                 <div
-                  key={index}
+                  key={cert.id}
                   className="relative p-4 bg-gradient-to-br from-[#2a2025] to-[#1a1418] rounded border border-[#d4a574]/20"
                 >
                   {/* Rose corner accent */}
@@ -234,7 +241,7 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
                   </div>
                   <h3 className="text-sm text-[#e8d5c4] font-medium pr-4">{cert.name}</h3>
                   <p className="text-xs text-[#c9a0dc]">{cert.issuer}</p>
-                  {cert.date && <p className="text-xs text-[#b08d8d] mt-1">{cert.date}</p>}
+                  {cert.issueDate && <p className="text-xs text-[#b08d8d] mt-1">{cert.issueDate}</p>}
                 </div>
               ))}
             </div>
@@ -242,21 +249,21 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
         )}
 
         {/* Projects */}
-        {projects && projects.length > 0 && (
+        {projectsSection && projectsSection.items.length > 0 && (
           <section>
             <div className="flex items-center gap-4 mb-4">
               <h2 className="text-xs tracking-[0.4em] text-[#d4a574] uppercase">Projects</h2>
               <div className="flex-1 h-px bg-gradient-to-r from-[#d4a574]/30 to-transparent"/>
             </div>
             <div className="grid grid-cols-1 gap-4">
-              {projects.map((project, index) => (
+              {(projectsSection.items as ProjectItem[]).map((project) => (
                 <div
-                  key={index}
+                  key={project.id}
                   className="p-4 bg-gradient-to-r from-[#2a2025]/50 to-transparent border-l-2 border-[#c9a0dc]/40"
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-sm text-[#e8d5c4] font-medium">{project.name}</h3>
-                    {project.url && (
+                    <h3 className="text-sm text-[#e8d5c4] font-medium">{project.title}</h3>
+                    {project.liveUrl && (
                       <span className="text-xs text-[#d4a574] hover:text-[#c9a0dc] transition-colors">
                         View →
                       </span>
@@ -265,9 +272,9 @@ export function VelvetRoseTemplate({ cv }: TemplateProps) {
                   {project.description && (
                     <p className="text-xs text-[#e8e0e4]/70 leading-relaxed mb-2">{project.description}</p>
                   )}
-                  {project.technologies && project.technologies.length > 0 && (
+                  {project.techStack && project.techStack.length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, techIndex) => (
+                      {project.techStack.map((tech, techIndex) => (
                         <span
                           key={techIndex}
                           className="px-2 py-0.5 text-xs text-[#c9a0dc] bg-[#c9a0dc]/10 rounded-full border border-[#c9a0dc]/20"

@@ -77,8 +77,8 @@ export function NewspaperCVTemplate({ personalInfo, sections, settings }: Templa
         {/* Main Headline */}
         <div className="text-center mb-6 border-b border-black pb-4">
           <h2 className="text-3xl font-bold mb-2">{personalInfo.headline}</h2>
-          {personalInfo.bio && (
-            <p className="text-sm italic max-w-lg mx-auto">{personalInfo.bio}</p>
+          {personalInfo.summary && (
+            <p className="text-sm italic max-w-lg mx-auto">{personalInfo.summary}</p>
           )}
         </div>
 
@@ -115,7 +115,7 @@ export function NewspaperCVTemplate({ personalInfo, sections, settings }: Templa
                   <div className="space-y-4">
                     {(section.items as ExperienceItem[]).map((item, i) => (
                       <article key={i} className="border-b border-gray-300 pb-4">
-                        <h4 className="font-bold text-lg">{item.position}</h4>
+                        <h4 className="font-bold text-lg">{item.role}</h4>
                         <p className="text-sm font-semibold">{item.company} • {item.startDate} - {item.endDate || "Present"}</p>
                         {item.description && (
                           <p className="text-sm mt-2 text-justify" style={{ columnCount: 2, columnGap: '1rem' }}>
@@ -171,7 +171,7 @@ export function NewspaperCVTemplate({ personalInfo, sections, settings }: Templa
                       <div key={i}>
                         <p className="font-bold">{item.degree}</p>
                         <p>{item.institution}</p>
-                        <p className="text-xs">{item.graduationDate}</p>
+                        <p className="text-xs">{item.endDate || 'Present'}</p>
                       </div>
                     ))}
                   </div>

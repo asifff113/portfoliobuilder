@@ -2,16 +2,10 @@
 
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface LiquidMetalTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -85,7 +79,7 @@ export function LiquidMetalTemplate({ hero, projects, isPreview = false }: Liqui
                 textShadow: "0 4px 30px rgba(255,255,255,0.1)",
               }}
             >
-              {hero.name}
+              {hero.headline}
             </motion.h1>
 
             <motion.p
@@ -94,17 +88,17 @@ export function LiquidMetalTemplate({ hero, projects, isPreview = false }: Liqui
               transition={{ delay: 0.5 }}
               className="text-xl text-zinc-400 mb-2"
             >
-              {hero.title}
+              {hero.headline}
             </motion.p>
 
-            {hero.subtitle && (
+            {hero.summary && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
                 className="text-zinc-500"
               >
-                {hero.subtitle}
+                {hero.summary}
               </motion.p>
             )}
 
@@ -191,3 +185,4 @@ export function LiquidMetalTemplate({ hero, projects, isPreview = false }: Liqui
     </div>
   );
 }
+

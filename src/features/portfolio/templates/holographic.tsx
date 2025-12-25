@@ -2,16 +2,10 @@
 
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface HolographicTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -95,16 +89,16 @@ export function HolographicTemplate({ hero, projects, isPreview = false }: Holog
                 className="absolute inset-0 text-cyan-400 blur-sm"
                 style={{ transform: "translateX(2px) translateY(2px)" }}
               >
-                {hero.name}
+                {hero.headline}
               </span>
               <span
                 className="absolute inset-0 text-pink-400 blur-sm"
                 style={{ transform: "translateX(-2px) translateY(-2px)" }}
               >
-                {hero.name}
+                {hero.headline}
               </span>
               <span className="relative bg-gradient-to-r from-cyan-400 via-white to-pink-400 bg-clip-text text-transparent">
-                {hero.name}
+                {hero.headline}
               </span>
             </motion.h1>
 
@@ -115,11 +109,11 @@ export function HolographicTemplate({ hero, projects, isPreview = false }: Holog
               className="space-y-2"
             >
               <p className="text-xl md:text-2xl text-cyan-300 font-mono">
-                [{hero.title}]
+                [{hero.headline}]
               </p>
-              {hero.subtitle && (
+              {hero.summary && (
                 <p className="text-white/50 font-mono text-sm">
-                  // {hero.subtitle}
+                  // {hero.summary}
                 </p>
               )}
             </motion.div>
@@ -234,3 +228,4 @@ function HolographicCard({ project, index }: { project: FeaturedProject; index: 
     </motion.div>
   );
 }
+

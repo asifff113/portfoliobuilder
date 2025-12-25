@@ -178,8 +178,8 @@ export function NeoBrutalistTemplate({ personalInfo, sections, settings }: Templ
                     <div key={item.id} className="border-4 border-black p-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
                       <div className="flex justify-between items-center mb-2">
                         <h3 className="text-lg font-black">{item.title}</h3>
-                        {item.url && (
-                          <a href={item.url} className="text-xs font-bold underline decoration-2">
+                        {item.liveUrl && (
+                          <a href={item.liveUrl} className="text-xs font-bold underline decoration-2">
                             LINK ↗
                           </a>
                         )}

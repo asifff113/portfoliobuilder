@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface NewspaperTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -39,7 +33,7 @@ export function NewspaperTemplate({ hero, projects, isPreview = false }: Newspap
         <header className="text-center border-b-4 border-double border-[#1a1a1a] pb-4 mb-6">
           <p className="text-sm tracking-widest mb-2">{today}</p>
           <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-2" style={{ fontFamily: "Georgia, serif" }}>
-            THE {hero.name.toUpperCase()} TIMES
+            THE {hero.headline.toUpperCase()} TIMES
           </h1>
           <div className="flex justify-center items-center gap-4 text-sm">
             <span>Vol. MMXXIV</span>
@@ -57,11 +51,11 @@ export function NewspaperTemplate({ hero, projects, isPreview = false }: Newspap
           className="border-b border-[#1a1a1a] pb-8 mb-8"
         >
           <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-center">
-            {hero.title}
+            {hero.headline}
           </h2>
-          {hero.subtitle && (
+          {hero.summary && (
             <p className="text-xl text-center text-[#555] italic">
-              {hero.subtitle}
+              {hero.summary}
             </p>
           )}
         </motion.section>
@@ -128,10 +122,11 @@ export function NewspaperTemplate({ hero, projects, isPreview = false }: Newspap
         {/* Footer */}
         <footer className="text-center border-t-2 border-[#1a1a1a] pt-4">
           <p className="text-sm text-[#666]">
-            © {new Date().getFullYear()} {hero.name}. All Rights Reserved.
+            © {new Date().getFullYear()} {hero.headline}. All Rights Reserved.
           </p>
         </footer>
       </div>
     </div>
   );
 }
+

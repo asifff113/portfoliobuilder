@@ -241,7 +241,7 @@ export function HolographicMatrixTemplate({ personalInfo, sections, settings }: 
                         <div key={proj.id} className="p-4 rounded-xl bg-white/5 border border-white/10">
                           <h4 className="font-semibold text-white flex items-center gap-2">
                             <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                            {proj.name || "Project"}
+                            {proj.title || "Project"}
                           </h4>
                           {proj.description && <p className="mt-1 text-sm text-slate-400">{proj.description}</p>}
                           {proj.techStack?.length > 0 && (
@@ -251,8 +251,8 @@ export function HolographicMatrixTemplate({ personalInfo, sections, settings }: 
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300">
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300">
                               <Globe className="w-3 h-3" /> View Project
                             </a>
                           )}

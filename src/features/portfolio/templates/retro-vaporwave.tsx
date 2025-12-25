@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface RetroVaporwaveTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -59,7 +53,7 @@ export function RetroVaporwaveTemplate({ hero, projects, isPreview = false }: Re
                 `,
               }}
             >
-              {hero.name}
+              {hero.headline}
             </h1>
             <motion.p
               initial={{ opacity: 0 }}
@@ -67,16 +61,16 @@ export function RetroVaporwaveTemplate({ hero, projects, isPreview = false }: Re
               transition={{ delay: 0.3 }}
               className="text-2xl md:text-3xl uppercase tracking-[0.3em] text-pink-300"
             >
-              {hero.title}
+              {hero.headline}
             </motion.p>
-            {hero.subtitle && (
+            {hero.summary && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className="text-lg mt-6 text-cyan-300 italic"
               >
-                「 {hero.subtitle} 」
+                「 {hero.summary} 」
               </motion.p>
             )}
           </motion.div>
@@ -196,9 +190,10 @@ export function RetroVaporwaveTemplate({ hero, projects, isPreview = false }: Re
 
         {/* Footer */}
         <footer className="text-center py-8 text-pink-300/50 text-sm">
-          <p>「 {new Date().getFullYear()} · {hero.name} · A E S T H E T I C 」</p>
+          <p>「 {new Date().getFullYear()} · {hero.headline} · A E S T H E T I C 」</p>
         </footer>
       </div>
     </div>
   );
 }
+

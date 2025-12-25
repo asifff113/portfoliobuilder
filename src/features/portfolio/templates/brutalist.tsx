@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface BrutalistTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -23,7 +17,7 @@ export function BrutalistTemplate({ hero, projects, isPreview: _isPreview = fals
       <header className="border-b-4 border-black p-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <h1 className="text-2xl font-black uppercase tracking-tight">
-            {hero.name}
+            {hero.headline}
           </h1>
           <nav className="flex gap-6 text-sm uppercase tracking-wider">
             <a href="#work" className="hover:underline underline-offset-4">Work</a>
@@ -41,16 +35,16 @@ export function BrutalistTemplate({ hero, projects, isPreview: _isPreview = fals
             animate={{ opacity: 1, y: 0 }}
             className="text-6xl md:text-[10rem] font-black uppercase leading-none tracking-tighter"
           >
-            {hero.title}
+            {hero.headline}
           </motion.h2>
-          {hero.subtitle && (
+          {hero.summary && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               className="text-xl md:text-2xl mt-8 max-w-2xl uppercase tracking-wide"
             >
-              {hero.subtitle}
+              {hero.summary}
             </motion.p>
           )}
         </div>
@@ -154,8 +148,9 @@ export function BrutalistTemplate({ hero, projects, isPreview: _isPreview = fals
 
       {/* Footer */}
       <footer className="border-t-4 border-black p-6 text-center text-sm uppercase">
-        © {new Date().getFullYear()} {hero.name}. All rights reserved.
+        © {new Date().getFullYear()} {hero.headline}. All rights reserved.
       </footer>
     </div>
   );
 }
+

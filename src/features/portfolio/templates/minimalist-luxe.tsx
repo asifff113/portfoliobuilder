@@ -194,3 +194,4 @@ export function MinimalistLuxeTemplate({ hero, profile, projects, isPreview = fa
     </div>
   );
 }
+

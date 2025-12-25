@@ -189,3 +189,4 @@ export function InteractiveGridTemplate({ hero, profile, projects, isPreview: _i
     </div>
   );
 }
+

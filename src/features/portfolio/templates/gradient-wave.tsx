@@ -2,16 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface GradientWaveTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -107,7 +101,7 @@ export function GradientWaveTemplate({ hero, projects, isPreview = false }: Grad
               animate={{ opacity: 1, y: 0 }}
               className="text-6xl md:text-8xl font-black mb-6 drop-shadow-2xl"
             >
-              {hero.name}
+              {hero.headline}
             </motion.h1>
 
             <motion.p
@@ -116,17 +110,17 @@ export function GradientWaveTemplate({ hero, projects, isPreview = false }: Grad
               transition={{ delay: 0.2 }}
               className="text-2xl md:text-3xl font-light mb-4 drop-shadow-lg"
             >
-              {hero.title}
+              {hero.headline}
             </motion.p>
 
-            {hero.subtitle && (
+            {hero.summary && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
                 className="text-lg text-white/80"
               >
-                {hero.subtitle}
+                {hero.summary}
               </motion.p>
             )}
 
@@ -189,3 +183,4 @@ export function GradientWaveTemplate({ hero, projects, isPreview = false }: Grad
     </div>
   );
 }
+

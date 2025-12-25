@@ -247,11 +247,6 @@ export function DeveloperTemplate({ personalInfo, sections }: TemplateProps) {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <span style={{ color: colors.orange }}>{item.title || "project"}</span>
-                                {item.status === "in-progress" && (
-                                  <span className="text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: colors.yellow, color: colors.bg }}>
-                                    WIP
-                                  </span>
-                                )}
                               </div>
                               <div className="flex items-center gap-2 text-xs">
                                 {item.liveUrl && (

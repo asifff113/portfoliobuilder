@@ -280,7 +280,6 @@ export function QuantumGridTemplate({ personalInfo, sections, settings }: Templa
                           <div key={cert.id} className="px-5 py-4">
                             <p className="text-sm font-semibold text-slate-900">{cert.name}</p>
                             <p className="text-xs text-slate-500">{cert.issuer} • {cert.issueDate}</p>
-                            {cert.description && <p className="mt-1 text-sm text-slate-600">{cert.description}</p>}
                           </div>
                         );
                       }

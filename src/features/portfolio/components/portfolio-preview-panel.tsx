@@ -38,11 +38,17 @@ export function PortfolioPreviewPanel({ profile, isFullPreview = false }: Portfo
   const blocks = usePortfolioStore((s) => s.blocks);
 
   const heroData = {
-    name: profile?.fullName || "Your Name",
-    title: hero.headline || profile?.headline || "Your Title",
-    subtitle: hero.summary || profile?.bio || "",
-    avatarUrl: hero.imageUrl || profile?.avatarUrl || undefined,
+    headline: hero.headline || profile?.headline || "Your Title",
+    summary: hero.summary || profile?.bio || "",
+    imageUrl: hero.imageUrl || profile?.avatarUrl || null,
+    ctaText: hero.ctaText || "Get in Touch",
+    ctaUrl: hero.ctaUrl || `mailto:${profile?.email || ""}`,
     email: profile?.email || "",
+    avatarUrl: hero.imageUrl || profile?.avatarUrl || null,
+    socialLinks: {
+      github: profile?.githubUrl || "",
+      linkedin: profile?.linkedinUrl || "",
+    },
   };
 
   const templateProps = {

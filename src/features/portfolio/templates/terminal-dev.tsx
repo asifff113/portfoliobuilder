@@ -251,3 +251,4 @@ export function TerminalDevTemplate({ hero, profile, projects, blocks: _blocks, 
     </div>
   );
 }
+

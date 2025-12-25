@@ -2,16 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface CosmicSpaceTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -101,13 +95,13 @@ export function CosmicSpaceTemplate({ hero, projects, isPreview = false }: Cosmi
               <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 shadow-[0_0_60px_rgba(167,139,250,0.5)]" />
               
               <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {hero.name}
+                {hero.headline}
               </h1>
               
-              <p className="text-xl text-white/60 mb-2">{hero.title}</p>
+              <p className="text-xl text-white/60 mb-2">{hero.headline}</p>
               
-              {hero.subtitle && (
-                <p className="text-white/40">{hero.subtitle}</p>
+              {hero.summary && (
+                <p className="text-white/40">{hero.summary}</p>
               )}
 
               <motion.div
@@ -167,3 +161,4 @@ export function CosmicSpaceTemplate({ hero, projects, isPreview = false }: Cosmi
     </div>
   );
 }
+

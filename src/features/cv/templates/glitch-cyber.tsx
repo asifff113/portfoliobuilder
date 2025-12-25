@@ -134,7 +134,7 @@ export function GlitchCyberTemplate({ personalInfo, sections, settings }: Templa
                       style={{ backgroundColor: primaryColor }}
                     />
                     <div className="mb-2">
-                      <h3 className="text-xl font-bold">{item.position}</h3>
+                      <h3 className="text-xl font-bold">{item.role}</h3>
                       <div className="flex flex-wrap gap-x-4 text-sm font-mono mt-1" style={{ color: secondaryColor }}>
                         <span>{item.company}</span>
                         <span>|</span>
@@ -173,17 +173,17 @@ export function GlitchCyberTemplate({ personalInfo, sections, settings }: Templa
                     <div className="absolute top-0 right-0 p-1 bg-black border-l border-b border-dashed" style={{ borderColor: primaryColor }}>
                       <Cpu size={14} style={{ color: primaryColor }} />
                     </div>
-                    <h3 className="text-lg font-bold mb-1">{item.name}</h3>
+                    <h3 className="text-lg font-bold mb-1">{item.title}</h3>
                     <p className="text-xs font-mono mb-2" style={{ color: secondaryColor }}>
-                      {item.url}
+                      {item.liveUrl}
                     </p>
                     <div 
                       className="text-sm opacity-80 mb-3"
                       dangerouslySetInnerHTML={{ __html: item.description }} 
                     />
-                    {item.technologies && item.technologies.length > 0 && (
+                    {item.techStack && item.techStack.length > 0 && (
                       <div className="flex flex-wrap gap-2">
-                        {item.technologies.map((tech, t) => (
+                        {item.techStack.map((tech: string, t: number) => (
                           <span 
                             key={t} 
                             className="text-xs px-2 py-0.5 font-mono uppercase"
@@ -214,13 +214,13 @@ export function GlitchCyberTemplate({ personalInfo, sections, settings }: Templa
                   <div key={i}>
                     <div className="flex justify-between text-sm mb-1 font-mono">
                       <span>{item.name}</span>
-                      <span style={{ color: secondaryColor }}>{item.level}%</span>
+                      <span style={{ color: secondaryColor }}>{item.proficiency * 20}%</span>
                     </div>
                     <div className="h-2 w-full bg-gray-800 relative overflow-hidden">
                       <div 
                         className="h-full absolute top-0 left-0"
                         style={{ 
-                          width: `${item.level}%`, 
+                          width: `${item.proficiency * 20}%`, 
                           backgroundColor: primaryColor,
                           boxShadow: `0 0 10px ${primaryColor}`
                         }}
@@ -263,7 +263,7 @@ export function GlitchCyberTemplate({ personalInfo, sections, settings }: Templa
               <div className="grid grid-cols-1 gap-2">
                 {(section.items as LanguageItem[]).map((item, i) => (
                   <div key={i} className="flex justify-between items-center p-2 bg-white/5 border border-white/10">
-                    <span className="font-mono text-sm">{item.language}</span>
+                    <span className="font-mono text-sm">{item.name}</span>
                     <span className="text-xs uppercase" style={{ color: secondaryColor }}>{item.proficiency}</span>
                   </div>
                 ))}
@@ -278,13 +278,13 @@ export function GlitchCyberTemplate({ personalInfo, sections, settings }: Templa
                 <span>Connect</span>
               </h2>
               <div className="flex flex-wrap gap-3">
-                {personalInfo.linkedin && (
-                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+                {personalInfo.linkedinUrl && (
+                  <a href={personalInfo.linkedinUrl} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
                     <Linkedin size={18} />
                   </a>
                 )}
-                {personalInfo.github && (
-                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+                {personalInfo.githubUrl && (
+                  <a href={personalInfo.githubUrl} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
                     <Github size={18} />
                   </a>
                 )}

@@ -323,3 +323,4 @@ export function ParticleNetworkTemplate({ hero, projects, isPreview = false }: P
     </div>
   );
 }
+

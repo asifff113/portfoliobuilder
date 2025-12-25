@@ -277,9 +277,9 @@ export function ThreeDCardsTemplate({ hero, projects, isPreview = false }: Three
                               Live Demo <ExternalLink className="w-3 h-3" />
                             </a>
                           )}
-                          {project.repoUrl && (
+                          {project.githubUrl && (
                             <a
-                              href={project.repoUrl}
+                              href={project.githubUrl}
                               className="text-sm text-white/50 hover:text-white flex items-center gap-1"
                             >
                               <Github className="w-3 h-3" /> Code
@@ -329,3 +329,4 @@ export function ThreeDCardsTemplate({ hero, projects, isPreview = false }: Three
     </div>
   );
 }
+

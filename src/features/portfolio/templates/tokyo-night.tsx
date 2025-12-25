@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface TokyoNightTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -30,7 +24,7 @@ export function TokyoNightTemplate({ hero, projects, isPreview: _isPreview = fal
             <span className="text-[#7aa2f7]">const</span>{" "}
             <span className="text-[#bb9af7]">developer</span>{" "}
             <span className="text-[#89ddff]">=</span>{" "}
-            <span className="text-[#9ece6a]">"{hero.name}"</span>
+            <span className="text-[#9ece6a]">"{hero.headline}"</span>
           </motion.div>
           
           <nav className="hidden md:flex gap-6 font-mono text-sm">
@@ -72,7 +66,7 @@ export function TokyoNightTemplate({ hero, projects, isPreview: _isPreview = fal
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold mb-6"
           >
-            <span className="text-[#c0caf5]">{hero.name}</span>
+            <span className="text-[#c0caf5]">{hero.headline}</span>
           </motion.h1>
 
           <motion.div
@@ -82,19 +76,19 @@ export function TokyoNightTemplate({ hero, projects, isPreview: _isPreview = fal
             className="font-mono text-xl md:text-2xl mb-8"
           >
             <span className="text-[#bb9af7]">function</span>{" "}
-            <span className="text-[#7aa2f7]">{hero.title.replace(/\s/g, "_")}</span>
+            <span className="text-[#7aa2f7]">{hero.headline.replace(/\s/g, "_")}</span>
             <span className="text-[#89ddff]">()</span>{" "}
             <span className="text-[#89ddff]">{"{"}</span>
           </motion.div>
 
-          {hero.subtitle && (
+          {hero.summary && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
               className="text-[#9ece6a] font-mono pl-8 mb-4"
             >
-              return "{hero.subtitle}";
+              return "{hero.summary}";
             </motion.p>
           )}
 
@@ -200,3 +194,4 @@ export function TokyoNightTemplate({ hero, projects, isPreview: _isPreview = fal
     </div>
   );
 }
+

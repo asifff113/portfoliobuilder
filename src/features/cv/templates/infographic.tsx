@@ -278,7 +278,7 @@ export function InfographicTemplate({ personalInfo, sections }: TemplateProps) {
                 {section.title}
               </h2>
               <div className="grid grid-cols-2 gap-4">
-                {(section.items as EducationItem[]).map((item) => (
+                {(section.items as EducationItem[]).map((item, idx) => (
                   <div key={item.id} className="p-4 rounded-lg" style={{ backgroundColor: `${colors[idx % colors.length]}10` }}>
                     <h3 className="font-bold text-gray-900 mb-1">{item.degree}</h3>
                     <p className="text-sm" style={{ color: colors[idx % colors.length] }}>{item.institution}</p>

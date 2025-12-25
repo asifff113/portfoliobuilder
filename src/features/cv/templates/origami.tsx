@@ -117,7 +117,7 @@ export function OrigamiCVTemplate({ personalInfo, sections, settings }: Template
         )}
 
         {/* Bio */}
-        {personalInfo.bio && (
+        {personalInfo.summary && (
           <section 
             className="mb-8 p-6 rounded-lg relative"
             style={{ 
@@ -130,7 +130,7 @@ export function OrigamiCVTemplate({ personalInfo, sections, settings }: Template
               className="absolute -top-2 -right-2 w-8 h-8 transform rotate-45"
               style={{ backgroundColor: colors.rose }}
             />
-            <p className="text-center italic">{personalInfo.bio}</p>
+            <p className="text-center italic">{personalInfo.summary}</p>
           </section>
         )}
 
@@ -160,7 +160,7 @@ export function OrigamiCVTemplate({ personalInfo, sections, settings }: Template
                     <div key={i}>
                       <div className="flex justify-between items-start">
                         <div>
-                          <h3 className="font-semibold">{item.position}</h3>
+                          <h3 className="font-semibold">{item.role}</h3>
                           <p style={{ color: colors.textLight }}>{item.company}</p>
                         </div>
                         <span className="text-sm px-2 py-1 rounded" style={{ backgroundColor: colors.roseLight, color: colors.roseDark }}>
@@ -181,7 +181,7 @@ export function OrigamiCVTemplate({ personalInfo, sections, settings }: Template
                     <div key={i}>
                       <h3 className="font-semibold">{item.degree}</h3>
                       <p style={{ color: colors.textLight }}>{item.institution}</p>
-                      <p className="text-sm" style={{ color: colors.textLight }}>{item.graduationDate}</p>
+                      <p className="text-sm" style={{ color: colors.textLight }}>{item.endDate || 'Present'}</p>
                     </div>
                   ))}
                 </div>

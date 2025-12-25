@@ -13,7 +13,7 @@ export function SocialProofBlock({ items, accentColor = "#06b6d4" }: SocialProof
   if (!items || items.length === 0) return null;
 
   const logos = items.filter((i) => i.type === "logo");
-  const badges = items.filter((i) => i.type === "badge" || i.type === "award");
+  const badges = items.filter((i) => i.type === "certification" || i.type === "award");
 
   return (
     <section className="py-16 px-6">
@@ -45,28 +45,28 @@ export function SocialProofBlock({ items, accentColor = "#06b6d4" }: SocialProof
                   whileHover={{ scale: 1.1 }}
                   className="group"
                 >
-                  {logo.link ? (
-                    <a href={logo.link} target="_blank" rel="noopener noreferrer">
+                  {logo.url ? (
+                    <a href={logo.url} target="_blank" rel="noopener noreferrer">
                       {logo.imageUrl ? (
                         <img
                           src={logo.imageUrl}
-                          alt={logo.title}
+                          alt={logo.name}
                           className="h-8 md:h-10 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0"
                         />
                       ) : (
                         <span className="text-white/50 group-hover:text-white font-medium transition-colors">
-                          {logo.title}
+                          {logo.name}
                         </span>
                       )}
                     </a>
                   ) : logo.imageUrl ? (
                     <img
                       src={logo.imageUrl}
-                      alt={logo.title}
+                      alt={logo.name}
                       className="h-8 md:h-10 w-auto object-contain opacity-50 grayscale"
                     />
                   ) : (
-                    <span className="text-white/50 font-medium">{logo.title}</span>
+                    <span className="text-white/50 font-medium">{logo.name}</span>
                   )}
                 </motion.div>
               ))}
@@ -96,9 +96,9 @@ export function SocialProofBlock({ items, accentColor = "#06b6d4" }: SocialProof
                   whileHover={{ scale: 1.05 }}
                   className="group"
                 >
-                  {badge.link ? (
+                  {badge.url ? (
                     <a
-                      href={badge.link}
+                      href={badge.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
@@ -106,7 +106,7 @@ export function SocialProofBlock({ items, accentColor = "#06b6d4" }: SocialProof
                       {badge.imageUrl && (
                         <img src={badge.imageUrl} alt="" className="w-8 h-8 object-contain" />
                       )}
-                      <span className="text-white/80 font-medium">{badge.title}</span>
+                      <span className="text-white/80 font-medium">{badge.name}</span>
                       <ExternalLink className="w-3 h-3 text-white/30 group-hover:text-white/60 transition-colors" />
                     </a>
                   ) : (
@@ -114,7 +114,7 @@ export function SocialProofBlock({ items, accentColor = "#06b6d4" }: SocialProof
                       {badge.imageUrl && (
                         <img src={badge.imageUrl} alt="" className="w-8 h-8 object-contain" />
                       )}
-                      <span className="text-white/80 font-medium">{badge.title}</span>
+                      <span className="text-white/80 font-medium">{badge.name}</span>
                     </div>
                   )}
                 </motion.div>

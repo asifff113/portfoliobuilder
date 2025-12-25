@@ -129,7 +129,7 @@ export function IsometricCVTemplate({ personalInfo, sections, settings }: Templa
         </header>
 
         {/* Bio */}
-        {personalInfo.bio && (
+        {personalInfo.summary && (
           <section 
             className="mb-6 p-4 rounded-lg"
             style={{ 
@@ -137,7 +137,7 @@ export function IsometricCVTemplate({ personalInfo, sections, settings }: Templa
               borderLeft: `3px solid ${colors.purple}`,
             }}
           >
-            <p>{personalInfo.bio}</p>
+            <p>{personalInfo.summary}</p>
           </section>
         )}
 
@@ -177,7 +177,7 @@ export function IsometricCVTemplate({ personalInfo, sections, settings }: Templa
                     >
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h3 className="font-semibold" style={{ color: colors.cyan }}>{item.position}</h3>
+                          <h3 className="font-semibold" style={{ color: colors.cyan }}>{item.role}</h3>
                           <p style={{ color: colors.purple }}>{item.company}</p>
                         </div>
                         <span className="text-sm" style={{ color: colors.pink }}>
@@ -202,7 +202,7 @@ export function IsometricCVTemplate({ personalInfo, sections, settings }: Templa
                     >
                       <h3 className="font-semibold" style={{ color: colors.cyan }}>{item.degree}</h3>
                       <p style={{ color: colors.purple }}>{item.institution}</p>
-                      <p className="text-sm" style={{ color: colors.textDim }}>{item.graduationDate}</p>
+                      <p className="text-sm" style={{ color: colors.textDim }}>{item.endDate || 'Present'}</p>
                     </div>
                   ))}
                 </div>
@@ -236,8 +236,8 @@ export function IsometricCVTemplate({ personalInfo, sections, settings }: Templa
                       <h3 className="font-semibold mb-1" style={{ color: colors.cyan }}>{project.title}</h3>
                       <p className="text-sm" style={{ color: colors.textDim }}>{project.description}</p>
                       <div className="flex gap-2 mt-2">
-                        {project.url && (
-                          <a href={project.url} style={{ color: colors.purple }}>
+                        {project.liveUrl && (
+                          <a href={project.liveUrl} style={{ color: colors.purple }}>
                             <ExternalLink size={14} />
                           </a>
                         )}

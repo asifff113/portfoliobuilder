@@ -295,7 +295,7 @@ export function MidnightCosmosTemplate({ personalInfo, sections, settings }: Tem
                         <div key={proj.id} className="p-4 rounded-xl bg-indigo-900/30 border border-indigo-500/20">
                           <h4 className="font-semibold text-white flex items-center gap-2">
                             <Zap className="w-4 h-4 text-purple-400" />
-                            {proj.name || "Project"}
+                            {proj.title || "Project"}
                           </h4>
                           {proj.description && <p className="mt-1 text-sm text-indigo-200">{proj.description}</p>}
                           {proj.techStack?.length > 0 && (
@@ -305,8 +305,8 @@ export function MidnightCosmosTemplate({ personalInfo, sections, settings }: Tem
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-xs text-purple-300 hover:text-purple-200">
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-xs text-purple-300 hover:text-purple-200">
                               <Globe className="w-3 h-3" /> Launch Project
                             </a>
                           )}

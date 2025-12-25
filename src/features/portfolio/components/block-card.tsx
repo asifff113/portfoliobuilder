@@ -114,7 +114,7 @@ export function BlockCard({ block }: BlockCardProps) {
       case "newsletter":
         return (
           <NewsletterEditor
-            config={(block.content as { title?: string; subtitle?: string; buttonText?: string; successMessage?: string; style?: string }) || {}}
+            config={(block.content as { title?: string; subtitle?: string; buttonText?: string; successMessage?: string; style?: "minimal" | "card" | "fullwidth" }) || {}}
             onChange={(config) => handleContentChange(config)}
           />
         );

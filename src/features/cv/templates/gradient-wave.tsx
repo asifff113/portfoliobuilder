@@ -96,9 +96,9 @@ export function GradientWaveCVTemplate({ personalInfo, sections, settings }: Tem
         </header>
 
         {/* Bio */}
-        {personalInfo.bio && (
+        {personalInfo.summary && (
           <section className="mb-6 p-4 rounded-2xl bg-white/10 backdrop-blur-sm">
-            <p className="text-center">{personalInfo.bio}</p>
+            <p className="text-center">{personalInfo.summary}</p>
           </section>
         )}
 
@@ -116,7 +116,7 @@ export function GradientWaveCVTemplate({ personalInfo, sections, settings }: Tem
                     <div key={i} className="p-4 rounded-xl bg-white/10">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h3 className="font-bold text-lg">{item.position}</h3>
+                          <h3 className="font-bold text-lg">{item.role}</h3>
                           <p className="opacity-80">{item.company}</p>
                         </div>
                         <span className="text-sm bg-white/20 px-2 py-1 rounded-full">
@@ -135,7 +135,7 @@ export function GradientWaveCVTemplate({ personalInfo, sections, settings }: Tem
                     <div key={i} className="p-4 rounded-xl bg-white/10">
                       <h3 className="font-bold">{item.degree}</h3>
                       <p className="opacity-80">{item.institution}</p>
-                      <p className="text-sm opacity-60">{item.graduationDate}</p>
+                      <p className="text-sm opacity-60">{item.endDate || 'Present'}</p>
                     </div>
                   ))}
                 </div>
@@ -161,8 +161,8 @@ export function GradientWaveCVTemplate({ personalInfo, sections, settings }: Tem
                       <h3 className="font-bold mb-2">{project.title}</h3>
                       <p className="text-sm opacity-80 mb-3">{project.description}</p>
                       <div className="flex gap-2">
-                        {project.url && (
-                          <a href={project.url} className="opacity-70 hover:opacity-100">
+                        {project.liveUrl && (
+                          <a href={project.liveUrl} className="opacity-70 hover:opacity-100">
                             <ExternalLink size={16} />
                           </a>
                         )}

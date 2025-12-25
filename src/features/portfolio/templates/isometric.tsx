@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface IsometricTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -50,12 +44,12 @@ export function IsometricTemplate({ hero, projects, isPreview = false }: Isometr
             >
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
-                  {hero.name}
+                  {hero.headline}
                 </span>
               </h1>
-              <p className="text-2xl text-white/70 mb-4">{hero.title}</p>
-              {hero.subtitle && (
-                <p className="text-lg text-white/50 mb-8">{hero.subtitle}</p>
+              <p className="text-2xl text-white/70 mb-4">{hero.headline}</p>
+              {hero.summary && (
+                <p className="text-lg text-white/50 mb-8">{hero.summary}</p>
               )}
               
               <div className="flex gap-4">
@@ -157,7 +151,7 @@ export function IsometricTemplate({ hero, projects, isPreview = false }: Isometr
 
         {/* Footer */}
         <footer className="py-12 px-6 text-center text-white/40">
-          <p>© {new Date().getFullYear()} {hero.name}</p>
+          <p>© {new Date().getFullYear()} {hero.headline}</p>
         </footer>
       </div>
     </div>
@@ -206,3 +200,4 @@ function IsometricBox({ size, gradient }: { size: number; gradient: string }) {
     </div>
   );
 }
+

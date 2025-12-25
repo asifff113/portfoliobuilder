@@ -120,10 +120,10 @@ export function TokyoNightCVTemplate({ personalInfo, sections, settings }: Templ
         </header>
 
         {/* Bio */}
-        {personalInfo.bio && (
+        {personalInfo.summary && (
           <section className="mb-6 p-4 rounded-lg" style={{ backgroundColor: colors.bgLight }}>
             <p style={{ color: colors.textDim }}>{"/* "}</p>
-            <p className="px-4">{personalInfo.bio}</p>
+            <p className="px-4">{personalInfo.summary}</p>
             <p style={{ color: colors.textDim }}>{" */"}</p>
           </section>
         )}
@@ -147,7 +147,7 @@ export function TokyoNightCVTemplate({ personalInfo, sections, settings }: Templ
                     <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: colors.bgLight }}>
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <h3 className="font-bold" style={{ color: colors.cyan }}>{item.position}</h3>
+                          <h3 className="font-bold" style={{ color: colors.cyan }}>{item.role}</h3>
                           <p style={{ color: colors.purple }}>{item.company}</p>
                         </div>
                         <span className="text-sm" style={{ color: colors.orange }}>
@@ -168,7 +168,7 @@ export function TokyoNightCVTemplate({ personalInfo, sections, settings }: Templ
                     <div key={i} className="p-4 rounded-lg" style={{ backgroundColor: colors.bgLight }}>
                       <h3 className="font-bold" style={{ color: colors.cyan }}>{item.degree}</h3>
                       <p style={{ color: colors.purple }}>{item.institution}</p>
-                      <p className="text-sm" style={{ color: colors.orange }}>{item.graduationDate}</p>
+                      <p className="text-sm" style={{ color: colors.orange }}>{item.endDate || 'Present'}</p>
                     </div>
                   ))}
                 </div>
@@ -198,8 +198,8 @@ export function TokyoNightCVTemplate({ personalInfo, sections, settings }: Templ
                       <h3 className="font-bold mb-2" style={{ color: colors.cyan }}>{project.title}</h3>
                       <p className="text-sm mb-2" style={{ color: colors.text }}>{project.description}</p>
                       <div className="flex gap-2">
-                        {project.url && (
-                          <a href={project.url} target="_blank" rel="noopener noreferrer">
+                        {project.liveUrl && (
+                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                             <ExternalLink size={14} style={{ color: colors.purple }} />
                           </a>
                         )}

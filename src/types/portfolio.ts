@@ -50,6 +50,13 @@ export interface PortfolioHero {
   imageUrl: string | null;
   ctaText: string;
   ctaUrl: string;
+  email?: string;
+  avatarUrl?: string | null;
+  socialLinks?: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+  };
 }
 
 export interface FeaturedProject {
@@ -62,6 +69,8 @@ export interface FeaturedProject {
   techStack: string[];
   isFeatured: boolean;
   order: number;
+  tags?: string[];
+  category?: string;
 }
 
 export type PortfolioBlockType =
@@ -181,6 +190,7 @@ export interface GalleryItem {
   url: string;
   thumbnailUrl?: string;
   caption?: string;
+  alt?: string;
   projectId?: string;
 }
 

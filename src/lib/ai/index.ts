@@ -5,14 +5,8 @@
  * All processing happens in the browser - no API keys needed.
  */
 
-type Text2TextPipeline = (
-  input: string,
-  options?: {
-    max_new_tokens?: number;
-    do_sample?: boolean;
-    temperature?: number;
-  }
-) => Promise<Array<{ generated_text?: string }>>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Text2TextPipeline = any;
 
 // Model loading state
 let textGenerationPipeline: Text2TextPipeline | null = null;

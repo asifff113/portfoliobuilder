@@ -157,7 +157,7 @@ export function MinimalistLuxeTemplate({ personalInfo, sections, settings }: Tem
               <div className="space-y-2">
                 {(section.items as LanguageItem[]).map((item, i) => (
                   <div key={i} className="flex justify-between text-sm">
-                    <span className="font-serif">{item.language}</span>
+                    <span className="font-serif">{item.name}</span>
                     <span className="text-gray-400 text-xs uppercase tracking-wider">{item.proficiency}</span>
                   </div>
                 ))}
@@ -180,7 +180,7 @@ export function MinimalistLuxeTemplate({ personalInfo, sections, settings }: Tem
                 {(section.items as ExperienceItem[]).map((item, i) => (
                   <div key={i} className="relative">
                     <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
-                      <h3 className="text-xl font-serif font-medium" style={{ color: primaryColor }}>{item.position}</h3>
+                      <h3 className="text-xl font-serif font-medium" style={{ color: primaryColor }}>{item.role}</h3>
                       <span className="text-xs font-sans uppercase tracking-wider text-gray-400">
                         {item.startDate} — {item.endDate || "Present"}
                       </span>
@@ -210,9 +210,9 @@ export function MinimalistLuxeTemplate({ personalInfo, sections, settings }: Tem
                 {(section.items as ProjectItem[]).map((item, i) => (
                   <div key={i}>
                     <div className="flex justify-between items-baseline mb-1">
-                      <h3 className="text-lg font-serif font-medium">{item.name}</h3>
-                      {item.url && (
-                        <a href={item.url} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
+                      <h3 className="text-lg font-serif font-medium">{item.title}</h3>
+                      {item.liveUrl && (
+                        <a href={item.liveUrl} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
                           View Project →
                         </a>
                       )}
@@ -221,9 +221,9 @@ export function MinimalistLuxeTemplate({ personalInfo, sections, settings }: Tem
                       className="text-sm leading-relaxed text-gray-600 font-sans mb-2"
                       dangerouslySetInnerHTML={{ __html: item.description }} 
                     />
-                    {item.technologies && item.technologies.length > 0 && (
+                    {item.techStack && item.techStack.length > 0 && (
                       <div className="flex gap-2 text-xs text-gray-400 italic font-serif">
-                        {item.technologies.join(" • ")}
+                        {item.techStack.join(" • ")}
                       </div>
                     )}
                   </div>

@@ -278,7 +278,7 @@ export function ZenGardenTemplate({ personalInfo, sections, settings }: Template
                         <div key={proj.id}>
                           <h4 className="font-medium flex items-center gap-2" style={{ color: zenColors.ink }}>
                             <Mountain className="w-4 h-4" style={{ color: zenColors.bamboo }} />
-                            {proj.name || "Project"}
+                            {proj.title || "Project"}
                           </h4>
                           {proj.description && (
                             <p className="mt-1 text-sm font-light" style={{ color: zenColors.stone }}>{proj.description}</p>
@@ -292,8 +292,8 @@ export function ZenGardenTemplate({ personalInfo, sections, settings }: Template
                               ))}
                             </div>
                           )}
-                          {proj.url && (
-                            <a href={proj.url} className="mt-2 inline-flex items-center gap-1 text-xs hover:opacity-70" style={{ color: zenColors.bamboo }}>
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} className="mt-2 inline-flex items-center gap-1 text-xs hover:opacity-70" style={{ color: zenColors.bamboo }}>
                               <Globe className="w-3 h-3" /> View Project
                             </a>
                           )}

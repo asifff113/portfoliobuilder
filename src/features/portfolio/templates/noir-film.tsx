@@ -1,16 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { FeaturedProject, PortfolioProfile } from "@/types/portfolio";
+import type { FeaturedProject, PortfolioProfile, PortfolioHero } from "@/types/portfolio";
 
 interface NoirFilmTemplateProps {
-  hero: {
-    name: string;
-    title: string;
-    subtitle?: string;
-    avatarUrl?: string;
-    email?: string;
-  };
+  hero: PortfolioHero;
   projects: FeaturedProject[];
   profile?: PortfolioProfile | null;
   isPreview?: boolean;
@@ -53,18 +47,18 @@ export function NoirFilmTemplate({ hero, projects, isPreview = false }: NoirFilm
               </div>
 
               <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight italic">
-                {hero.name}
+                {hero.headline}
               </h1>
               
               <div className="h-px w-48 bg-white/50 mx-auto mb-6" />
               
               <p className="text-xl md:text-2xl text-white/70 italic mb-4">
-                {hero.title}
+                {hero.headline}
               </p>
               
-              {hero.subtitle && (
+              {hero.summary && (
                 <p className="text-lg text-white/50 italic">
-                  "{hero.subtitle}"
+                  "{hero.summary}"
                 </p>
               )}
             </motion.div>
@@ -124,3 +118,4 @@ export function NoirFilmTemplate({ hero, projects, isPreview = false }: NoirFilm
     </div>
   );
 }
+
