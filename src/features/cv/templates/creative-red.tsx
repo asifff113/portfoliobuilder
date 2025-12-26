@@ -137,9 +137,9 @@ export function CreativeRedTemplate({ personalInfo, sections }: TemplateProps) {
           {/* Photo */}
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <div className="w-30 h-30 rounded-full overflow-hidden" style={{ width: "120px", height: "120px" }}>
-              {personalInfo.photoUrl ? (
+              {personalInfo.avatarUrl ? (
                 <img 
-                  src={personalInfo.photoUrl} 
+                  src={personalInfo.avatarUrl} 
                   alt={personalInfo.fullName}
                   className="w-full h-full object-cover"
                 />
