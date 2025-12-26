@@ -241,7 +241,7 @@ export function CreativeRedTemplate({ personalInfo, sections }: TemplateProps) {
                   <div key={i} className="flex items-start justify-between gap-2">
                     <div className="flex flex-col">
                       <span className="text-sm font-bold text-white leading-tight">{edu.degree}</span>
-                      <span className="text-xs text-gray-400 mt-0.5">{edu.school}</span>
+                      <span className="text-xs text-gray-400 mt-0.5">{edu.institution}</span>
                     </div>
                     <span className="bg-[#c41e3a] text-white text-xs font-bold px-2 py-1 rounded-sm whitespace-nowrap">
                       {edu.startDate} - {edu.endDate}
@@ -447,7 +447,7 @@ export function CreativeRedTemplate({ personalInfo, sections }: TemplateProps) {
                       <div className="text-[11px] text-gray-500 mb-0.5" style={{ fontFamily: "Arial, sans-serif" }}>
                         {exp.company} | {exp.startDate} - {exp.endDate}
                       </div>
-                      <h3 className="text-sm font-black text-[#c41e3a] mb-1">{exp.position}</h3>
+                      <h3 className="text-sm font-black text-[#c41e3a] mb-1">{exp.role}</h3>
                       <ul className="text-[11px] text-gray-600 leading-relaxed list-disc list-inside">
                         <li dangerouslySetInnerHTML={{ __html: exp.description }} />
                       </ul>
