@@ -246,11 +246,37 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [savePortfolio]);
 
-  // Publish toggle handler
+  // Publish toggle handler - saves directly to database
   const handlePublishToggle = async () => {
-    togglePublish();
-    // Save immediately after toggle
-    setTimeout(savePortfolio, 100);
+    if (!portfolioId) {
+      // If no portfolio exists yet, toggle and save normally
+      togglePublish();
+      setTimeout(savePortfolio, 100);
+      return;
+    }
+
+    // Directly update the database for immediate effect
+    const newPublishState = !meta.isPublished;
+    
+    try {
+      const { error } = await supabase
+        .from("portfolios")
+        .update({ 
+          is_published: newPublishState,
+          updated_at: new Date().toISOString(),
+        } as never)
+        .eq("id", portfolioId);
+
+      if (error) {
+        console.error("Failed to update publish status:", error);
+        return;
+      }
+
+      // Update the local state after successful save
+      togglePublish();
+    } catch (error) {
+      console.error("Failed to toggle publish:", error);
+    }
   };
 
   // View live portfolio
