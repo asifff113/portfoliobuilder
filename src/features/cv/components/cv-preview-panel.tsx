@@ -63,6 +63,7 @@ import { NewspaperCVTemplate } from "../templates/newspaper";
 import { OrigamiCVTemplate } from "../templates/origami";
 import { IsometricCVTemplate } from "../templates/isometric";
 import { PersonalBioTemplate } from "../templates/personal-bio";
+import { CreativeRedTemplate } from "../templates/creative-red";
 import type { PersonalInfo, CVSection } from "@/types/cv";
 
 // Template props interface that all templates should implement
@@ -140,6 +141,7 @@ const templateComponents: Record<string, React.ComponentType<TemplateProps>> = {
   "origami": OrigamiCVTemplate,
   "isometric": IsometricCVTemplate,
   "personal-bio": PersonalBioTemplate,
+  "creative-red": CreativeRedTemplate,
 };
 
 export const CVPreviewPanel = forwardRef<HTMLDivElement, CVPreviewPanelProps>(

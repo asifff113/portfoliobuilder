@@ -5,4 +5,5 @@ export { PortfolioPreviewPanel } from "./portfolio-preview-panel";
 export { HeroForm } from "./hero-form";
 export { ProjectCard } from "./project-card";
 export { PortfolioTemplateSelector } from "./portfolio-template-selector";
+export { ShareDialog } from "./share-dialog";
 

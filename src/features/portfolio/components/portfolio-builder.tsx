@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { usePortfolioStore } from "../store";
 import { PortfolioEditorPanel } from "./portfolio-editor-panel";
 import { PortfolioPreviewPanel } from "./portfolio-preview-panel";
+import { ShareDialog } from "./share-dialog";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 import type { PortfolioProfile } from "@/types/portfolio";
 
@@ -45,11 +46,25 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
   const [isEditorCollapsed, setIsEditorCollapsed] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Generate a unique slug
-  const generateSlug = useCallback((title: string) => {
-    const base = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    return `${base}-${Date.now().toString(36)}`;
-  }, []);
+  // Generate a unique slug with collision check
+  const generateUniqueSlug = useCallback(async (title: string): Promise<string> => {
+    const base = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "portfolio";
+    let slug = `${base}-${Math.random().toString(36).substring(2, 9)}`;
+    
+    // Check if slug already exists
+    const { data: existing } = await supabase
+      .from("portfolios")
+      .select("id")
+      .eq("slug", slug)
+      .single();
+    
+    // If exists, add timestamp to make it unique
+    if (existing) {
+      slug = `${base}-${Date.now().toString(36)}`;
+    }
+    
+    return slug;
+  }, [supabase]);
 
   // Save portfolio
   const savePortfolio = useCallback(async () => {
@@ -63,7 +78,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
 
       if (!portfolioId) {
         // Create new portfolio
-        const slug = meta.slug || generateSlug(meta.title || "portfolio");
+        const slug = meta.slug || await generateUniqueSlug(meta.title || "portfolio");
         // Supported layout types in the database
         const dbSupportedLayouts = ["hero_timeline", "project_grid", "minimal", "creative", "developer", "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial", "terminal_dev", "particle_network", "3d_cards"];
         const layoutType = dbSupportedLayouts.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
@@ -195,7 +210,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
     supabase,
     markAsSaved,
     setIsSaving,
-    generateSlug,
+    generateUniqueSlug,
     router,
   ]);
 
@@ -325,6 +340,13 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
                 View Live
               </Button>
             )}
+
+            {/* Share button */}
+            <ShareDialog
+              slug={meta.slug || ""}
+              title={meta.title || "My Portfolio"}
+              isPublished={meta.isPublished}
+            />
 
             {/* Manual save */}
             <Button

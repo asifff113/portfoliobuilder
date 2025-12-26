@@ -810,6 +810,13 @@ export const cvTemplates: CVTemplate[] = [
     category: "creative",
   },
   {
+    id: "creative-red",
+    name: "Creative Red",
+    description: "Bold, artistic layout with ransom-note header, torn paper effects, and cultural motifs",
+    previewImageUrl: null,
+    category: "creative",
+  },
+  {
     id: "glassmorphism",
     name: "Glassmorphism",
     description: "Modern, premium design with frosted glass effects and soft gradients",

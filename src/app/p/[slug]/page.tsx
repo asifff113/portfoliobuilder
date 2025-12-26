@@ -68,20 +68,7 @@ export default async function PublicPortfolioPage({
   // Fetch published portfolio by slug
   const { data: portfolioData, error: portfolioError } = await supabase
     .from("portfolios")
-    .select(`
-      *,
-      profiles!portfolios_user_id_fkey (
-        full_name,
-        headline,
-        bio,
-        phone,
-        location,
-        website_url,
-        linkedin_url,
-        github_url,
-        avatar_url
-      )
-    `)
+    .select("*")
     .eq("slug", slug)
     .eq("is_published", true)
     .single();
@@ -89,6 +76,23 @@ export default async function PublicPortfolioPage({
   if (portfolioError || !portfolioData) {
     notFound();
   }
+
+  // Fetch profile separately (no FK relationship between portfolios and profiles)
+  const { data: profileData } = await supabase
+    .from("profiles")
+    .select(`
+      full_name,
+      headline,
+      bio,
+      phone,
+      location,
+      website_url,
+      linkedin_url,
+      github_url,
+      avatar_url
+    `)
+    .eq("user_id", portfolioData.user_id)
+    .single();
 
   // Fetch projects
   const { data: projectsData } = await supabase
@@ -98,7 +102,7 @@ export default async function PublicPortfolioPage({
     .order("order_index", { ascending: true });
 
   // Build the data
-  const profileRow = portfolioData.profiles as Record<string, unknown> | null;
+  const profileRow = profileData as Record<string, unknown> | null;
 
   const hero: PortfolioHero = {
     headline: portfolioData.hero_headline || "",

@@ -12,13 +12,6 @@ export default async function SettingsPage() {
     redirect("/auth");
   }
 
-  // Fetch user profile
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("user_id", user.id)
-    .single();
-
   return (
     <SettingsClient
       user={{
@@ -26,7 +19,6 @@ export default async function SettingsPage() {
         email: user.email || "",
         avatarUrl: user.user_metadata?.avatar_url || null,
       }}
-      profile={profile}
     />
   );
 }

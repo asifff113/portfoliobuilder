@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   DndContext,
   closestCenter,
@@ -30,6 +30,9 @@ import {
   Zap,
   Star,
   Palette,
+  Check,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -47,6 +50,7 @@ import { ProjectCard } from "./project-card";
 import { BlockCard } from "./block-card";
 import { PortfolioTemplateSelector } from "./portfolio-template-selector";
 import { portfolioTemplates, type PortfolioProfile } from "@/types/portfolio";
+import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 interface PortfolioEditorPanelProps {
   profile?: PortfolioProfile | null;
@@ -75,8 +79,11 @@ const blockTypes = [
 export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
   const [activeTab, setActiveTab] = useState("hero");
   const [isThemesOpen, setIsThemesOpen] = useState(false);
+  const [slugStatus, setSlugStatus] = useState<"idle" | "checking" | "available" | "taken">("idle");
+  const supabase = getSupabaseBrowserClient();
 
   const meta = usePortfolioStore((s) => s.meta);
+  const portfolioId = usePortfolioStore((s) => s.portfolioId);
   const projects = usePortfolioStore((s) => s.projects);
   const blocks = usePortfolioStore((s) => s.blocks);
   const addProject = usePortfolioStore((s) => s.addProject);
@@ -84,6 +91,43 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
   const addBlock = usePortfolioStore((s) => s.addBlock);
   const setLayout = usePortfolioStore((s) => s.setLayout);
   const updateMeta = usePortfolioStore((s) => s.updateMeta);
+
+  // Check if slug is available
+  const checkSlugAvailability = useCallback(async (slug: string) => {
+    if (!slug || slug.length < 3) {
+      setSlugStatus("idle");
+      return;
+    }
+
+    setSlugStatus("checking");
+    
+    try {
+      const { data } = await supabase
+        .from("portfolios")
+        .select("id")
+        .eq("slug", slug)
+        .neq("id", portfolioId || "")
+        .single();
+
+      setSlugStatus(data ? "taken" : "available");
+    } catch {
+      // No matching record means slug is available
+      setSlugStatus("available");
+    }
+  }, [supabase, portfolioId]);
+
+  // Debounced slug change handler
+  const handleSlugChange = useCallback((value: string) => {
+    const sanitized = value.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/--+/g, "-");
+    updateMeta({ slug: sanitized });
+    
+    // Check availability after a delay
+    const timeout = setTimeout(() => {
+      checkSlugAvailability(sanitized);
+    }, 500);
+    
+    return () => clearTimeout(timeout);
+  }, [updateMeta, checkSlugAvailability]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -131,20 +175,36 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
             </label>
             <div className="flex items-center gap-2">
               <span className="text-white/40">/p/</span>
-              <input
-                type="text"
-                value={meta.slug}
-                onChange={(e) =>
-                  updateMeta({
-                    slug: e.target.value
-                      .toLowerCase()
-                      .replace(/[^a-z0-9-]/g, "-"),
-                  })
-                }
-                placeholder="my-portfolio"
-                className="flex-1 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder:text-white/30 focus:border-cyan-400 focus:outline-none"
-              />
+              <div className="relative flex-1">
+                <input
+                  type="text"
+                  value={meta.slug}
+                  onChange={(e) => handleSlugChange(e.target.value)}
+                  placeholder="my-portfolio"
+                  className={`w-full rounded-lg border bg-white/5 px-4 py-2 pr-10 text-white placeholder:text-white/30 focus:outline-none ${
+                    slugStatus === "taken" 
+                      ? "border-red-500 focus:border-red-500" 
+                      : slugStatus === "available" 
+                      ? "border-green-500 focus:border-green-500"
+                      : "border-white/10 focus:border-cyan-400"
+                  }`}
+                />
+                <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                  {slugStatus === "checking" && (
+                    <Loader2 className="h-4 w-4 animate-spin text-white/50" />
+                  )}
+                  {slugStatus === "available" && (
+                    <Check className="h-4 w-4 text-green-500" />
+                  )}
+                  {slugStatus === "taken" && (
+                    <AlertCircle className="h-4 w-4 text-red-500" />
+                  )}
+                </div>
+              </div>
             </div>
+            {slugStatus === "taken" && (
+              <p className="mt-1 text-xs text-red-400">This URL is already taken</p>
+            )}
           </div>
         </div>
 

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import {
   Menu,
-  Bell,
   Search,
   LogOut,
   Settings,
@@ -145,12 +144,6 @@ export function AppTopbar({ user }: AppTopbarProps) {
 
       {/* Actions */}
       <div className="flex items-center gap-2">
-        {/* Notifications */}
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="h-5 w-5" />
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-neon-pink" />
-        </Button>
-
         {/* User Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -174,7 +167,7 @@ export function AppTopbar({ user }: AppTopbarProps) {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/app/settings">
+              <Link href="/app/profile">
                 <UserIcon className="mr-2 h-4 w-4" />
                 Profile
               </Link>
