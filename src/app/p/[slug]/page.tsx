@@ -2,6 +2,26 @@ import { createClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
 import { HeroTimelineTemplate } from "@/features/portfolio/templates/hero-timeline";
 import { ProjectGridTemplate } from "@/features/portfolio/templates/project-grid";
+import { NeonCyberTemplate } from "@/features/portfolio/templates/neon-cyber";
+import { MinimalistLuxeTemplate } from "@/features/portfolio/templates/minimalist-luxe";
+import { InteractiveGridTemplate } from "@/features/portfolio/templates/interactive-grid";
+import { GlassmorphismTemplate } from "@/features/portfolio/templates/glassmorphism";
+import { MagazineEditorialTemplate } from "@/features/portfolio/templates/magazine-editorial";
+import { TerminalDevTemplate } from "@/features/portfolio/templates/terminal-dev";
+import { ParticleNetworkTemplate } from "@/features/portfolio/templates/particle-network";
+import { ThreeDCardsTemplate } from "@/features/portfolio/templates/3d-cards";
+import { BrutalistTemplate } from "@/features/portfolio/templates/brutalist";
+import { RetroVaporwaveTemplate } from "@/features/portfolio/templates/retro-vaporwave";
+import { AuroraTemplate } from "@/features/portfolio/templates/aurora";
+import { HolographicTemplate } from "@/features/portfolio/templates/holographic";
+import { TokyoNightTemplate } from "@/features/portfolio/templates/tokyo-night";
+import { GradientWaveTemplate } from "@/features/portfolio/templates/gradient-wave";
+import { IsometricTemplate } from "@/features/portfolio/templates/isometric";
+import { NoirFilmTemplate } from "@/features/portfolio/templates/noir-film";
+import { CosmicSpaceTemplate } from "@/features/portfolio/templates/cosmic-space";
+import { NewspaperTemplate } from "@/features/portfolio/templates/newspaper";
+import { OrigamiTemplate } from "@/features/portfolio/templates/origami";
+import { LiquidMetalTemplate } from "@/features/portfolio/templates/liquid-metal";
 import { AnalyticsTracker } from "./analytics-tracker";
 import type {
   PortfolioHero,
@@ -154,14 +174,62 @@ export default async function PublicPortfolioPage({
     projects,
   };
 
+  // Render the appropriate template based on layout type
+  const renderTemplate = () => {
+    switch (layoutType) {
+      case "hero_timeline":
+        return <HeroTimelineTemplate {...templateProps} />;
+      case "project_grid":
+        return <ProjectGridTemplate {...templateProps} />;
+      case "neon_cyber":
+        return <NeonCyberTemplate {...templateProps} />;
+      case "minimal_luxe":
+        return <MinimalistLuxeTemplate {...templateProps} />;
+      case "interactive_grid":
+        return <InteractiveGridTemplate {...templateProps} />;
+      case "glassmorphism":
+        return <GlassmorphismTemplate {...templateProps} />;
+      case "magazine_editorial":
+        return <MagazineEditorialTemplate {...templateProps} />;
+      case "terminal_dev":
+        return <TerminalDevTemplate {...templateProps} />;
+      case "particle_network":
+        return <ParticleNetworkTemplate {...templateProps} />;
+      case "3d_cards":
+        return <ThreeDCardsTemplate {...templateProps} />;
+      case "brutalist":
+        return <BrutalistTemplate {...templateProps} />;
+      case "retro_vaporwave":
+        return <RetroVaporwaveTemplate {...templateProps} />;
+      case "aurora":
+        return <AuroraTemplate {...templateProps} />;
+      case "holographic":
+        return <HolographicTemplate {...templateProps} />;
+      case "tokyo_night":
+        return <TokyoNightTemplate {...templateProps} />;
+      case "gradient_wave":
+        return <GradientWaveTemplate {...templateProps} />;
+      case "isometric":
+        return <IsometricTemplate {...templateProps} />;
+      case "noir_film":
+        return <NoirFilmTemplate {...templateProps} />;
+      case "cosmic_space":
+        return <CosmicSpaceTemplate {...templateProps} />;
+      case "newspaper":
+        return <NewspaperTemplate {...templateProps} />;
+      case "origami":
+        return <OrigamiTemplate {...templateProps} />;
+      case "liquid_metal":
+        return <LiquidMetalTemplate {...templateProps} />;
+      default:
+        return <HeroTimelineTemplate {...templateProps} />;
+    }
+  };
+
   return (
     <>
       <AnalyticsTracker portfolioId={portfolioData.id} />
-      {layoutType === "hero_timeline" && <HeroTimelineTemplate {...templateProps} />}
-      {layoutType === "project_grid" && <ProjectGridTemplate {...templateProps} />}
-      {!["hero_timeline", "project_grid"].includes(layoutType) && (
-        <HeroTimelineTemplate {...templateProps} />
-      )}
+      {renderTemplate()}
     </>
   );
 }
