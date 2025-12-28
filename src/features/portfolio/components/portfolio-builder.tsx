@@ -155,7 +155,10 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         ];
         const layoutType2 = dbSupportedLayouts2.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
         
-        const { error: updateError } = await supabase
+        // Debug: Log what we're saving
+        console.log("[Portfolio Save] Saving layout_type:", layoutType2, "from meta.layoutType:", meta.layoutType);
+        
+        const { error: updateError, data: updateData } = await supabase
           .from("portfolios")
           .update({
             title: meta.title,
@@ -169,9 +172,17 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
             custom_domain: meta.customDomain,
             updated_at: new Date().toISOString(),
           } as never)
-          .eq("id", portfolioId);
+          .eq("id", portfolioId)
+          .select("layout_type")
+          .single();
 
-        if (updateError) throw updateError;
+        // Debug: Log the saved result
+        console.log("[Portfolio Save] Database returned:", updateData);
+        
+        if (updateError) {
+          console.error("[Portfolio Save] Update error:", updateError);
+          throw updateError;
+        }
 
         // Delete and re-insert projects
         await supabase.from("featured_projects").delete().eq("portfolio_id", portfolioId);
