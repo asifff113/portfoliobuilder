@@ -239,13 +239,19 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
 
   // Auto-save with debounce
   useEffect(() => {
-    if (!isDirty) return;
+    if (!isDirty) {
+      console.log("[Auto-save] isDirty is false, skipping");
+      return;
+    }
+
+    console.log("[Auto-save] isDirty is true, scheduling save in 3s. Current layoutType:", meta.layoutType);
 
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
 
     saveTimeoutRef.current = setTimeout(() => {
+      console.log("[Auto-save] Triggering savePortfolio now");
       savePortfolio();
     }, 3000);
 
@@ -254,7 +260,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         clearTimeout(saveTimeoutRef.current);
       }
     };
-  }, [isDirty, savePortfolio]);
+  }, [isDirty, savePortfolio, meta.layoutType]);
 
   // Keyboard shortcut: Ctrl/Cmd + S
   useEffect(() => {
