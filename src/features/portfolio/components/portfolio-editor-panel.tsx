@@ -148,10 +148,8 @@ export function PortfolioEditorPanel({ profile }: PortfolioEditorPanelProps) {
 
   const handleTemplateSelect = (templateId: string) => {
     const template = portfolioTemplates.find((t) => t.id === templateId);
-    console.log("[Template Select] Selected template:", templateId, "->", template?.layoutType);
     if (template) {
       setLayout(template.layoutType);
-      console.log("[Template Select] Called setLayout with:", template.layoutType);
     }
   };
 

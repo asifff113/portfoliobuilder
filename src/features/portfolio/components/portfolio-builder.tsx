@@ -155,10 +155,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         ];
         const layoutType2 = dbSupportedLayouts2.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
         
-        // Debug: Log what we're saving
-        console.log("[Portfolio Save] Saving layout_type:", layoutType2, "from meta.layoutType:", meta.layoutType);
-        
-        const { error: updateError, data: updateData } = await supabase
+        const { error: updateError } = await supabase
           .from("portfolios")
           .update({
             title: meta.title,
@@ -172,17 +169,9 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
             custom_domain: meta.customDomain,
             updated_at: new Date().toISOString(),
           } as never)
-          .eq("id", portfolioId)
-          .select("layout_type")
-          .single();
+          .eq("id", portfolioId);
 
-        // Debug: Log the saved result
-        console.log("[Portfolio Save] Database returned:", updateData);
-        
-        if (updateError) {
-          console.error("[Portfolio Save] Update error:", updateError);
-          throw updateError;
-        }
+        if (updateError) throw updateError;
 
         // Delete and re-insert projects
         await supabase.from("featured_projects").delete().eq("portfolio_id", portfolioId);
@@ -239,19 +228,13 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
 
   // Auto-save with debounce
   useEffect(() => {
-    if (!isDirty) {
-      console.log("[Auto-save] isDirty is false, skipping");
-      return;
-    }
-
-    console.log("[Auto-save] isDirty is true, scheduling save in 3s. Current layoutType:", meta.layoutType);
+    if (!isDirty) return;
 
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
 
     saveTimeoutRef.current = setTimeout(() => {
-      console.log("[Auto-save] Triggering savePortfolio now");
       savePortfolio();
     }, 3000);
 
@@ -260,7 +243,7 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         clearTimeout(saveTimeoutRef.current);
       }
     };
-  }, [isDirty, savePortfolio, meta.layoutType]);
+  }, [isDirty, savePortfolio]);
 
   // Keyboard shortcut: Ctrl/Cmd + S
   useEffect(() => {

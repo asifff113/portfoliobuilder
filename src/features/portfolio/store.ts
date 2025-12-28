@@ -129,14 +129,10 @@ export const usePortfolioStore = create<PortfolioStore>()(
       },
 
       setLayout: (layoutType) => {
-        console.log("[Store] setLayout called with:", layoutType);
-        set((state) => {
-          console.log("[Store] Previous layoutType:", state.meta.layoutType, "-> New:", layoutType);
-          return {
-            meta: { ...state.meta, layoutType },
-            isDirty: true,
-          };
-        });
+        set((state) => ({
+          meta: { ...state.meta, layoutType },
+          isDirty: true,
+        }));
       },
 
       // Hero actions

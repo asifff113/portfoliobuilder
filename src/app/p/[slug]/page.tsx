@@ -229,11 +229,6 @@ export default async function PublicPortfolioPage({
   return (
     <>
       <AnalyticsTracker portfolioId={portfolioData.id} />
-      {/* Debug: Show what layout type is being used - REMOVE AFTER DEBUGGING */}
-      <div className="fixed bottom-4 right-4 z-[9999] rounded bg-black/90 px-3 py-2 text-xs text-white shadow-lg border border-white/20">
-        <div>Layout: <span className="text-cyan-400">{layoutType}</span></div>
-        <div>DB value: <span className="text-yellow-400">{portfolioData.layout_type || "null"}</span></div>
-      </div>
       {renderTemplate()}
     </>
   );
