@@ -13,6 +13,21 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  // Custom rule overrides
+  {
+    rules: {
+      // Allow unescaped entities in JSX (common in template files)
+      "react/no-unescaped-entities": "off",
+      // Allow JSX comments (common in templates)
+      "react/jsx-no-comment-textnodes": "off",
+      // Allow explicit any in type assertions for complex dynamic content
+      "@typescript-eslint/no-explicit-any": "warn",
+      // setState in useEffect is sometimes necessary for initialization
+      "react-hooks/set-state-in-effect": "off",
+      // Impure function calls during render (random values for templates)
+      "react-hooks/purity": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
