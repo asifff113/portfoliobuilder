@@ -79,8 +79,14 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
       if (!portfolioId) {
         // Create new portfolio
         const slug = meta.slug || await generateUniqueSlug(meta.title || "portfolio");
-        // Supported layout types in the database
-        const dbSupportedLayouts = ["hero_timeline", "project_grid", "minimal", "creative", "developer", "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial", "terminal_dev", "particle_network", "3d_cards"];
+        // Supported layout types in the database - all templates
+        const dbSupportedLayouts = [
+          "hero_timeline", "project_grid", "minimal", "creative", "developer",
+          "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial",
+          "terminal_dev", "particle_network", "3d_cards", "brutalist", "retro_vaporwave",
+          "aurora", "holographic", "tokyo_night", "gradient_wave", "isometric",
+          "noir_film", "cosmic_space", "newspaper", "origami", "liquid_metal"
+        ];
         const layoutType = dbSupportedLayouts.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
         
         const { data: newPortfolio, error: createError } = await supabase
@@ -139,8 +145,14 @@ export function PortfolioBuilder({ profile }: PortfolioBuilderProps) {
         router.replace(`/app/portfolio/${newPortfolioData.id}`);
       } else {
         // Update existing portfolio
-        // Supported layout types in the database
-        const dbSupportedLayouts2 = ["hero_timeline", "project_grid", "minimal", "creative", "developer", "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial", "terminal_dev", "particle_network", "3d_cards"];
+        // Supported layout types in the database - all templates
+        const dbSupportedLayouts2 = [
+          "hero_timeline", "project_grid", "minimal", "creative", "developer",
+          "neon_cyber", "minimal_luxe", "interactive_grid", "glassmorphism", "magazine_editorial",
+          "terminal_dev", "particle_network", "3d_cards", "brutalist", "retro_vaporwave",
+          "aurora", "holographic", "tokyo_night", "gradient_wave", "isometric",
+          "noir_film", "cosmic_space", "newspaper", "origami", "liquid_metal"
+        ];
         const layoutType2 = dbSupportedLayouts2.includes(meta.layoutType) ? meta.layoutType : "hero_timeline";
         
         const { error: updateError } = await supabase
